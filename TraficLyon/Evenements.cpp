@@ -1,18 +1,18 @@
 /*
- * Capteur.cpp
+ * Evenements.cpp
  *
  *  Created on: 24 oct. 2014
  *      Author: Hugo
  */
 
-#include "Capteur.h"
+#include "Evenements.h"
 
-Capteur::Capteur() {
+Evenements::Evenements() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Capteur::~Capteur() {
+Evenements::~Evenements() {
 	// TODO Auto-generated destructor stub
 }
 
