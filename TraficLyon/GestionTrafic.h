@@ -5,8 +5,8 @@
  *      Author: Hugo
  */
 
-#ifndef GESTIONTRAFIC_H_
-#define GESTIONTRAFIC_H_
+#ifndef GESTIONTRAFIC_H
+#define GESTIONTRAFIC_H
 
 class GestionTrafic {
 public:
@@ -14,4 +14,4 @@ public:
 	virtual ~GestionTrafic();
 };
 
-#endif /* GESTIONTRAFIC_H_ */
+#endif /* GESTIONTRAFIC_H */

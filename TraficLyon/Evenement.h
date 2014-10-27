@@ -5,19 +5,19 @@
  *      Author: Hugo
  */
 
-#ifndef EVENEMENT_H_
-#define EVENEMENT_H_
+#ifndef EVENEMENT_H
+#define EVENEMENT_H
 
 class Evenement {
 public:
 	Evenement();
 	virtual ~Evenement();
 private:
+	int annee;
 	int mois;
 	int nJourMois;
 	int minutes;
 	int secondes;
-	int annee;
 };
 
-#endif /* EVENEMENT_H_ */
+#endif /* EVENEMENT_H */

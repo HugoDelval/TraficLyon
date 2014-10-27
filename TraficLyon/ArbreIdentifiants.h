@@ -5,13 +5,24 @@
  *      Author: Hugo
  */
 
-#ifndef ARBREIDENTIFIANTS_H_
-#define ARBREIDENTIFIANTS_H_
+#ifndef ARBREIDENTIFIANTS_H
+#define ARBREIDENTIFIANTS_H
 
 class ArbreIdentifiants {
 public:
 	ArbreIdentifiants();
+    ArbreIdentifiants(ArbreIdentifiants g, int idReel, int idTableau, ArbreIdentifiants d);
+    ArbreIdentifiants(const ArbreIdentifiants &aCopier);
 	virtual ~ArbreIdentifiants();
+	int getId(int idReel);
+
+private:
+	int hauteur;
+    int idReel;
+    int idTableau;
+    ArbreIdentifiants filsG, filsD;
+
+
 };
 
 #endif /* ARBREIDENTIFIANTS_H_ */

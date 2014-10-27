@@ -7,12 +7,13 @@
 
 #include "Evenement.h"
 
-Evenement::Evenement() {
+Evenement::Evenement()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
-Evenement::~Evenement() {
+Evenement::~Evenement()
+{
 	// TODO Auto-generated destructor stub
 }
-
