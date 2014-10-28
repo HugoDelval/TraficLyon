@@ -8,36 +8,36 @@
 #ifndef ARBREIDENTIFIANTS_H
 #define ARBREIDENTIFIANTS_H
 
-class ArbreIdentifiants {
-public:
-    ArbreIdentifiants(ArbreIdentifiants *g, int idReel, int idTableau, ArbreIdentifiants *d);
-	ArbreIdentifiants();
-    ArbreIdentifiants(const ArbreIdentifiants &aCopier);
-	virtual ~ArbreIdentifiants();
-	int getId(int idReel);
-	ArbreIdentifiants* inserer(int idR, int idT);
-	ArbreIdentifiants* supprimer(int idR, ArbreIdentifiants &a);
-	void afficher();
-
-private:
-
-    int determineHauteur();
-    ArbreIdentifiants* supprimerRacine();
-    ArbreIdentifiants* dernierDescendant();
-    int max(int a, int b);
-    void calculerHauteur();
-    ArbreIdentifiants* equilibrer();
-    ArbreIdentifiants* rotationG();
-    ArbreIdentifiants* rotationD();
-	int trouverIdTableau(int idReel);
-	bool isEmpty();
-
-    ArbreIdentifiants *filsD;
-    ArbreIdentifiants *filsG;
-	int hauteur;
-    int idReel;
-    int idTableau;
-
+struct AVLTreeNode
+{
+	int idReel;
+	int idTableau;
+	AVLTreeNode *left;
+	AVLTreeNode *right;
+	int height;
 };
-
-#endif /* ARBREIDENTIFIANTS_H */
+typedef struct AVLTreeNode* ptrOnAVLTreeNode;
+class ArbreIdentifiants
+{
+	public:
+		void insert(int idR, int idT, ptrOnAVLTreeNode &p);
+		void supprimer(int idR,ptrOnAVLTreeNode &aSupprimer);
+		int deleteMin(ptrOnAVLTreeNode &p);
+		int trouverIdTableauCorrespondant(int idR,ptrOnAVLTreeNode &p);
+		ptrOnAVLTreeNode findMin(ptrOnAVLTreeNode p);
+		ptrOnAVLTreeNode findMax(ptrOnAVLTreeNode p);
+		void vider(ptrOnAVLTreeNode &dest);
+		void copy(ptrOnAVLTreeNode &src,ptrOnAVLTreeNode &dest);
+		ptrOnAVLTreeNode nodeCopy(ptrOnAVLTreeNode &aCopier);
+		void preOrder(ptrOnAVLTreeNode p);
+		void inOrder(ptrOnAVLTreeNode p);
+		void postOrder(ptrOnAVLTreeNode p);
+		int hauteurSousArbre(ptrOnAVLTreeNode);
+		ptrOnAVLTreeNode rotationSimpleGauche(ptrOnAVLTreeNode &p1);
+		ptrOnAVLTreeNode rotationDoubleGauche(ptrOnAVLTreeNode &p1);
+		ptrOnAVLTreeNode rotationSimpleDroite(ptrOnAVLTreeNode &p1);
+		ptrOnAVLTreeNode rotationDoubleDroite(ptrOnAVLTreeNode &p1);
+		int max(int value1, int value2);
+		int nombreNodes(ptrOnAVLTreeNode p);
+};
+#endif
