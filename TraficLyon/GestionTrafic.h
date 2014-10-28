@@ -9,6 +9,14 @@
 #define GESTIONTRAFIC_H
 
 #include "Evenements.h"
+#include <string>
+
+const int COMMANDE_ADD = 0;
+const int COMMANDE_STATS_C = 1;
+const int COMMANDE_STATS_D7 = 2;
+const int COMMANDE_STATS_D7_H24 = 3;
+const int COMMANDE_MAX_TS = 4;
+const int COMMANDE_EXIT = 5;
 
 using namespace std;
 
@@ -18,11 +26,12 @@ public:
 	virtual ~GestionTrafic();
 	void start();
 private:
-	void appelerAjouter(int idCapteurReel,int annee, int mois, int jourDuMois, int heure, int minute, int seconde, int jouerDeLaSemaine, char trafic);
-	void appelerStatistiquesCapteur(int idCapteur);
-	void appelerStatistiquesJourSemaine(int nJour);
-	void appelerStatistiquesJourHeureSemaine(int nJour, int heure);
+	void appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois, string heure, string minute, string seconde, string jourDeLaSemaine, string trafic);
+	void appelerStatistiquesCapteur(string idCapteurReel);
+	void appelerStatistiquesJourSemaine(string nJour);
+	void appelerStatistiquesJourHeureSemaine(string nJour, string heure);
 	void appelerMaxBouchonsSimultanes();
+	int determineTypeCommande(const string &commande);
 };
 
 #endif /* GESTIONTRAFIC_H */
