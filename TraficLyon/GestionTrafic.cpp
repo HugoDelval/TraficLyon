@@ -7,12 +7,14 @@
 
 #include "GestionTrafic.h"
 
-GestionTrafic::GestionTrafic() {
+GestionTrafic::GestionTrafic()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
-GestionTrafic::~GestionTrafic() {
+GestionTrafic::~GestionTrafic()
+{
 	// TODO Auto-generated destructor stub
 }
 

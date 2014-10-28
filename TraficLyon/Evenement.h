@@ -8,6 +8,9 @@
 #ifndef EVENEMENT_H
 #define EVENEMENT_H
 
+#include <iostream>
+using namespace std;
+
 class Evenement {
 public:
 	Evenement();

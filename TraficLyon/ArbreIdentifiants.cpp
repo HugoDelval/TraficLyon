@@ -312,7 +312,7 @@ int ArbreIdentifiants::nombreNodes(ptrOnAVLTreeNode p)
 	}
 	return count;
 }
-
+/*
 int main()
 {
 	ptrOnAVLTreeNode root,root1,min,max;//,flag;
@@ -403,4 +403,4 @@ int main()
 		}
 	}while(choice != 0);
 	return 0;
-}
+}*/

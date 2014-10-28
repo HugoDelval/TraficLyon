@@ -5,11 +5,8 @@
  *      Author: Hugo
  */
 
-#include <iostream>
 #include "Evenement.h"
 
-using namespace std;
-/* ne pas oublier toutes ces inclusions !*/
 
 Evenement::Evenement()
 {

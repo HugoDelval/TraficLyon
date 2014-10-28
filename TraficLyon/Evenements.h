@@ -8,6 +8,12 @@
 #ifndef EVENEMENTS_H
 #define EVENEMENTS_H
 
+#include <iostream>
+#include "ArbreIdentifiants.h"
+#include "Evenement.h"
+
+using namespace std;
+
 class Evenements {
 public:
 	Evenements();
