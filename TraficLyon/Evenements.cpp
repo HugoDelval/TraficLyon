@@ -4,12 +4,14 @@
  *  Created on: 24 oct. 2014
  *      Author: Hugo
  */
+
 #include <iostream>
 #include "ArbreIdentifiants.h"
 #include "Evenement.h"
 #include "Evenements.h"
 
 using namespace std;
+/* ne pas oublier toutes ces inclusions !*/
 
 Evenements::Evenements() {
 
