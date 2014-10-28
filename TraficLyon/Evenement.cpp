@@ -5,7 +5,10 @@
  *      Author: Hugo
  */
 
+#include <iostream>
 #include "Evenement.h"
+
+using namespace std;
 
 Evenement::Evenement()
 {
