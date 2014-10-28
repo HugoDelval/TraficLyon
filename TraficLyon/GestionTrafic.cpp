@@ -21,7 +21,6 @@ GestionTrafic::~GestionTrafic()
 
 void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois, string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
 {
-
 	cout<<"appel de ajouter avec :"<<endl;
 	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
 	cout<<"annee= '"<<annee<<"'"<<endl;
@@ -33,18 +32,45 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 	cout<<"jourDeLaSemaine= '"<<jourDeLaSemaine<<"'"<<endl;
 	cout<<"trafic= '"<<trafic<<"'"<<endl;
 	cout<<endl;
+	int idCapteurR = atoi(idCapteurReel.c_str());
+	int anneeFinale = atoi(annee.c_str());
+	int moisFinal = atoi(mois.c_str());
+	int jourDuMoisFinal = atoi(jourDuMois.c_str());
+	int heureFinale = atoi(heure.c_str());
+	int minuteFinale = atoi(minute.c_str());
+	int secondeFinale = atoi(seconde.c_str());
+	int jourDeLaSemaineFinale = atoi(jourDeLaSemaine.c_str());
+	int traficFinal = 0;
+	if(trafic.compare("V"))
+	{
+		traficFinal=1;
+	}
+	else if(trafic.compare("J"))
+	{
+		traficFinal=2;
+	}
+	else if(trafic.compare("R"))
+	{
+		traficFinal=3;
+	}
+	else if(trafic.compare("N"))
+	{
+		traficFinal=4;
+	}
 }
 void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 {
 	cout<<"appel stat capteur :"<<endl;
 	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
 	cout<<endl;
+	int idCapteurR = atoi(idCapteurReel.c_str());
 }
 void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
 {
 	cout<<"appel stat jour Semaine :"<<endl;
 	cout<<"nJour= '"<<nJour<<"'"<<endl;
 	cout<<endl;
+	int jourDeLaSemaineFinale = atoi(nJour.c_str());
 }
 void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)
 {
@@ -52,6 +78,8 @@ void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heu
 	cout<<"nJour= '"<<nJour<<"'"<<endl;
 	cout<<"heure= '"<<heure<<"'"<<endl;
 	cout<<endl;
+	int jourDeLaSemaineFinale = atoi(nJour.c_str());
+	int heureFinale = atoi(heure.c_str());
 }
 void GestionTrafic::appelerMaxBouchonsSimultanes()
 {
