@@ -9,7 +9,6 @@
 #define GESTIONTRAFIC_H
 
 #include "Evenements.h"
-#include <string>
 #include <stdlib.h>
 
 const int COMMANDE_ADD = 0;
