@@ -10,6 +10,12 @@
 
 /* ne pas oublier toutes ces inclusions !*/
 
+void ajouterEvenement(int idCapteur, int heure, int jourSemaine, int trafic, int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent)
+{
+	evenements[idCapteur][heure][jourSemaine][trafic]=Evenement(anneeEvent , moisEvent,nJourMoisEvent, minutesEvent,secondesEvent);
+}
+
+
 Evenements::Evenements() {
 
 	ArbreIdentifiants arbreId;

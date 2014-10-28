@@ -27,6 +27,7 @@ private:
 	// id capteur , heure , jour de la semaine , trafic
 
 public:
+	void ajouterEvenement(int idCapteur, int heure, int jourSemaine, int trafic, int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent);
 	void statistiquesCapteur(int idCapteur);
 	void statistiquesJourSemaine(int nJour);
 	void statistiquesJourHeureSemaine(int nJour, int heure);
