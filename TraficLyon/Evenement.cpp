@@ -17,7 +17,7 @@ Evenement::Evenement()
 	mois=0;
 	nJourMois=0;
 	minutes=0;
-	seondes=0;
+	secondes=0;
 
 }
 
@@ -30,7 +30,7 @@ Evenement::Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int min
 	mois=moisEvent;
 	nJourMois=nJourMoisEvent;
 	minutes=minutesEvent;
-	seondes=secondesEvent;
+	secondes=secondesEvent;
 
 }
 

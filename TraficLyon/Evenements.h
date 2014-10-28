@@ -16,7 +16,8 @@ public:
 
 private:
 	ArbreIdentifiants arbreId;
-	Evenement evenements[1500][23][7][5];
+	Evenement ****evenements;
+	// 1500 * 23 * 7 * 5
 	// id capteur , heure , jour de la semaine , trafic
 
 public:
