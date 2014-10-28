@@ -8,11 +8,18 @@
 #include "Evenements.h"
 
 Evenements::Evenements() {
-	// TODO Auto-generated constructor stub
+
+	//ArbreIdentifiants arbreId = new ArbreIdentifiants;
+	evenements= new Evenement[1500][23][7][5];
 
 }
 
-Evenements::~Evenements() {
-	// TODO Auto-generated destructor stub
+Evenements::~Evenements()
+{
+#ifdef MAP
+	cout<< "Evenements::~Evenements()" <<endl;
+#endif
+	delete [] evenements;
+
 }
 

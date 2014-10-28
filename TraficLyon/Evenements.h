@@ -8,7 +8,7 @@
 #ifndef EVENEMENTS_H
 #define EVENEMENTS_H
 
-class Evenements{
+class Evenements {
 public:
 	Evenements();
 	virtual ~Evenements();

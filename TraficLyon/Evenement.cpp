@@ -9,11 +9,35 @@
 
 Evenement::Evenement()
 {
-	// TODO Auto-generated constructor stub
+
+#ifdef MAP
+	cout<< "Evenement::Evenement()" <<endl;
+#endif
+	annee=0;
+	mois=0;
+	nJourMois=0;
+	minutes=0;
+	seondes=0;
+
+}
+
+Evenement::Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent)
+{
+#ifdef MAP
+	cout<< "Evenement::Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent)" <<endl;
+#endif
+	annee=anneeEvent;
+	mois=moisEvent;
+	nJourMois=nJourMoisEvent;
+	minutes=minutesEvent;
+	seondes=secondesEvent;
 
 }
 
 Evenement::~Evenement()
 {
-	// TODO Auto-generated destructor stub
+#ifdef MAP
+	cout<< "Evenement::~Evenement()" <<endl;
+#endif
+
 }
