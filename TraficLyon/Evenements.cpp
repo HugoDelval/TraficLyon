@@ -22,10 +22,10 @@ Evenements::Evenements() {
 		evenements[i] = new Evenement**[23];
 		for(int j=0 ; j<23 ; j++)
 		{
-			evenements[j] = new Evenement*[7];
+			evenements[i][j] = new Evenement*[7];
 			for(int k=0 ; k<7 ; k++)
 			{
-				evenements[k] = new Evenement[5];
+				evenements[i][j][k] = new Evenement[5];
 			}
 		}
 	}
