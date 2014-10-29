@@ -9,19 +9,20 @@
 #define LISTEEVENEMENTS_H_
 
 #include "Evenement.h"
+#include "Evenement.h"
+#include <stddef.h>  // permet de connaitre 'NULL'
 
 
 class ListeEvenements {
 public:
 	ListeEvenements();
 	virtual ~ListeEvenements();
+	void ajouterDansLaListe(Evenement *event);
 
 private:
 	Evenement *racine;
 	Evenement *evenementCourant;
 
-public:
-	void ajouterDansLaListe(Evenement event);
 };
 
 #endif /* LISTEEVENEMENTS_H_ */

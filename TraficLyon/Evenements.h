@@ -23,9 +23,9 @@ public:
 
 
 private:
-	ArbreIdentifiants arbreId;
-	ListeEvenements ****evenements;
-	// 1500 * 23 * 7 * 5
+	ArbreIdentifiants *arbreId;
+	ListeEvenements *****evenements;
+	// 1500 * 23 * 7 * 5 + une etoile car pointeur vers liste
 	// id capteur , heure , jour de la semaine , trafic
 
 public:

@@ -6,12 +6,6 @@
  */
 
 #include "Evenement.h"
-#include <stddef.h>  // permet de connaitre 'NULL'
-
-void Evenement::attribuerEvenementSuivant(Evenement *nextEvent)   // un setEvenementSuivant en gros...
-{
-	evenementSuivant=nextEvent;
-}
 
 Evenement::Evenement()
 {
@@ -38,7 +32,6 @@ Evenement::Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int min
 	minutes=minutesEvent;
 	secondes=secondesEvent;
 	evenementSuivant=NULL;
-
 }
 
 

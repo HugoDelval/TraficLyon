@@ -5,35 +5,31 @@
  *      Author: Hugo
  */
 
-
 #include "Evenements.h"
-#include "ListeEvenements.h"
 
-
-/* ne pas oublier toutes ces inclusions !*/
-
-void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine, int trafic, int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent)
+void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
+									int trafic, int anneeEvent , int moisEvent,
+									int nJourMoisEvent, int minutesEvent, int secondesEvent)
 {
-	Evenement evenementAAjouter= Evenement(anneeEvent, moisEvent, nJourMoisEvent,minutesEvent, secondesEvent);
-	evenements[idCapteur][heure][jourSemaine][trafic].ajouterDansLaListe(evenementAAjouter);
+	Evenement *evenementAAjouter= new Evenement(anneeEvent, moisEvent, nJourMoisEvent,minutesEvent, secondesEvent);
+	evenements[idCapteur][heure][jourSemaine][trafic]->ajouterDansLaListe(evenementAAjouter);
 }
 
 
 
 Evenements::Evenements() {
 
-	ArbreIdentifiants arbreId;
 
-	evenements= new ListeEvenements***[1500];
+	evenements= new ListeEvenements****[1500];
 	for(int i=0 ; i<1500 ; i++)
 	{
-		evenements[i] = new ListeEvenements**[23];
+		evenements[i] = new ListeEvenements***[23];
 		for(int j=0 ; j<23 ; j++)
 		{
-			evenements[i][j] = new ListeEvenements*[7];
+			evenements[i][j] = new ListeEvenements**[7];
 			for(int k=0 ; k<7 ; k++)
 			{
-				evenements[i][j][k] = new ListeEvenements[5];
+				evenements[i][j][k] = new ListeEvenements*[5];
 			}
 		}
 	}

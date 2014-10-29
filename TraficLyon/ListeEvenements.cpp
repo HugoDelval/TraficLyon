@@ -6,22 +6,18 @@
  */
 
 #include "ListeEvenements.h"
-#include "Evenement.h"
-#include <stddef.h>  // permet de connaitre 'NULL'
 
-void ListeEvenements::ajouterDansLaListe(Evenement event)
+void ListeEvenements::ajouterDansLaListe(Evenement *event)
 {
-	evenementCourant=racine;
+	//evenementCourant=racine;
 	if(racine==NULL)
 	{
-		*racine=event;
-	} else {
-		while((*evenementCourant)->evenementSuivant != NULL)  // comment acceder a evenement suivant
-															 // sans 'getEvenementSuivant' ?
-		{
-			evenementCourant=(*evenementCourant)->evenementSuivant;
-		}
-		evenementCourant->attribuerEvenementSuivant((*event).evenementSuivant);
+		racine=event;
+		evenementCourant=event;
+	} else
+	{
+		(*evenementCourant).evenementSuivant=event;
+		evenementCourant=event;
 	}
 }
 
@@ -37,7 +33,7 @@ ListeEvenements::~ListeEvenements() {
 	{
 		evenementALiberer=evenementCourant;
 		evenementCourant=evenementCourant->evenementSuivant;
-		delete *evenementCourant;
+		delete evenementALiberer;
 	}
 }
 

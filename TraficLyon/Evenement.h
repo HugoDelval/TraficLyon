@@ -8,6 +8,11 @@
 #ifndef EVENEMENT_H
 #define EVENEMENT_H
 
+#include <stddef.h>  // permet de connaitre 'NULL'
+#include <iostream>
+
+using namespace std;
+
 class Evenement {
 public:
 	Evenement();
@@ -20,8 +25,9 @@ private:
 	int minutes;
 	int secondes;
 	Evenement *evenementSuivant;
-public:
-	void attribuerEvenementSuivant(Evenement *nextEvent);
+
+friend class ListeEvenements;
+
 };
 
 #endif /* EVENEMENT_H */
