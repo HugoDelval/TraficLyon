@@ -26,6 +26,7 @@ public:
 	void statistiquesJourHeureSemaine(int nJour, int heure);
 	void maxBouchonsSimultanes();
 	int ajouterIdAArbre(int idCapeurReel);
+	void afficherTousLesEvenements();
 
 private:
 	ArbreIdentifiants *arbreId;

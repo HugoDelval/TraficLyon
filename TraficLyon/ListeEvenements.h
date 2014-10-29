@@ -18,6 +18,7 @@ public:
 	ListeEvenements();
 	virtual ~ListeEvenements();
 	void ajouterDansLaListe(Evenement *event);
+	void afficherListe(int idCapteur, int heure, int jourSemaine, int trafic);
 
 private:
 	Evenement *racine;

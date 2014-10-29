@@ -18,9 +18,10 @@ GestionTrafic::~GestionTrafic()
 }
 
 
-void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois, string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
+void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois,
+				string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
 {
-/*
+
 	cout<<"appel de ajouter avec :"<<endl;
 	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
 	cout<<"annee= '"<<annee<<"'"<<endl;
@@ -31,7 +32,7 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 	cout<<"seconde= '"<<seconde<<"'"<<endl;
 	cout<<"jourDeLaSemaine= '"<<jourDeLaSemaine<<"'"<<endl;
 	cout<<"trafic= '"<<trafic<<"'"<<endl;
-	cout<<endl;*/
+	cout<<endl;
 	int idCapteurR = atoi(idCapteurReel.c_str());
 
 	int idCapteurTableau = toutLeTrafic->ajouterIdAArbre(idCapteurR);
@@ -61,7 +62,10 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		{
 			traficFinal=4;
 		}
-		toutLeTrafic->ajouterEvenement(0,heureFinale,jourDeLaSemaineFinale,traficFinal,anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
+		toutLeTrafic->ajouterEvenement(0,heureFinale,jourDeLaSemaineFinale,traficFinal,
+								anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
+
+		toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
 	else //il y a une erreur dans l'insertion
 	{
@@ -208,5 +212,6 @@ int main()
 {
 	GestionTrafic g;
 	g.start();
+
 	return 0;
 }
