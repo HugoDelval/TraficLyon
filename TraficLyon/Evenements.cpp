@@ -17,9 +17,9 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 
 
 
-Evenements::Evenements() {
-
-
+Evenements::Evenements()
+{
+	arbreId = new ArbreIdentifiants();
 	evenements= new ListeEvenements****[1500];
 	for(int i=0 ; i<1500 ; i++)
 	{
@@ -33,7 +33,6 @@ Evenements::Evenements() {
 			}
 		}
 	}
-
 }
 
 Evenements::~Evenements()

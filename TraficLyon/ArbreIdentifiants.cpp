@@ -5,6 +5,97 @@
 using namespace std;
 
 
+ArbreIdentifiants::ArbreIdentifiants()
+{
+	root = NULL;
+}
+
+int ArbreIdentifiants::insert(int idR)
+{
+	int idTableau=-1;
+	if(root==NULL)
+	{
+		idTableau=0;
+		insert(idR,idTableau,root);
+	}
+	else if(trouverIdTableauCorrespondant(idR,root)==-1 ) //si idR n'existe pas deja
+	{
+		idTableau=findMax(root)+1;
+		insert(idR,idTableau,root);
+	}
+	else // il existe deja, on recupere idTableau
+	{
+		idTableau = trouverIdTableauCorrespondant(idR,root);
+	}
+	return idTableau;
+}
+
+// Finding an element
+int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR,ptrOnAVLTreeNode &p)
+{
+	if (p==NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		if (idR < p->idReel)
+		{
+			trouverIdTableauCorrespondant(idR,p->left);
+		}
+		else
+		{
+			if (idR>p->idReel)
+			{
+				trouverIdTableauCorrespondant(idR,p->right);
+			}
+			else
+			{
+				return p->idTableau;
+			}
+		}
+	}
+	return -1;
+}
+
+// Finding the Smallest
+ptrOnAVLTreeNode ArbreIdentifiants::findMin(ptrOnAVLTreeNode p)
+{
+	if (p==NULL)
+	{
+		cout<<"The tree is empty\n"<<endl;
+		return p;
+	}
+	else
+	{
+		while(p->left !=NULL)
+		{
+			p=p->left;
+			//return p;
+		}
+		return p;
+	}
+}
+
+// Finding the Largest node
+ptrOnAVLTreeNode ArbreIdentifiants::findMax(ptrOnAVLTreeNode p)
+{
+	if (p==NULL)
+	{
+		cout<<"The tree is empty\n"<<endl;
+		return p;
+	}
+	else
+	{
+		while(p->right !=NULL)
+		{
+			p=p->right;
+			//return p;
+		}
+		return p;
+	}
+}
+
 // Inserting a node
 void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 {
@@ -64,69 +155,7 @@ void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 	d=max(m,n);
 	p->height = d + 1;
 }
-// Finding the Smallest
-ptrOnAVLTreeNode ArbreIdentifiants::findMin(ptrOnAVLTreeNode p)
-{
-	if (p==NULL)
-	{
-		cout<<"The tree is empty\n"<<endl;
-		return p;
-	}
-	else
-	{
-		while(p->left !=NULL)
-		{
-			p=p->left;
-			//return p;
-		}
-		return p;
-	}
-}
-// Finding the Largest node
-ptrOnAVLTreeNode ArbreIdentifiants::findMax(ptrOnAVLTreeNode p)
-{
-	if (p==NULL)
-	{
-		cout<<"The tree is empty\n"<<endl;
-		return p;
-	}
-	else
-	{
-		while(p->right !=NULL)
-		{
-			p=p->right;
-			//return p;
-		}
-		return p;
-	}
-}
-// Finding an element
-int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR,ptrOnAVLTreeNode &p)
-{
-	if (p==NULL)
-	{
-		return -1;
-	}
-	else
-	{
-		if (idR < p->idReel)
-		{
-			trouverIdTableauCorrespondant(idR,p->left);
-		}
-		else
-		{
-			if (idR>p->idReel)
-			{
-				trouverIdTableauCorrespondant(idR,p->right);
-			}
-			else
-			{
-				return p->idTableau;
-			}
-		}
-	}
-	return -1;
-}
+
 // Copy a tree
 void ArbreIdentifiants::copy(ptrOnAVLTreeNode &src,ptrOnAVLTreeNode &dest)
 {

@@ -9,18 +9,18 @@
 
 GestionTrafic::GestionTrafic()
 {
-	// TODO Auto-generated constructor stub
-
+	toutLeTrafic = new Evenements();
 }
 
 GestionTrafic::~GestionTrafic()
 {
-	// TODO Auto-generated destructor stub
+
 }
 
 
 void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois, string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
 {
+	/*
 	cout<<"appel de ajouter avec :"<<endl;
 	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
 	cout<<"annee= '"<<annee<<"'"<<endl;
@@ -31,31 +31,42 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 	cout<<"seconde= '"<<seconde<<"'"<<endl;
 	cout<<"jourDeLaSemaine= '"<<jourDeLaSemaine<<"'"<<endl;
 	cout<<"trafic= '"<<trafic<<"'"<<endl;
-	cout<<endl;
+	cout<<endl;*/
 	int idCapteurR = atoi(idCapteurReel.c_str());
-	int anneeFinale = atoi(annee.c_str());
-	int moisFinal = atoi(mois.c_str());
-	int jourDuMoisFinal = atoi(jourDuMois.c_str());
-	int heureFinale = atoi(heure.c_str());
-	int minuteFinale = atoi(minute.c_str());
-	int secondeFinale = atoi(seconde.c_str());
-	int jourDeLaSemaineFinale = atoi(jourDeLaSemaine.c_str());
-	int traficFinal = 0;
-	if(trafic.compare("V"))
+
+
+	int idCapteurTableau = toutLeTrafic->arbreId->insert(idCapteurR);
+	if(idCapteurTableau != -1)
 	{
-		traficFinal=1;
+		int anneeFinale = atoi(annee.c_str());
+		int moisFinal = atoi(mois.c_str());
+		int jourDuMoisFinal = atoi(jourDuMois.c_str());
+		int heureFinale = atoi(heure.c_str());
+		int minuteFinale = atoi(minute.c_str());
+		int secondeFinale = atoi(seconde.c_str());
+		int jourDeLaSemaineFinale = atoi(jourDeLaSemaine.c_str());
+		int traficFinal = 0; // <=> capteur inactif
+		if(trafic.compare("V")==0)
+		{
+			traficFinal=1;
+		}
+		else if(trafic.compare("J")==0)
+		{
+			traficFinal=2;
+		}
+		else if(trafic.compare("R")==0)
+		{
+			traficFinal=3;
+		}
+		else if(trafic.compare("N")==0)
+		{
+			traficFinal=4;
+		}
+		toutLeTrafic->ajouterEvenement(0,heureFinale,jourDeLaSemaineFinale,traficFinal,anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
 	}
-	else if(trafic.compare("J"))
+	else //il y a une erreur dans l'insertion
 	{
-		traficFinal=2;
-	}
-	else if(trafic.compare("R"))
-	{
-		traficFinal=3;
-	}
-	else if(trafic.compare("N"))
-	{
-		traficFinal=4;
+		cout<<"erreur arbreIdentifiants"<<endl;
 	}
 }
 void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)

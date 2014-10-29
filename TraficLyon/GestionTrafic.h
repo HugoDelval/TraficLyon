@@ -32,6 +32,8 @@ private:
 	void appelerStatistiquesJourHeureSemaine(string nJour, string heure);
 	void appelerMaxBouchonsSimultanes();
 	int determineTypeCommande(const string &commande);
+
+	Evenements *toutLeTrafic;
 };
 
 #endif /* GESTIONTRAFIC_H */
