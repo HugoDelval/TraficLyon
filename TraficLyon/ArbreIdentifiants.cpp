@@ -8,26 +8,29 @@ using namespace std;
 ArbreIdentifiants::ArbreIdentifiants()
 {
 	root = NULL;
+	dernierIdTableau = -1;
 }
 
 int ArbreIdentifiants::insert(int idR)
 {
-	int idTableau=-1;
+	int res=-1;
 	if(root==NULL)
 	{
-		idTableau=0;
-		insert(idR,idTableau,root);
+		dernierIdTableau++;
+		insert(idR,dernierIdTableau,root);
+		res = dernierIdTableau;
 	}
 	else if(trouverIdTableauCorrespondant(idR,root)==-1 ) //si idR n'existe pas deja
 	{
-		idTableau=findMax(root)+1;
-		insert(idR,idTableau,root);
+		dernierIdTableau++;
+		insert(idR,dernierIdTableau,root);
+		res = dernierIdTableau;
 	}
 	else // il existe deja, on recupere idTableau
 	{
-		idTableau = trouverIdTableauCorrespondant(idR,root);
+		res = trouverIdTableauCorrespondant(idR,root);
 	}
-	return idTableau;
+	return res;
 }
 
 // Finding an element

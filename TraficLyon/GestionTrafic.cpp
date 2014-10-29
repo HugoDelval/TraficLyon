@@ -35,7 +35,7 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 	int idCapteurR = atoi(idCapteurReel.c_str());
 
 
-	int idCapteurTableau = toutLeTrafic->arbreId->insert(idCapteurR);
+	int idCapteurTableau = toutLeTrafic->ajouterIdAArbre(idCapteurR);
 	if(idCapteurTableau != -1)
 	{
 		int anneeFinale = atoi(annee.c_str());

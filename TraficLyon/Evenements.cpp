@@ -15,7 +15,10 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 	evenements[idCapteur][heure][jourSemaine][trafic]->ajouterDansLaListe(evenementAAjouter);
 }
 
-
+int Evenements::ajouterIdAArbre(int idCapeurReel)
+{
+	return arbreId->insert(idCapeurReel);
+}
 
 Evenements::Evenements()
 {

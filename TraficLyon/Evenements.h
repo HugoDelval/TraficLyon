@@ -25,12 +25,14 @@ public:
 	void statistiquesJourSemaine(int nJour);
 	void statistiquesJourHeureSemaine(int nJour, int heure);
 	void maxBouchonsSimultanes();
+	int ajouterIdAArbre(int idCapeurReel);
 
 private:
 	ArbreIdentifiants *arbreId;
 	ListeEvenements *****evenements;
 	// 1500 * 23 * 7 * 5 + une etoile car pointeur vers liste
 	// id capteur , heure , jour de la semaine , trafic
+
 
 };
 

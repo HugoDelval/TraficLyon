@@ -44,5 +44,6 @@ private:
 	int nombreNodes(ptrOnAVLTreeNode p); //inutile ?
 
 	ptrOnAVLTreeNode root;
+	int dernierIdTableau;
 };
 #endif
