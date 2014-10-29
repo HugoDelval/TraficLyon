@@ -12,7 +12,6 @@ class Evenement {
 public:
 	Evenement();
 	Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent);
-	Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent, Evenement* nextEvent);
 	virtual ~Evenement();
 private:
 	int annee;
@@ -21,6 +20,8 @@ private:
 	int minutes;
 	int secondes;
 	Evenement *evenementSuivant;
+public:
+	void attribuerEvenementSuivant(Evenement *nextEvent);
 };
 
 #endif /* EVENEMENT_H */

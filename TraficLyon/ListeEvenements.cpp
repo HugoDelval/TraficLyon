@@ -16,13 +16,12 @@ void ListeEvenements::ajouterDansLaListe(Evenement event)
 	{
 		*racine=event;
 	} else {
-		while((*evenementCourant)->evenementSuivant != NULL;// je crois quej'ai pas le droit vu que l'attribut est
-															//privé... donc ca compile pas
-															// j'éssayerai avec un double pointeur demain
+		while((*evenementCourant)->evenementSuivant != NULL)  // comment acceder a evenement suivant
+															 // sans 'getEvenementSuivant' ?
 		{
 			evenementCourant=(*evenementCourant)->evenementSuivant;
 		}
-		(*evenementCourant)->evenementSuivant=(*event).evenementSuivant;
+		evenementCourant->attribuerEvenementSuivant((*event).evenementSuivant);
 	}
 }
 
