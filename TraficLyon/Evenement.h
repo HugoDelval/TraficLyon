@@ -12,6 +12,7 @@ class Evenement {
 public:
 	Evenement();
 	Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent);
+	Evenement(int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent, Evenement* nextEvent);
 	virtual ~Evenement();
 private:
 	int annee;

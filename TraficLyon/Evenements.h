@@ -11,6 +11,8 @@
 #include <iostream>
 #include "ArbreIdentifiants.h"
 #include "Evenement.h"
+#include "ListeEvenements.h"
+
 
 using namespace std;
 
@@ -22,7 +24,7 @@ public:
 
 private:
 	ArbreIdentifiants arbreId;
-	Evenement ****evenements;
+	ListeEvenements ****evenements;
 	// 1500 * 23 * 7 * 5
 	// id capteur , heure , jour de la semaine , trafic
 
