@@ -13,6 +13,9 @@ ArbreIdentifiants::ArbreIdentifiants()
 
 int ArbreIdentifiants::insert(int idR)
 {
+#ifdef MAP
+	cout<<"insert in ArbreIdentifiants with : "<<idR<<endl;
+#endif
 	int res=-1;
 	if(root==NULL)
 	{

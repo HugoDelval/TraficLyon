@@ -11,6 +11,9 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 									int trafic, int anneeEvent , int moisEvent,
 									int nJourMoisEvent, int minutesEvent, int secondesEvent)
 {
+#ifdef MAP
+	cout<<"insert in Evenements with : "<<idCapteur<<" "<<heure<<" "<<jourSemaine<<" "<<trafic<<endl;
+#endif
 	Evenement *evenementAAjouter= new Evenement(anneeEvent, moisEvent, nJourMoisEvent,minutesEvent, secondesEvent);
 	evenements[idCapteur][heure][jourSemaine][trafic]->ajouterDansLaListe(evenementAAjouter);
 }
@@ -33,6 +36,10 @@ Evenements::Evenements()
 			for(int k=0 ; k<7 ; k++)
 			{
 				evenements[i][j][k] = new ListeEvenements*[5];
+				for(int l=0 ; l<5 ; l++)
+				{
+					evenements[i][j][k][l] = new ListeEvenements();
+				}
 			}
 		}
 	}

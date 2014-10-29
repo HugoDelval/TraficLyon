@@ -21,12 +21,14 @@ void ListeEvenements::ajouterDansLaListe(Evenement *event)
 	}
 }
 
-ListeEvenements::ListeEvenements() {
+ListeEvenements::ListeEvenements()
+{
 	racine=NULL;
 	evenementCourant=NULL;
 }
 
-ListeEvenements::~ListeEvenements() {
+ListeEvenements::~ListeEvenements()
+{
 	evenementCourant=racine;
 	Evenement *evenementALiberer;
 	while (evenementCourant != NULL)
