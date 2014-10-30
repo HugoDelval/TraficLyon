@@ -30,19 +30,10 @@ void Evenements::afficherTousLesEvenements()
 	cout<< "-----(par idTableau)-------" << endl;
 	cout<< "---------------------------" << endl;
 	for(int i(0); i<1500; i++)
-	{
 		for(int j(0) ; j<23 ; j++)
-		{
 			for(int k(0) ; k<7 ; k++)
-			{
 				for(int l(0) ; l<5 ; l++)
-				{
 					evenements[i][j][k][l]->afficherListe(i,j,k,l);
-				}
-			}
-		}
-	}
-
 }
 
 Evenements::Evenements()

@@ -25,12 +25,15 @@ int ArbreIdentifiants::insert(int idR)
 	}
 	else if(trouverIdTableauCorrespondant(idR,root)==-1 ) //si idR n'existe pas deja
 	{
+		cout<<"idR n'existe pas"<<endl;
+		inOrder(root);
 		dernierIdTableau++;
 		insert(idR,dernierIdTableau,root);
 		res = dernierIdTableau;
 	}
 	else // il existe deja, on recupere idTableau
 	{
+		cout<<"idR existe"<<endl;
 		res = trouverIdTableauCorrespondant(idR,root);
 	}
 	return res;
@@ -47,13 +50,13 @@ int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR,ptrOnAVLTreeNode &p
 	{
 		if (idR < p->idReel)
 		{
-			trouverIdTableauCorrespondant(idR,p->left);
+			return trouverIdTableauCorrespondant(idR,p->left);
 		}
 		else
 		{
 			if (idR>p->idReel)
 			{
-				trouverIdTableauCorrespondant(idR,p->right);
+				return trouverIdTableauCorrespondant(idR,p->right);
 			}
 			else
 			{
@@ -149,11 +152,11 @@ void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 					p = rotationDoubleDroite(p);
 				}
 			}
-		}
+		}/*
 		else
 		{
 			cout<<"Element Exists\n"<<endl;
-		}
+		}*/
 	}
 	int m,n,d;
 	m=hauteurSousArbre(p->left);
@@ -259,7 +262,7 @@ void ArbreIdentifiants::preOrder(ptrOnAVLTreeNode p)
 {
 	if (p!=NULL)
 	{
-		cout<<p->idReel<<"\t";
+		cout<<p->idReel<<", "<<p->idTableau<<"\t";
 		preOrder(p->left);
 		preOrder(p->right);
 	}
@@ -271,7 +274,7 @@ void ArbreIdentifiants::inOrder(ptrOnAVLTreeNode p)
 	if (p!=NULL)
 	{
 		inOrder(p->left);
-		cout<<p->idReel<<"\t";
+		cout<<p->idReel<<", "<<p->idTableau<<"\t";
 		inOrder(p->right);
 	}
 }
@@ -283,7 +286,7 @@ void ArbreIdentifiants::postOrder(ptrOnAVLTreeNode p)
 	{
 		postOrder(p->left);
 		postOrder(p->right);
-		cout<<p->idReel<<"\t";
+		cout<<p->idReel<<", "<<p->idTableau<<"\t";
 	}
 }
 
@@ -350,21 +353,13 @@ int ArbreIdentifiants::nombreNodes(ptrOnAVLTreeNode p)
 /*
 int main()
 {
-	ptrOnAVLTreeNode root,root1,min,max;//,flag;
+	ptrOnAVLTreeNode min,max;//,flag;
 	int idR,idT,choice,findele,delele;
 	char ch='y';
 	ArbreIdentifiants bst;
 
-	//system("clear");
-	root = NULL;
-	root1=NULL;
 	cout<<"\n\t\t\t\tWELCOME TO AVL TREE"<<endl;
 	cout<<"\t\t\t\t:::::::::::::::::::\n"<<endl;
-
-	for(int i=0 ; i<1500 ; i++)
-	{
-		bst.insert(i,i,root);
-	}
 
 	do
 	{
@@ -387,46 +382,44 @@ int main()
 			case 1:
 				cout<<"\n\t\tADDING NEW NODE"<<endl;
 				cout<<"\t\t:::::::::::::\n"<<endl;
-				cout<<"Enter a new idTab value: ";
-				cin>>idT;
 				cout<<"Enter a new idR value: ";
 				cin>>idR;
-				bst.insert(idR,idT,root);
+				bst.insert(idR);
 				cout<<"\nThe new value have been added to your tree successfully\n"<<endl;
 				break;
 			case 4:
 				cout<<"\nEnter idR to search: ";
 				cin>>findele;
-				if (root != NULL)
+				if (bst.root != NULL)
 				{
-					bst.trouverIdTableauCorrespondant(findele,root);
+					cout<<bst.trouverIdTableauCorrespondant(findele,bst.root)<<endl;
 				}
 				break;
 			case 5:
 				cout<<"\nEnter node to delete: ";
 				cin>>delele;
-				bst.supprimer(delele,root);
-				bst.inOrder(root);
+				bst.supprimer(delele,bst.root);
+				bst.inOrder(bst.root);
 				cout<<endl;
 				break;
 			case 6:
 				cout<<"\n\t\tPRE-ORDER TRAVERSAL"<<endl;
-				bst.preOrder(root);
+				bst.preOrder(bst.root);
 				cout<<endl;
 				break;
 			case 7:
 				cout<<"\n\t\tIN-ORDER TRAVERSAL"<<endl;
-				bst.inOrder(root);
+				bst.inOrder(bst.root);
 				cout<<endl;
 				break;
 			case 8:
 				cout<<"\n\t\tPOST ORDER TRAVERSAL"<<endl;
-				bst.postOrder(root);
+				bst.postOrder(bst.root);
 				cout<<endl;
 				break;
 			case 9:
 				cout<<"\n\t\tHEIGHT\n"<<endl;
-				cout<<"The height of the tree is: "<<bst.hauteurSousArbre(root)<<endl;
+				cout<<"The height of the tree is: "<<bst.hauteurSousArbre(bst.root)<<endl;
 
 				break;
 			case 0:
@@ -438,4 +431,5 @@ int main()
 		}
 	}while(choice != 0);
 	return 0;
-}*/
+}
+*/

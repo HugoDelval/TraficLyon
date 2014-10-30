@@ -16,7 +16,7 @@ void ListeEvenements::ajouterDansLaListe(Evenement *event)
 		evenementCourant=event;
 	} else
 	{
-		(*evenementCourant).evenementSuivant=event;
+		evenementCourant->evenementSuivant=event;
 		evenementCourant=event;
 	}
 }
