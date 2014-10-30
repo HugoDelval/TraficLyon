@@ -25,6 +25,10 @@ int Evenements::ajouterIdAArbre(int idCapeurReel)
 
 void Evenements::afficherTousLesEvenements()
 {
+	cout<< endl;
+	cout<< "-------Evenements : -------" << endl;
+	cout<< "-----(par idTableau)-------" << endl;
+	cout<< "---------------------------" << endl;
 	for(int i(0); i<1500; i++)
 	{
 		for(int j(0) ; j<23 ; j++)
