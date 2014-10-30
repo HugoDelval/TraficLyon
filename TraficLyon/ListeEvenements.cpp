@@ -23,19 +23,21 @@ void ListeEvenements::ajouterDansLaListe(Evenement *event)
 
 void ListeEvenements::afficherListe(int idCapteur, int heure, int jourSemaine, int trafic)
 {
-	if(evenementCourant==NULL)
+	if(racine==NULL)
 	{
 		//cout << "Liste vide" << endl;
 		// bloc vide : ne rien faire
-	} else {
-		evenementCourant=racine;
-		while (evenementCourant != NULL)
+	}
+	else
+	{
+		Evenement *e=racine;
+		while (e != NULL)
 		{
-			cout << idCapteur << " " << evenementCourant->annee << " " << evenementCourant->mois
-					<< " " << evenementCourant->nJourMois << " " << jourSemaine << " " << heure
-						<< " " << evenementCourant->minutes << " " << evenementCourant->secondes
+			cout << idCapteur << " " << e->annee << " " << e->mois
+					<< " " << e->nJourMois << " " << jourSemaine << " " << heure
+						<< " " << e->minutes << " " << e->secondes
 							<< " " <<  trafic << endl;
-			evenementCourant = evenementCourant->evenementSuivant;
+			e = e->evenementSuivant;
 		}
 	}
 }
@@ -49,12 +51,12 @@ ListeEvenements::ListeEvenements()
 
 ListeEvenements::~ListeEvenements()
 {
-	evenementCourant=racine;
+	Evenement *e=racine;
 	Evenement *evenementALiberer;
-	while (evenementCourant != NULL)
+	while (e != NULL)
 	{
-		evenementALiberer=evenementCourant;
-		evenementCourant=evenementCourant->evenementSuivant;
+		evenementALiberer=e;
+		e=e->evenementSuivant;
 		delete evenementALiberer;
 	}
 }
