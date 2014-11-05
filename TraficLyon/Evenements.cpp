@@ -18,6 +18,18 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 	evenements[idCapteur][heure][jourSemaine][trafic]->ajouterDansLaListe(evenementAAjouter);
 }
 
+void Evenements::maxBouchonsSimultanes()
+{
+	for(int i(0); i<1500; i++)
+		for(int j(0) ; j<23 ; j++)
+			for(int k(0) ; k<7 ; k++)
+				for(int l(0) ; l<5 ; l++)
+				{
+
+				}
+}
+
+
 int Evenements::ajouterIdAArbre(int idCapeurReel)
 {
 	return arbreId->insert(idCapeurReel);

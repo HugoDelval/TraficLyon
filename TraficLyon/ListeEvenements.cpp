@@ -9,12 +9,13 @@
 
 void ListeEvenements::ajouterDansLaListe(Evenement *event)
 {
-	//evenementCourant=racine;
+
 	if(racine==NULL)
 	{
 		racine=event;
 		evenementCourant=event;
-	} else
+	}
+	else
 	{
 		evenementCourant->evenementSuivant=event;
 		evenementCourant=event;
@@ -25,7 +26,6 @@ void ListeEvenements::afficherListe(int idCapteur, int heure, int jourSemaine, i
 {
 	if(racine==NULL)
 	{
-		//cout << "Liste vide" << endl;
 		// bloc vide : ne rien faire
 	}
 	else

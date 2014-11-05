@@ -72,6 +72,7 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		cout<<"erreur arbreIdentifiants"<<endl;
 	}
 }
+
 void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 {
 	/*cout<<"appel stat capteur :"<<endl;
@@ -79,6 +80,7 @@ void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 	cout<<endl;*/
 	int idCapteurR = atoi(idCapteurReel.c_str());
 }
+
 void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
 {
 	/*cout<<"appel stat jour Semaine :"<<endl;
@@ -86,6 +88,7 @@ void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
 	cout<<endl;*/
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
 }
+
 void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)
 {
 	/*cout<<"appel stat JourSemaine + heure :"<<endl;
@@ -95,10 +98,10 @@ void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heu
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
 	int heureFinale = atoi(heure.c_str());
 }
+
 void GestionTrafic::appelerMaxBouchonsSimultanes()
 {
-/*	cout<<"Appel max bouchons"<<endl;
-	cout<<endl;*/
+	toutLeTrafic->maxBouchonsSimultanes();
 }
 
 void GestionTrafic::start()
