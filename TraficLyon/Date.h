@@ -8,9 +8,11 @@
 #ifndef DATE_H_
 #define DATE_H_
 
-class Date {
+class Date
+{
 public:
 	Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
+	Date();
 	virtual ~Date();
 private:
 	int jourDeLaSemaine; // 0 -> 6
@@ -22,6 +24,16 @@ private:
 	int seconde;         // 0 -> 59
 
 	int secondesDepuisDebutAnnee;
+
 };
+
+bool operator==(Date const& date1, Date const& date2); // surcharge '=='
+bool operator!=(Date const& date1, Date const& date2); // surcharge '!='
+bool operator<(Date const& date1, Date const& date2); //surcharge <
+bool operator<=(Date const& date1, Date const& date2); // surcharge <=
+bool operator>(Date const& date1, Date const& date2); // surcharge >
+bool operator>=(Date const& date1, Date const& date2); // surcharge >=
+Date operator+(Date const& date1, int minutes); // surcharge +
+
 
 #endif /* DATE_H_ */
