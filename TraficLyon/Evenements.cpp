@@ -16,8 +16,9 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 	cout<<"insert in Evenements with : "<<idCapteur<<" "<<heure<<" "<<jourSemaine<<" "<<trafic<<endl;
 #endif
 */
-	Evenement *evenementAAjouter= new Evenement(anneeEvent, moisEvent, nJourMoisEvent,minutesEvent, secondesEvent);
-	evenements[idCapteur][heure][jourSemaine][trafic]->ajouterDansLaListe(evenementAAjouter);
+	capteurs[idCapteur]->ajouter(heure, jourSemaine, trafic,
+								 anneeEvent, moisEvent, nJourMoisEvent,
+								 minutesEvent, secondesEvent);
 	float traficAcuel=gestionnaireMax.ajouteCapteurEtRetourneTraficActuel(idCapteur,trafic,anneeEvent,moisEvent,nJourMoisEvent,heure,minutesEvent,secondesEvent);
 	if(traficAcuel > bouchonMax)
 	{
@@ -43,7 +44,6 @@ void Evenements::maxBouchonsSimultanes()
 		 << endl;
 }
 
-
 int Evenements::ajouterIdAArbre(int idCapeurReel)
 {
 	return arbreId->insert(idCapeurReel);
@@ -56,31 +56,16 @@ void Evenements::afficherTousLesEvenements()
 	cout<< "-----(par idTableau)-------" << endl;
 	cout<< "---------------------------" << endl;
 	for(int i(0); i<1500; i++)
-		for(int j(0) ; j<23 ; j++)
-			for(int k(0) ; k<7 ; k++)
-				for(int l(0) ; l<5 ; l++)
-					evenements[i][j][k][l]->afficherListe(i,j,k,l);
+		capteurs[i]->afficher();
 }
 
 Evenements::Evenements()
 {
 	arbreId = new ArbreIdentifiants();
-	evenements= new ListeEvenements****[1500];
+	capteurs = new EvenementsCapteur*[1500];
 	for(int i=0 ; i<1500 ; i++)
 	{
-		evenements[i] = new ListeEvenements***[23];
-		for(int j=0 ; j<23 ; j++)
-		{
-			evenements[i][j] = new ListeEvenements**[7];
-			for(int k=0 ; k<7 ; k++)
-			{
-				evenements[i][j][k] = new ListeEvenements*[5];
-				for(int l=0 ; l<5 ; l++)
-				{
-					evenements[i][j][k][l] = new ListeEvenements();
-				}
-			}
-		}
+		capteurs[i] = new EvenementsCapteur();
 	}
 	anneeBouchonMax=0;
 	moisBouchonMax=0;
@@ -94,7 +79,7 @@ Evenements::Evenements()
 void Evenements::statistiquesCapteur(int idCapteurReel)
 {
 	int idCapteurTableau = arbreId->trouverIdTableauCorrespondant(idCapteurReel);
-	float pourcentageVert = dureeVert / dureeTotale ;
+	// float pourcentageVert = dureeVert / dureeTotale ;
 }
 
 Evenements::~Evenements()
@@ -102,7 +87,7 @@ Evenements::~Evenements()
 #ifdef MAP
 	cout<< "Evenements::~Evenements()" <<endl;
 #endif
-	delete [] evenements;
+	delete [] capteurs;
 // a modifier : boucles comme dans le constructeur
 }
 

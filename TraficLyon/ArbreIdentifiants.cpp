@@ -57,13 +57,13 @@ int ArbreIdentifiants::trouverIdTableauCorrespondantRec(int idR,ptrOnAVLTreeNode
 	{
 		if (idR < p->idReel)
 		{
-			return trouverIdTableauCorrespondant(idR,p->left);
+			return trouverIdTableauCorrespondantRec(idR,p->left);
 		}
 		else
 		{
 			if (idR>p->idReel)
 			{
-				return trouverIdTableauCorrespondant(idR,p->right);
+				return trouverIdTableauCorrespondantRec(idR,p->right);
 			}
 			else
 			{
@@ -75,6 +75,7 @@ int ArbreIdentifiants::trouverIdTableauCorrespondantRec(int idR,ptrOnAVLTreeNode
 }
 
 // Finding the Smallest
+/*
 ptrOnAVLTreeNode ArbreIdentifiants::findMin(ptrOnAVLTreeNode p)
 {
 	if (p==NULL)
@@ -110,7 +111,7 @@ ptrOnAVLTreeNode ArbreIdentifiants::findMax(ptrOnAVLTreeNode p)
 		}
 		return p;
 	}
-}
+}*/
 
 // Inserting a node
 void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
@@ -173,11 +174,13 @@ void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 }
 
 // Copy a tree
+/*
 void ArbreIdentifiants::copy(ptrOnAVLTreeNode &src,ptrOnAVLTreeNode &dest)
 {
 	vider(dest);
 	dest = nodeCopy(src);
 }
+
 // Make a tree empty
 void ArbreIdentifiants::vider(ptrOnAVLTreeNode &dest)
 {
@@ -265,6 +268,7 @@ int ArbreIdentifiants::deleteMin(ptrOnAVLTreeNode &p)
 		return c;
 	}
 }
+
 void ArbreIdentifiants::preOrder(ptrOnAVLTreeNode p)
 {
 	if (p!=NULL)
@@ -296,7 +300,7 @@ void ArbreIdentifiants::postOrder(ptrOnAVLTreeNode p)
 		cout<<p->idReel<<", "<<p->idTableau<<"\t";
 	}
 }
-
+*/
 int ArbreIdentifiants::max(int value1, int value2)
 {
 	return ((value1 > value2) ? value1 : value2);
@@ -345,7 +349,7 @@ ptrOnAVLTreeNode ArbreIdentifiants::rotationDoubleDroite(ptrOnAVLTreeNode &p1)
 	p1->right = rotationSimpleGauche(p1->right);
 	return rotationSimpleDroite(p1);
 }
-
+/*
 int ArbreIdentifiants::nombreNodes(ptrOnAVLTreeNode p)
 {
 	int count=0;
@@ -357,7 +361,7 @@ int ArbreIdentifiants::nombreNodes(ptrOnAVLTreeNode p)
 	}
 	return count;
 }
-/*
+
 int main()
 {
 	ptrOnAVLTreeNode min,max;//,flag;

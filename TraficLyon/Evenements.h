@@ -10,8 +10,7 @@
 
 #include <iostream>
 #include "ArbreIdentifiants.h"
-#include "Evenement.h"
-#include "ListeEvenements.h"
+#include "EvenementsCapteur.h"
 #include "ListeDatesMaxBouchons.h"
 
 
@@ -31,9 +30,8 @@ public:
 
 private:
 	ArbreIdentifiants *arbreId;
-	ListeEvenements *****evenements;
-	// 1500 * 23 * 7 * 5 + une etoile car pointeur vers liste
-	// id capteur , heure , jour de la semaine , trafic
+	EvenementsCapteur **capteurs;
+	// tableau de pointeurs vers EvenementsCapteur : id*1500
 	int anneeBouchonMax;
 	int moisBouchonMax;
 	int jourBouchonMax;

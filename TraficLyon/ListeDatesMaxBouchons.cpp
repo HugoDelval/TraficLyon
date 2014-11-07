@@ -17,9 +17,9 @@ float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, 
 	newE->idCapteur=idCapteur;
 	newE->trafic=trafic;
 	int secondesMois(0);
-	int secondesMois30 (30*3600*24);
-	int secondesMois31 (31*3600*24);
-	int secondesMois28 (28*3600*24);
+	int secondesMois30(30*3600*24);
+	int secondesMois31(31*3600*24);
+	int secondesMois28(28*3600*24);
 	switch (mois)
 	{
 	case 1: // fevrier
