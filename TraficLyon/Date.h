@@ -16,13 +16,14 @@ class Date
 {
 public:
 	Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
-	Date(const Date &dateACopier);
+	Date(Date const &dateACopier);
 	Date();
 	virtual ~Date();
-	bool estEgal(Date const& dateAComparer);
-	bool estInf(Date const& dateAComparer);
+	bool estEgal(Date const& dateAComparer) const;
+	bool estInf(Date const& dateAComparer) const;
 	Date additionner(int secondes);
 	void afficheDate();
+	int  difference(Date const &dateAEnlever) const;
 
 private:
 	int jourDeLaSemaine; // 0 -> 6
@@ -46,6 +47,6 @@ bool operator>(Date const& date1, Date const& date2); // surcharge >
 bool operator>=(Date const& date1, Date const& date2); // surcharge >=
 Date operator+(Date const& date1, int minutes); // surcharge +
 Date operator-(Date const& date1, int minutes);
-
+int operator-(Date const& date1, Date const& date2);
 
 #endif /* DATE_H_ */

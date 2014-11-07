@@ -9,49 +9,54 @@
 #include "Date.h"
 
 
-bool operator==(Date& date1, Date& date2)
+bool operator==(Date const &date1, Date const &date2)
 {
 	return date1.estEgal(date2);
 }
 
-bool operator!=(Date& date1, Date& date2)
+bool operator!=(Date const& date1, Date const& date2)
 {
 	return !(date1==date2);
 }
 
-bool operator<(Date &date2, Date& date1)
+bool operator<(Date const& date2, Date const &date1)
 {
 	return date1.estInf(date2);
 }
 
-bool operator<=(Date& date1, Date& date2)
+bool operator<=(Date const& date1, Date const& date2)
 {
 	return (date1<date2 || date1==date2);
 }
 
-bool operator>(Date& date1, Date& date2)
+bool operator>(Date const& date1, Date const& date2)
 {
 	return !(date1<date2 || date1==date2);
 }
 
-bool operator>=(Date& date1, Date& date2)
+bool operator>=(Date const& date1, Date const& date2)
 {
 	return !(date1<date2);
 }
 
-Date operator+(const Date &date, int secondes)   // 0 <= secondes <= 60
+Date operator+(Date const &date, int secondes)   // 0 <= secondes <= 60
 {
 	Date dateAddition(date);
 	return dateAddition.additionner(secondes);
 }
 
-Date operator-(const Date &date, int secondes)   // 0 <= secondes <= 60
+int operator-(Date const& date1, Date const& dateAEnlever)
+{
+	return date1.difference(dateAEnlever);
+}
+
+Date operator-(Date const &date, int secondes)   // 0 <= secondes <= 60
 {
 	Date dateSoustraction(date);
 	return dateSoustraction.additionner(-secondes);
 }
 
-bool Date::estEgal(Date const& dateAComparer)
+bool Date::estEgal(Date const &dateAComparer) const
 {
 	if (dateAComparer.annee == annee  && dateAComparer.jourDeLaSemaine==jourDeLaSemaine
 				&& dateAComparer.jourDuMois==jourDuMois && dateAComparer.mois==mois
@@ -64,7 +69,7 @@ bool Date::estEgal(Date const& dateAComparer)
 	}
 }
 
-bool Date::estInf(Date const& dateAComparer)
+bool Date::estInf(Date const& dateAComparer) const
 {
 	if(dateAComparer.annee >annee )
 			return true;
@@ -80,7 +85,6 @@ bool Date::estInf(Date const& dateAComparer)
 			return true;
 		else
 			return false;
-
 }
 
 Date Date::additionner(int secondes)
@@ -202,6 +206,11 @@ Date Date::additionner(int secondes)
 	return *this;
 }
 
+int Date::difference(Date const &dateAEnlever) const
+{
+	return secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee;
+}
+
 void Date::afficheDate()
 {
 	cout << annee <<" "<<mois << " " << jourDuMois << " " << heure << " " << minute << " " << seconde;
@@ -231,10 +240,51 @@ Date::Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, 
 	this->minute = minute;
 	this->seconde = seconde;
 
-	// TODO secondeannee
+	int secondesMois(0);
+	int secondesMois30 (30*3600*24);
+	int secondesMois31 (31*3600*24);
+	int secondesMois28 (28*3600*24);
+	switch (mois)
+	{
+		case 1: // fevrier
+			secondesMois=secondesMois31;
+			break;
+		case 2: //mars
+			secondesMois=secondesMois31 + secondesMois28;
+			break;
+		case 3: //avril
+			secondesMois=secondesMois31 *2 + secondesMois28;
+			break;
+		case 4: //mai
+			secondesMois=secondesMois31 *2 + secondesMois28 + secondesMois30;
+			break;
+		case 5: //juin
+			secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30;
+			break;
+		case 6: //juillet
+			secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30*2;
+			break;
+		case 7: //aout
+			secondesMois=secondesMois31 *4 + secondesMois28 + secondesMois30 *2;
+			break;
+		case 8: //septembre
+			secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *2;
+			break;
+		case 9: //octobre
+			secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *3;
+			break;
+		case 10: //novembre
+			secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *3;
+			break;
+		case 11: //decembre
+			secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *4;
+			break;
+	}
+
+	secondesDepuisDebutAnnee = seconde + minute*60 + heure*3600 + jourDuMois*3600*24 + secondesMois;
 }
 
-Date::Date(const Date &dateACopier)
+Date::Date(Date const &dateACopier)
 {
 	jourDeLaSemaine = dateACopier.jourDeLaSemaine;
 	annee = dateACopier.annee;
