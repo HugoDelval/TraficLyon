@@ -8,12 +8,22 @@
 #ifndef DATE_H_
 #define DATE_H_
 
+#include <iostream>
+
+using namespace std;
+
 class Date
 {
 public:
 	Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
+	Date(const Date &dateACopier);
 	Date();
 	virtual ~Date();
+	bool estEgal(Date const& dateAComparer);
+	bool estInf(Date const& dateAComparer);
+	Date additionner(int secondes);
+	void afficheDate();
+
 private:
 	int jourDeLaSemaine; // 0 -> 6
 	int annee;
@@ -25,6 +35,7 @@ private:
 
 	int secondesDepuisDebutAnnee;
 
+friend class EvenementsCapteur;
 };
 
 bool operator==(Date const& date1, Date const& date2); // surcharge '=='
@@ -34,6 +45,7 @@ bool operator<=(Date const& date1, Date const& date2); // surcharge <=
 bool operator>(Date const& date1, Date const& date2); // surcharge >
 bool operator>=(Date const& date1, Date const& date2); // surcharge >=
 Date operator+(Date const& date1, int minutes); // surcharge +
+Date operator-(Date const& date1, int minutes);
 
 
 #endif /* DATE_H_ */

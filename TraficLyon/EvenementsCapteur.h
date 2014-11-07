@@ -8,27 +8,30 @@
 #ifndef EVENEMENTSCAPTEUR_H_
 #define EVENEMENTSCAPTEUR_H_
 
-class EvenementsCapteur {
+#include "Date.h"
+#include <iostream>
+
+using namespace std;
+
+class EvenementsCapteur
+{
+
 public:
-	EvenementsCapteur(int heure, int jourSemaine, int trafic,
-	 			  	  int anneeEvent , int moisEvent, int nJourMoisEvent,
-	 			  	  int minutesEvent, int secondesEvent);
+	EvenementsCapteur(int trafic, Date date);
+	EvenementsCapteur();
 	virtual ~EvenementsCapteur();
-	void ajouter(int heure, int jourSemaine, int trafic,
-				 int anneeEvent , int moisEvent, int nJourMoisEvent,
-				 int minutesEvent, int secondesEvent);
+	void ajouter(int trafic, Date date);
 	void afficher();
 
 private:
-	int anneeDernierEvenement;
-	int secondesAnneeDernierEvenement;
+	Date dateDernierEvenement;
 	int traficDernierEvenement;
-	int heureDernierEvenement;
-	int jourSemaineDernierEvenement;
+	int max5minutes(int nombreSecondes);
 
 	int ***secondesPassees; // = nombre de secondes passees dans l'etat 'trafic' le jour x de la semaine a y heure
-	// 23        * 7              * 5
+	// 24        * 7              * 5
 	// heure , jour de la semaine , trafic
+
 };
 
 #endif /* EVENEMENTSCAPTEUR_H_ */

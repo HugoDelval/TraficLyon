@@ -32,13 +32,10 @@ private:
 	ArbreIdentifiants *arbreId;
 	EvenementsCapteur **capteurs;
 	// tableau de pointeurs vers EvenementsCapteur : id*1500
-	int anneeBouchonMax;
-	int moisBouchonMax;
-	int jourBouchonMax;
-	int heureBouchonMax;
-	int minuteBouchonMax;
-	int secondeBouchonMax;
+	Date dateBouchonMax;
+	Date dateDebutAcquisition;
 	float bouchonMax;
+
 	ListeDatesMaxBouchons gestionnaireMax;
 
 };

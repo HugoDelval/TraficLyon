@@ -16,30 +16,20 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 	cout<<"insert in Evenements with : "<<idCapteur<<" "<<heure<<" "<<jourSemaine<<" "<<trafic<<endl;
 #endif
 */
-	capteurs[idCapteur]->ajouter(heure, jourSemaine, trafic,
-								 anneeEvent, moisEvent, nJourMoisEvent,
-								 minutesEvent, secondesEvent);
-	float traficAcuel=gestionnaireMax.ajouteCapteurEtRetourneTraficActuel(idCapteur,trafic,anneeEvent,moisEvent,nJourMoisEvent,heure,minutesEvent,secondesEvent);
+	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
+	capteurs[idCapteur]->ajouter(trafic,dateEvenement);
+	float traficAcuel=gestionnaireMax.ajouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
 	if(traficAcuel > bouchonMax)
 	{
 		bouchonMax = traficAcuel;
-		anneeBouchonMax=anneeEvent;
-		moisBouchonMax = moisEvent;
-		jourBouchonMax = nJourMoisEvent;
-		heureBouchonMax = heure;
-		minuteBouchonMax = minutesEvent;
-		secondeBouchonMax = secondesEvent;
+		dateBouchonMax = dateEvenement;
 	}
 }
 
 void Evenements::maxBouchonsSimultanes()
 {
-	cout << anneeBouchonMax << " "
-		 << moisBouchonMax << " "
-		 << jourBouchonMax << " "
-		 << heureBouchonMax << " "
-		 << minuteBouchonMax << " "
-		 << secondeBouchonMax << " "
+	dateBouchonMax.afficheDate();
+	cout << " "
 		 << bouchonMax << "%"
 		 << endl;
 }
@@ -67,18 +57,13 @@ Evenements::Evenements()
 	{
 		capteurs[i] = new EvenementsCapteur();
 	}
-	anneeBouchonMax=0;
-	moisBouchonMax=0;
-	jourBouchonMax=0;
-	heureBouchonMax=0;
-	minuteBouchonMax=0;
-	secondeBouchonMax=0;
 	bouchonMax=0.0;
 }
 
 void Evenements::statistiquesCapteur(int idCapteurReel)
 {
 	int idCapteurTableau = arbreId->trouverIdTableauCorrespondant(idCapteurReel);
+
 	// float pourcentageVert = dureeVert / dureeTotale ;
 }
 

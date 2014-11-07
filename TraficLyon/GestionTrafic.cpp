@@ -63,7 +63,7 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 			traficFinal=4;
 		}
 		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale,traficFinal,
-								anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
+									   anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
 
 		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
