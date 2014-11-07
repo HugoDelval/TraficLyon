@@ -65,7 +65,7 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale,traficFinal,
 								anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
 
-		toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
+		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
 	else //il y a une erreur dans l'insertion
 	{
@@ -79,6 +79,7 @@ void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
 	cout<<endl;*/
 	int idCapteurR = atoi(idCapteurReel.c_str());
+	toutLeTrafic->statistiquesCapteur(idCapteurR);
 }
 
 void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)

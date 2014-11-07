@@ -13,9 +13,11 @@ ArbreIdentifiants::ArbreIdentifiants()
 
 int ArbreIdentifiants::insert(int idR)
 {
+	/*
 #ifdef MAP
 	cout<<"insert in ArbreIdentifiants with : "<<idR<<endl;
 #endif
+*/
 	int res=-1;
 	if(root==NULL)
 	{
@@ -23,24 +25,29 @@ int ArbreIdentifiants::insert(int idR)
 		insert(idR,dernierIdTableau,root);
 		res = dernierIdTableau;
 	}
-	else if(trouverIdTableauCorrespondant(idR,root)==-1 ) //si idR n'existe pas deja
+	else if(trouverIdTableauCorrespondantRec(idR,root)==-1 ) //si idR n'existe pas deja
 	{
-		cout<<"idR n'existe pas"<<endl;
-		inOrder(root);
+		// cout<<"idR n'existe pas"<<endl;
+		// inOrder(root);
 		dernierIdTableau++;
 		insert(idR,dernierIdTableau,root);
 		res = dernierIdTableau;
 	}
 	else // il existe deja, on recupere idTableau
 	{
-		cout<<"idR existe"<<endl;
-		res = trouverIdTableauCorrespondant(idR,root);
+		// cout<<"idR existe"<<endl;
+		res = trouverIdTableauCorrespondantRec(idR,root);
 	}
 	return res;
 }
 
+int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR)
+{
+	return trouverIdTableauCorrespondantRec(idR,root);
+}
+
 // Finding an element
-int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR,ptrOnAVLTreeNode &p)
+int ArbreIdentifiants::trouverIdTableauCorrespondantRec(int idR,ptrOnAVLTreeNode &p)
 {
 	if (p==NULL)
 	{
@@ -118,7 +125,7 @@ void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 		p->height=0;
 		if (p==NULL)
 		{
-			cout<<"Out of Space\n"<<endl;
+			//cout<<"Out of Space\n"<<endl;
 		}
 	}
 	else

@@ -22,7 +22,7 @@ public:
 
 private:
 	Evenement *racine;
-	Evenement *evenementCourant;
+	Evenement *evenementCourant; //dernier element
 
 };
 

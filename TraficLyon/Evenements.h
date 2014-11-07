@@ -12,6 +12,7 @@
 #include "ArbreIdentifiants.h"
 #include "Evenement.h"
 #include "ListeEvenements.h"
+#include "ListeDatesMaxBouchons.h"
 
 
 using namespace std;
@@ -21,7 +22,7 @@ public:
 	Evenements();
 	virtual ~Evenements();
 	void ajouterEvenement(int idCapteur, int heure, int jourSemaine, int trafic, int anneeEvent , int moisEvent, int nJourMoisEvent, int minutesEvent, int secondesEvent);
-	void statistiquesCapteur(int idCapteur);
+	void statistiquesCapteur(int idCapteurReel);
 	void statistiquesJourSemaine(int nJour);
 	void statistiquesJourHeureSemaine(int nJour, int heure);
 	void maxBouchonsSimultanes();
@@ -33,7 +34,14 @@ private:
 	ListeEvenements *****evenements;
 	// 1500 * 23 * 7 * 5 + une etoile car pointeur vers liste
 	// id capteur , heure , jour de la semaine , trafic
-
+	int anneeBouchonMax;
+	int moisBouchonMax;
+	int jourBouchonMax;
+	int heureBouchonMax;
+	int minuteBouchonMax;
+	int secondeBouchonMax;
+	float bouchonMax;
+	ListeDatesMaxBouchons gestionnaireMax;
 
 };
 

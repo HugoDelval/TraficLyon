@@ -25,6 +25,7 @@ private:
 	int minutes;
 	int secondes;
 	Evenement *evenementSuivant;
+	Evenement *evenementPrecedent;
 
 friend class ListeEvenements;
 
