@@ -8,57 +8,14 @@
 #include "ListeDatesMaxBouchons.h"
 
 
-float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic,
-										  int annee, int mois, int jourDuMois,
-										  int heure, int minute, int seconde)
+float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle)
 {
-	ElementListeDates *newE = new ElementListeDates();
-	newE->annee=annee;
-	newE->idCapteur=idCapteur;
-	newE->trafic=trafic;
-	int secondesMois(0);
-	int secondesMois30(30*3600*24);
-	int secondesMois31(31*3600*24);
-	int secondesMois28(28*3600*24);
-	switch (mois)
-	{
-	case 1: // fevrier
-		secondesMois=secondesMois31;
-		break;
-	case 2: //mars
-		secondesMois=secondesMois31 + secondesMois28;
-		break;
-	case 3: //avril
-		secondesMois=secondesMois31 *2 + secondesMois28;
-		break;
-	case 4: //mai
-		secondesMois=secondesMois31 *2 + secondesMois28 + secondesMois30;
-		break;
-	case 5: //juin
-		secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30;
-		break;
-	case 6: //juillet
-		secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30*2;
-		break;
-	case 7: //aout
-		secondesMois=secondesMois31 *4 + secondesMois28 + secondesMois30 *2;
-		break;
-	case 8: //septembre
-		secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *2;
-		break;
-	case 9: //octobre
-		secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *3;
-		break;
-	case 10: //novembre
-		secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *3;
-		break;
-	case 11: //decembre
-		secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *4;
-		break;
-	}
-	newE->secondesDansAnnee=seconde + minute*60 + heure*3600 + jourDuMois*3600*24 + secondesMois;
 	if(trafic != 0) // si le capteur est actif
 	{
+		ElementListeDates *newE = new ElementListeDates();
+		newE->idCapteur=idCapteur;
+		newE->trafic=trafic;
+		newE->dateEvenement=dateActuelle;
 		ajouteDansLaListe(newE);
 	}
 	return calculeTraficActu();
@@ -66,7 +23,7 @@ float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, 
 
 void ListeDatesMaxBouchons::ajouteDansLaListe(ElementListeDates *newE)
 {
-	supprimeCapteursObsoletes(newE->annee, newE->secondesDansAnnee, newE->idCapteur);
+	supprimeCapteursObsoletes(newE->dateEvenement, newE->idCapteur);
 	if(root == NULL)
 	{
 		root = newE;
@@ -86,7 +43,7 @@ void ListeDatesMaxBouchons::ajouteDansLaListe(ElementListeDates *newE)
 	}
 }
 
-void ListeDatesMaxBouchons::supprimeCapteursObsoletes(int anneeActu, int secondesDansAnneeActu, int newIdCapteur)
+void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int newIdCapteur)
 {
 	/*
 	 * suppression de tous les elements ayant une date obsolete + ceux ayant le meme id que newE
@@ -119,9 +76,7 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(int anneeActu, int seconde
 				delete evenementCourant;
 			}
 		}
-		else if( evenementCourant->annee+1 < anneeActu
-				|| (evenementCourant->annee < anneeActu && secondesDansAnneeActu + (nombreSecondesAnnee-evenementCourant->secondesDansAnnee)>5*60 )
-				|| (evenementCourant->annee == anneeActu && (secondesDansAnneeActu - evenementCourant->secondesDansAnnee) > 5*60 ) )
+		else if( evenementCourant->dateEvenement + (5*60) < dateActuelle )
 		{
 			//suppresion de toute la liste a partir d'ici + sortie boucle
 			ElementListeDates *evenementALiberer;

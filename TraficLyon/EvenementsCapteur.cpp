@@ -10,7 +10,7 @@
 
 void EvenementsCapteur::ajouter(int trafic, Date date)
 {
-	int secondesPasseesMajore = max5minutes(date-dateDernierEvenement); /*on s'interesse seulement
+	int secondesPasseesMajore = 0;/*max5minutes(date-dateDernierEvenement); /*on s'interesse seulement
 	                                                                     a la periode de validite de l'ancien evenement
 	                                                                     */
 	if((dateDernierEvenement+secondesPasseesMajore).heure != dateDernierEvenement.heure) // on est dans la mm heure, mm jour ..

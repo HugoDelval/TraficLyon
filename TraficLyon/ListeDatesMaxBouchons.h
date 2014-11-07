@@ -9,13 +9,13 @@
 #define LISTEDATESMAXBOUCHONS_H_
 
 #include <stddef.h>  // permet de connaitre 'NULL'
+#include "Date.h"
 
 struct ElementListeDates
 {
 	int idCapteur;
 	int trafic;
-	int annee;
-	int secondesDansAnnee;
+	Date dateEvenement;
 	ElementListeDates *suivant;
 	ElementListeDates *precedent;
 };
@@ -25,10 +25,10 @@ class ListeDatesMaxBouchons {
 public:
 	ListeDatesMaxBouchons();
 	virtual ~ListeDatesMaxBouchons();
-	float ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
+	float ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle);
 
 private:
-	void supprimeCapteursObsoletes(int anneeActu, int secondesDansAnneeActu, int newIdCapteur);
+	void supprimeCapteursObsoletes(Date dateActuelle, int newIdCapteur);
 	void ajouteDansLaListe(ElementListeDates *newE);
 	float calculeTraficActu();
 
