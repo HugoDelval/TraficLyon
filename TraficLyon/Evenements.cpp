@@ -46,7 +46,11 @@ void Evenements::afficherTousLesEvenements()
 	cout<< "-----(par idTableau)-------" << endl;
 	cout<< "---------------------------" << endl;
 	for(int i(0); i<1500; i++)
+	{
+		cout << "id = " << i << endl;
 		capteurs[i]->afficher();
+	}
+
 }
 
 Evenements::Evenements()

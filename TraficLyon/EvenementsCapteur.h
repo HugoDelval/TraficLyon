@@ -24,9 +24,11 @@ public:
 	void afficher();
 
 private:
+	int max5minutes(int nombreSecondes);
+
 	Date dateDernierEvenement;
 	int traficDernierEvenement;
-	int max5minutes(int nombreSecondes);
+	bool isEmpty;
 
 	int ***secondesPassees; // = nombre de secondes passees dans l'etat 'trafic' le jour x de la semaine a y heure
 	// 24        * 7              * 5

@@ -10,26 +10,37 @@
 
 void EvenementsCapteur::ajouter(int trafic, Date date)
 {
-	int secondesPasseesMajore = max5minutes(date-dateDernierEvenement); /*on s'interesse seulement
-	                                                                     a la periode de validite de l'ancien evenement
-	                                                                     */
-	if((dateDernierEvenement+secondesPasseesMajore).heure != dateDernierEvenement.heure) // on est dans la mm heure, mm jour ..
+	if(!isEmpty)
 	{
-		secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
-                          += secondesPasseesMajore;
+		int secondesPasseesMajore = max5minutes(date-dateDernierEvenement); /*on s'interesse seulement
+		                                                                     a la periode de validite de l'ancien evenement
+		                                                                     */
+		if((dateDernierEvenement+secondesPasseesMajore).heure != dateDernierEvenement.heure) // on est dans la mm heure, mm jour ..
+		{
+			secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
+	                          += secondesPasseesMajore;
+		}
+		else // 2 cases a modifier
+		{
+			Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
+			int tempsAAjouterDateDernierEvenement = ( (59-dateDernierEvenement.minute)*60 + 59-dateDernierEvenement.seconde ) ;
+			int autreTemps = secondesPasseesMajore - tempsAAjouterDateDernierEvenement;
+			secondesPassees[datePlus5min.heure][datePlus5min.jourDeLaSemaine][traficDernierEvenement]
+			               += autreTemps;
+			secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
+						   += tempsAAjouterDateDernierEvenement;
+		}
+		traficDernierEvenement = trafic;
+		dateDernierEvenement = date;
 	}
-	else // 2 cases a modifier
+	else
 	{
-		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
-		int tempsAAjouterDateDernierEvenement = ( (59-dateDernierEvenement.minute)*60 + 59-dateDernierEvenement.seconde ) ;
-		int autreTemps = secondesPasseesMajore - tempsAAjouterDateDernierEvenement;
-		secondesPassees[datePlus5min.heure][datePlus5min.jourDeLaSemaine][traficDernierEvenement]
-		               += autreTemps;
-		secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
-					   += tempsAAjouterDateDernierEvenement;
+		traficDernierEvenement = trafic;
+		dateDernierEvenement = date;
+		isEmpty=false;
 	}
-	traficDernierEvenement = trafic;
-	dateDernierEvenement = date;
+	//cout<<"fin ajouter dans EvenementsCapteur"<<endl;
+
 }
 
 void EvenementsCapteur::afficher()
@@ -40,11 +51,15 @@ void EvenementsCapteur::afficher()
 		{
 			for(int k=0 ; k<5 ; k++) // trafic
 			{
-				cout << "heure:" << i
-					 << "    jour de la semaine:" << j
-					 << "    trafic:" << k
-					 << "    nombres secondes dans cet état:" << secondesPassees[i][j][k]
-					 << endl;
+				if(secondesPassees[i][j][k]!=0)
+				{
+					cout << "heure:" << i
+						 << "    jour de la semaine:" << j
+						 << "    trafic:" << k
+						 << "    nombres secondes dans cet état:" << secondesPassees[i][j][k]
+						 << endl;
+				}
+
 			}
 		}
 	}
@@ -76,6 +91,7 @@ EvenementsCapteur::EvenementsCapteur(int trafic, Date date)
 			}
 		}
 	}
+	isEmpty=false;
 }
 
 EvenementsCapteur::EvenementsCapteur()
@@ -95,6 +111,7 @@ EvenementsCapteur::EvenementsCapteur()
 			}
 		}
 	}
+	isEmpty=true;
 }
 
 EvenementsCapteur::~EvenementsCapteur()

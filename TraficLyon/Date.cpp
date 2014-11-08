@@ -69,19 +69,20 @@ bool Date::estEgal(Date const &dateAComparer) const
 	}
 }
 
+// todo verifier
 bool Date::estInf(Date const& dateAComparer) const
 {
-	if(dateAComparer.annee >annee )
+	if(dateAComparer.annee <annee )
 			return true;
-		else if(dateAComparer.mois >mois)
+		else if(dateAComparer.mois <mois)
 			return true;
-		else if(dateAComparer.jourDuMois > jourDuMois)
+		else if(dateAComparer.jourDuMois < jourDuMois)
 			return true;
-		else if(dateAComparer.heure > heure)
+		else if(dateAComparer.heure < heure)
 			return true;
-		else if(dateAComparer.minute >minute)
+		else if(dateAComparer.minute <minute)
 			return true;
-		else if(dateAComparer.seconde >seconde)
+		else if(dateAComparer.seconde <seconde)
 			return true;
 		else
 			return false;
@@ -99,9 +100,9 @@ Date Date::additionner(int secondes)
 	else if(seconde < 0)
 	{
 		seconde = -seconde;
-		minute-=((seconde/60)+1);
+		minute-=(((seconde-1)/60)+1);
 		seconde %= 60;
-		seconde = 60 - seconde;
+		seconde = (60 - seconde)%60;
 	}
 
 	if(minute >= 60)
@@ -112,9 +113,9 @@ Date Date::additionner(int secondes)
 	else if (minute<0)
 	{
 		minute = -minute;
-		heure-=((minute/60)+1);
+		heure-=(((minute-1)/60)+1);
 		minute %= 60;
-		minute = 60 - minute;
+		minute = (60 - minute)%60;
 	}
 
 	if(heure >= 24)
@@ -127,12 +128,12 @@ Date Date::additionner(int secondes)
 	else if (heure <0)
 	{
 		heure = -heure;
-		jourDuMois-=((heure/24)+1);
-		jourDeLaSemaine-=((heure/24)+1);
+		jourDuMois-=(((heure-1)/24)+1);
+		jourDeLaSemaine-=(((heure-1)/24)+1);
 		jourDeLaSemaine%=7;
-		jourDeLaSemaine = 7 - jourDeLaSemaine;
+		jourDeLaSemaine = (7 - jourDeLaSemaine)%7;
 		heure %=24;
-		heure = 24 - heure;
+		heure = (24 - heure)%24;
 	}
 
 	if((jourDuMois > 27 && mois == 1))
@@ -143,9 +144,9 @@ Date Date::additionner(int secondes)
 	else if(jourDuMois<0 && mois==2)
 	{
 		jourDuMois=-jourDuMois;
-		mois-=((jourDuMois/28)+1);
+		mois-=(((jourDuMois-1)/28)+1);
 		jourDuMois%=28;
-		jourDuMois = 28-jourDuMois;
+		jourDuMois = (28-jourDuMois)%28;
 	}
 
 
@@ -157,9 +158,9 @@ Date Date::additionner(int secondes)
 	else if(jourDuMois<0 && (mois==4 || mois==6 || mois==9 || mois==11))
 	{
 		jourDuMois=-jourDuMois;
-		mois-=((jourDuMois/30)+1);
+		mois-=(((jourDuMois-1)/30)+1);
 		jourDuMois%=30;
-		jourDuMois=30-jourDuMois;
+		jourDuMois=(30-jourDuMois)%30;
 	}
 
 	if(jourDuMois > 30 && (mois == 0 || mois == 2 || mois == 4 || mois == 6
@@ -184,9 +185,9 @@ Date Date::additionner(int secondes)
 	else if(jourDuMois<0 && (mois==1 || mois==3 || mois==5 || mois==7 || mois==8 || mois==10 || mois==0))
 	{
 		jourDuMois=-jourDuMois;
-		mois-=((jourDuMois/31)+1);
+		mois-=(((jourDuMois-1)/31)+1);
 		jourDuMois%=31;
-		jourDuMois=31-jourDuMois;
+		jourDuMois=(31-jourDuMois)%31;
 	}
 
 	secondesDepuisDebutAnnee += secondes;
@@ -200,7 +201,7 @@ Date Date::additionner(int secondes)
 		annee--;
 		mois=-mois;
 		mois%=12;
-		mois=12-mois;
+		mois=(12-mois)%12;
 	}
 
 	return *this;
@@ -208,13 +209,24 @@ Date Date::additionner(int secondes)
 
 int Date::difference(Date const &dateAEnlever) const
 {
-	return secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee;
+	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)*365*24*3600;
 }
 
 void Date::afficheDate()
 {
 	cout << annee <<" "<<mois << " " << jourDuMois << " " << heure << " " << minute << " " << seconde;
+}
 
+void Date::debugAffichage()
+{
+	cout << "année: "<< annee
+		 <<" mois: "<<mois
+		 << " jour: " << jourDuMois
+		 << " heure: " << heure
+		 << " minute: " << minute
+		 << " seconde: " << seconde
+		 << " jourSemaine: " << jourDeLaSemaine
+		 <<endl;
 }
 
 Date::Date()

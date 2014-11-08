@@ -43,14 +43,25 @@ void ListeDatesMaxBouchons::ajouteDansLaListe(ElementListeDates *newE)
 	}
 }
 
+void ListeDatesMaxBouchons::debugAffiche()
+{
+	ElementListeDates *evenementCourant = root;
+	while (evenementCourant != NULL)
+	{
+		cout<<"id:"<<evenementCourant->idCapteur<<" trafic:"<<evenementCourant->trafic<<" ";
+		evenementCourant->dateEvenement.debugAffichage();
+		evenementCourant=evenementCourant->suivant;
+	}
+}
+
 void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int newIdCapteur)
 {
 	/*
 	 * suppression de tous les elements ayant une date obsolete + ceux ayant le meme id que newE
 	 */
 	ElementListeDates *evenementCourant=root;
-	int nombreSecondesAnnee = 365 * 24 * 3600 ;
-	while (evenementCourant != NULL)
+
+	while(evenementCourant != NULL)
 	{
 		if(evenementCourant->idCapteur == newIdCapteur)
 		{
@@ -78,13 +89,21 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 		}
 		else if( evenementCourant->dateEvenement + (5*60) < dateActuelle )
 		{
-			//suppresion de toute la liste a partir d'ici + sortie boucle
+
+			//action : suppresion de toute la liste a partir d'ici + sortie boucle
+			debugAffiche();
+			if(evenementCourant->precedent != NULL)
+			{
+				evenementCourant->precedent->suivant=NULL;
+			}
 			ElementListeDates *evenementALiberer;
 			while (evenementCourant != NULL)
 			{
 				evenementALiberer=evenementCourant;
 				evenementCourant=evenementCourant->suivant;
 				delete evenementALiberer;
+				cout<<"62"<<endl;
+				debugAffiche();
 			}
 			//sortie boucle
 			break;

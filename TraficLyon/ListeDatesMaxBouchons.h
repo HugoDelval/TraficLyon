@@ -26,6 +26,7 @@ public:
 	ListeDatesMaxBouchons();
 	virtual ~ListeDatesMaxBouchons();
 	float ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle);
+	void debugAffiche();
 
 private:
 	void supprimeCapteursObsoletes(Date dateActuelle, int newIdCapteur);
