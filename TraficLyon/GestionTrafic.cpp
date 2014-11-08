@@ -21,20 +21,7 @@ GestionTrafic::~GestionTrafic()
 void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois,
 				string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
 {
-/*
-	cout<<"appel de ajouter avec :"<<endl;
-	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
-	cout<<"annee= '"<<annee<<"'"<<endl;
-	cout<<"mois= '"<<mois<<"'"<<endl;
-	cout<<"jourDuMois= '"<<jourDuMois<<"'"<<endl;
-	cout<<"heure= '"<<heure<<"'"<<endl;
-	cout<<"minute= '"<<minute<<"'"<<endl;
-	cout<<"seconde= '"<<seconde<<"'"<<endl;
-	cout<<"jourDeLaSemaine= '"<<jourDeLaSemaine<<"'"<<endl;
-	cout<<"trafic= '"<<trafic<<"'"<<endl;
-	cout<<endl;*/
 	int idCapteurR = atoi(idCapteurReel.c_str());
-
 	int idCapteurTableau = toutLeTrafic->ajouterIdAArbre(idCapteurR);
 	if(idCapteurTableau != -1)
 	{
@@ -62,8 +49,8 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		{
 			traficFinal=4;
 		}
-		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale,traficFinal,
-									   anneeFinale,moisFinal,jourDuMoisFinal,minuteFinale,secondeFinale);
+		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
+									   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
 
 		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
@@ -75,27 +62,18 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 
 void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 {
-	/*cout<<"appel stat capteur :"<<endl;
-	cout<<"idCapteurReel= '"<<idCapteurReel<<"'"<<endl;
-	cout<<endl;*/
 	int idCapteurR = atoi(idCapteurReel.c_str());
 	toutLeTrafic->statistiquesCapteur(idCapteurR);
 }
 
 void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
 {
-	/*cout<<"appel stat jour Semaine :"<<endl;
-	cout<<"nJour= '"<<nJour<<"'"<<endl;
-	cout<<endl;*/
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
+	toutLeTrafic->statistiquesJourSemaine(jourDeLaSemaineFinale);
 }
 
 void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)
 {
-	/*cout<<"appel stat JourSemaine + heure :"<<endl;
-	cout<<"nJour= '"<<nJour<<"'"<<endl;
-	cout<<"heure= '"<<heure<<"'"<<endl;
-	cout<<endl;*/
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
 	int heureFinale = atoi(heure.c_str());
 }

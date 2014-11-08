@@ -43,6 +43,43 @@ void EvenementsCapteur::ajouter(int trafic, Date date)
 
 }
 
+void EvenementsCapteur::statistiquesParCapteur()
+{
+	double secondesPasseesActif=0.0;
+	double secondesPasseesV1=0.0;
+	double secondesPasseesJ2=0.0;
+	double secondesPasseesR3=0.0;
+	double secondesPasseesN4=0.0;
+	for(int i=0 ; i<24 ; i++)
+	{
+		for(int j=0 ; j<7 ; j++)
+		{
+			for(int k=0 ; k<5 ; k++)
+			{
+				secondesPasseesActif += secondesPassees[i][j][k];
+				switch(k)
+				{
+					case 1:
+						secondesPasseesV1 += secondesPassees[i][j][k];
+						break;
+					case 2:
+						secondesPasseesJ2 += secondesPassees[i][j][k];
+						break;
+					case 3:
+						secondesPasseesR3 += secondesPassees[i][j][k];
+						break;
+					case 4:
+						secondesPasseesN4 += secondesPassees[i][j][k];
+				}
+			}
+		}
+	}
+	cout<<"V "<<(secondesPasseesV1/secondesPasseesActif)*100.0<<"%"<<endl;
+	cout<<"J "<<(secondesPasseesJ2/secondesPasseesActif)*100.0<<"%"<<endl;
+	cout<<"R "<<(secondesPasseesR3/secondesPasseesActif)*100.0<<"%"<<endl;
+	cout<<"N "<<(secondesPasseesN4/secondesPasseesActif)*100.0<<"%"<<endl;
+}
+
 void EvenementsCapteur::afficher()
 {
 	for(int i=0 ; i<24 ; i++)  // heures

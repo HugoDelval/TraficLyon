@@ -67,8 +67,15 @@ Evenements::Evenements()
 void Evenements::statistiquesCapteur(int idCapteurReel)
 {
 	int idCapteurTableau = arbreId->trouverIdTableauCorrespondant(idCapteurReel);
+	capteurs[idCapteurTableau]->statistiquesParCapteur();
+}
 
-	// float pourcentageVert = dureeVert / dureeTotale ;
+void Evenements::statistiquesJourSemaine(int nJour)
+{
+	for(int i=0 ; i<1500 ; i++)
+	{
+
+	}
 }
 
 Evenements::~Evenements()

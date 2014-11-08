@@ -33,7 +33,6 @@ private:
 	EvenementsCapteur **capteurs;
 	// tableau de pointeurs vers EvenementsCapteur : id*1500
 	Date dateBouchonMax;
-	Date dateDebutAcquisition;
 	float bouchonMax;
 
 	ListeDatesMaxBouchons gestionnaireMax;

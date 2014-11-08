@@ -22,6 +22,7 @@ public:
 	virtual ~EvenementsCapteur();
 	void ajouter(int trafic, Date date);
 	void afficher();
+	void statistiquesParCapteur();
 
 private:
 	int max5minutes(int nombreSecondes);
