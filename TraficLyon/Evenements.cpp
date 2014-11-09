@@ -18,6 +18,7 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 */
 	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
 	capteurs[idCapteur]->ajouter(trafic,dateEvenement);
+	dateDernierEvenementTrafic = dateEvenement;
 	float traficAcuel=gestionnaireMax.ajouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
 	if(traficAcuel > bouchonMax)
 	{
@@ -28,9 +29,8 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 
 void Evenements::maxBouchonsSimultanes()
 {
-	dateBouchonMax.afficheDate();
-	cout << " "
-		 << bouchonMax << "%"
+	dateBouchonMax.afficheDateRelle();
+	cout << bouchonMax << "%"
 		 << endl;
 }
 
@@ -72,10 +72,30 @@ void Evenements::statistiquesCapteur(int idCapteurReel)
 
 void Evenements::statistiquesJourSemaine(int nJour)
 {
+	double tempsTotal(0.0);
+	double *secondesPasseesJournee = new double[4];
+	for(int j=0 ; j<4 ; j++)
+	{
+		secondesPasseesJournee[j] = 0.0;
+	}
+	//vert, jaune, rouge, et noir
+	double *secondesPasseesJourneeCapteurX = new double[4];
 	for(int i=0 ; i<1500 ; i++)
 	{
-
+		secondesPasseesJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, dateDernierEvenementTrafic);
+		for(int j=0 ; j<4 ; j++)
+		{
+			tempsTotal += secondesPasseesJourneeCapteurX[j];
+			secondesPasseesJournee[j] += secondesPasseesJourneeCapteurX[j];
+		}
 	}
+	cout<<tempsTotal<<endl;
+	cout<<secondesPasseesJournee[0]<<endl;
+	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
+	cout<<"V "<<(secondesPasseesJournee[0]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"J "<<(secondesPasseesJournee[1]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"R "<<(secondesPasseesJournee[2]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"N "<<(secondesPasseesJournee[3]/tempsTotal)*100.0<<"%"<<endl;
 }
 
 Evenements::~Evenements()

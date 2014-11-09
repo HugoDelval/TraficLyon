@@ -212,9 +212,14 @@ int Date::difference(Date const &dateAEnlever) const
 	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)*365*24*3600;
 }
 
-void Date::afficheDate()
+void Date::afficheDateRelle()
 {
-	cout << annee <<" "<<mois << " " << jourDuMois << " " << heure << " " << minute << " " << seconde;
+	cout << annee <<" "
+		 << mois+1 << " "
+		 << jourDuMois+1 << " "
+		 << heure << " "
+		 << minute << " "
+		 << seconde << " ";
 }
 
 void Date::debugAffichage()

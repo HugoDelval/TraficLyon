@@ -51,7 +51,6 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		}
 		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
 									   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
-
 		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
 	else //il y a une erreur dans l'insertion
@@ -69,7 +68,7 @@ void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
 void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
 {
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
-	toutLeTrafic->statistiquesJourSemaine(jourDeLaSemaineFinale);
+	toutLeTrafic->statistiquesJourSemaine(jourDeLaSemaineFinale-1);
 }
 
 void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)

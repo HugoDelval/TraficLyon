@@ -15,16 +15,19 @@ void EvenementsCapteur::ajouter(int trafic, Date date)
 		int secondesPasseesMajore = max5minutes(date-dateDernierEvenement); /*on s'interesse seulement
 		                                                                     a la periode de validite de l'ancien evenement
 		                                                                     */
-		if((dateDernierEvenement+secondesPasseesMajore).heure != dateDernierEvenement.heure) // on est dans la mm heure, mm jour ..
+		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
+		if(datePlus5min.heure == dateDernierEvenement.heure) // on est dans la mm heure, mm jour ..
 		{
 			secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
 	                          += secondesPasseesMajore;
 		}
 		else // 2 cases a modifier
 		{
-			Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
-			int tempsAAjouterDateDernierEvenement = ( (59-dateDernierEvenement.minute)*60 + 59-dateDernierEvenement.seconde ) ;
+			int tempsAAjouterDateDernierEvenement = max5minutes( (59-dateDernierEvenement.minute)*60 + 60-dateDernierEvenement.seconde ) ;
 			int autreTemps = secondesPasseesMajore - tempsAAjouterDateDernierEvenement;
+			/*cout<<tempsAAjouterDateDernierEvenement<<endl;
+			cout<<autreTemps<<endl;
+			cout<<secondesPasseesMajore<<endl;*/
 			secondesPassees[datePlus5min.heure][datePlus5min.jourDeLaSemaine][traficDernierEvenement]
 			               += autreTemps;
 			secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
@@ -78,6 +81,46 @@ void EvenementsCapteur::statistiquesParCapteur()
 	cout<<"J "<<(secondesPasseesJ2/secondesPasseesActif)*100.0<<"%"<<endl;
 	cout<<"R "<<(secondesPasseesR3/secondesPasseesActif)*100.0<<"%"<<endl;
 	cout<<"N "<<(secondesPasseesN4/secondesPasseesActif)*100.0<<"%"<<endl;
+}
+
+double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
+{
+	double *secondesPasseesJournee = new double[4];
+	for(int j=0 ; j<4 ; j++)
+	{
+		secondesPasseesJournee[j] = 0.0;
+	}
+	for(int i=0 ; i<24 ; i++)
+	{
+		for(int j=1 ; j<5 ; j++)
+		{
+			secondesPasseesJournee[j-1] += secondesPassees[i][jour][j];
+		}
+	}
+
+	int secondesPasseesMajore = max5minutes(dateDernierEvenementTrafic-dateDernierEvenement);
+	if(secondesPasseesMajore>0) // on doit peut etre ajouter qqchose au resultat final
+	{
+		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
+		//il faut ajouter qqchose si :
+		if( datePlus5min.jourDeLaSemaine==jour && dateDernierEvenement.jourDeLaSemaine==jour )
+		{
+			secondesPasseesJournee[traficDernierEvenement-1] += secondesPasseesMajore;
+		}
+		else
+		{
+			if(dateDernierEvenement.jourDeLaSemaine == jour)
+			{
+				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes( (59-dateDernierEvenement.minute)*60 + 60-dateDernierEvenement.seconde );
+			}
+			else if(datePlus5min.jourDeLaSemaine == jour)
+			{
+				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes( (datePlus5min.minute)*60 + datePlus5min.seconde );
+			}
+		}
+	}
+
+	return secondesPasseesJournee;
 }
 
 void EvenementsCapteur::afficher()

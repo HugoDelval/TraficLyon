@@ -22,7 +22,7 @@ public:
 	bool estEgal(Date const& dateAComparer) const;
 	bool estInf(Date const& dateAComparer) const;
 	Date additionner(int secondes);
-	void afficheDate();
+	void afficheDateRelle();
 	void debugAffichage();
 	int  difference(Date const &dateAEnlever) const;
 

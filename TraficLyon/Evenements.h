@@ -32,6 +32,7 @@ private:
 	ArbreIdentifiants *arbreId;
 	EvenementsCapteur **capteurs;
 	// tableau de pointeurs vers EvenementsCapteur : id*1500
+	Date dateDernierEvenementTrafic; //TODO !!!!!!!!!
 	Date dateBouchonMax;
 	float bouchonMax;
 

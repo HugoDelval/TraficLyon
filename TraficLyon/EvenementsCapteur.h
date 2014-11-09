@@ -23,6 +23,7 @@ public:
 	void ajouter(int trafic, Date date);
 	void afficher();
 	void statistiquesParCapteur();
+	double* secondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic);
 
 private:
 	int max5minutes(int nombreSecondes);

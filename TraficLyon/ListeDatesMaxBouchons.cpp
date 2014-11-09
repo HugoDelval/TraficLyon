@@ -69,7 +69,10 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 			if(evenementCourant==root)
 			{
 				root = evenementCourant->suivant;
-				root->precedent=NULL;
+				if(root != NULL)
+				{
+					root->precedent=NULL;
+				}
 				delete evenementCourant;
 			}
 			else
@@ -89,7 +92,6 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 		}
 		else if( evenementCourant->dateEvenement + (5*60) < dateActuelle )
 		{
-
 			//action : suppresion de toute la liste a partir d'ici + sortie boucle
 			if(evenementCourant->precedent != NULL)
 			{
@@ -102,13 +104,9 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 			ElementListeDates *evenementALiberer;
 			while (evenementCourant != NULL)
 			{
-				/*debugAffiche();
-				cout<<endl;*/
 				evenementALiberer=evenementCourant;
 				evenementCourant=evenementCourant->suivant;
 				delete evenementALiberer;
-				/*debugAffiche();
-				cout<<endl;*/
 			}
 			//sortie boucle
 			break;
