@@ -98,6 +98,36 @@ void Evenements::statistiquesJourSemaine(int nJour)
 	cout<<"N "<<(secondesPasseesJournee[3]/tempsTotal)*100.0<<"%"<<endl;
 }
 
+
+void Evenements::statistiquesJourHeureSemaine(int nJour, int heure)
+{
+	double tempsTotal(0.0);
+	double *secondesPasseesHeureJournee = new double[4];
+	for(int j=0 ; j<4 ; j++)
+	{
+		secondesPasseesHeureJournee[j] = 0.0;
+	}
+	//vert, jaune, rouge, et noir
+	double *secondesPasseesHeureJourneeCapteurX = new double[4];
+	for(int i=0 ; i<1500 ; i++)
+	{
+		secondesPasseesHeureJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, heure, dateDernierEvenementTrafic);
+		for(int j=0 ; j<4 ; j++)
+		{
+			tempsTotal += secondesPasseesHeureJourneeCapteurX[j];
+			secondesPasseesHeureJournee[j] += secondesPasseesHeureJourneeCapteurX[j];
+		}
+	}
+	cout<<tempsTotal<<endl;
+	cout<<secondesPasseesHeureJournee[0]<<endl;
+	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
+	cout<<"V "<<(secondesPasseesHeureJournee[0]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"J "<<(secondesPasseesHeureJournee[1]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"R "<<(secondesPasseesHeureJournee[2]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"N "<<(secondesPasseesHeureJournee[3]/tempsTotal)*100.0<<"%"<<endl;
+}
+
+
 Evenements::~Evenements()
 {
 #ifdef MAP

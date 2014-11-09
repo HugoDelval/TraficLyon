@@ -123,6 +123,43 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDern
 	return secondesPasseesJournee;
 }
 
+double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic)
+{
+	double *secondesPasseesHeure = new double[4];
+	for(int j=0 ; j<4 ; j++)
+	{
+		secondesPasseesHeure[j] = 0.0;
+	}
+	for(int i=1 ; i<5 ; i++)
+	{
+		secondesPasseesHeure[i-1] += secondesPassees[heure][jour][i];
+	}
+
+	int secondesPasseesMajore = max5minutes(dateDernierEvenementTrafic-dateDernierEvenement);
+	if(secondesPasseesMajore>0) // on doit peut etre ajouter qqchose au resultat final
+	{
+		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
+		//il faut ajouter qqchose si :
+		if( datePlus5min.heure==heure && dateDernierEvenement.heure==heure )
+		{
+			secondesPasseesHeure[traficDernierEvenement-1] += secondesPasseesMajore;
+		}
+		else
+		{
+			if(dateDernierEvenement.heure == heure)
+			{
+				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes(60-dateDernierEvenement.seconde );
+			}
+			else if(datePlus5min.heure == heure)
+			{
+				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes( datePlus5min.seconde );
+			}
+		}
+	}
+
+	return secondesPasseesHeure;
+}
+
 void EvenementsCapteur::afficher()
 {
 	for(int i=0 ; i<24 ; i++)  // heures

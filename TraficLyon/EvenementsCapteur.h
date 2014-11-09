@@ -24,6 +24,8 @@ public:
 	void afficher();
 	void statistiquesParCapteur();
 	double* secondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic);
+	double* secondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic);
+
 
 private:
 	int max5minutes(int nombreSecondes);

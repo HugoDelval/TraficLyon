@@ -75,6 +75,7 @@ void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heu
 {
 	int jourDeLaSemaineFinale = atoi(nJour.c_str());
 	int heureFinale = atoi(heure.c_str());
+	toutLeTrafic->statistiquesJourHeureSemaine(jourDeLaSemaineFinale-1, heureFinale);
 }
 
 void GestionTrafic::appelerMaxBouchonsSimultanes()
