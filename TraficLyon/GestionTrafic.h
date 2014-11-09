@@ -17,6 +17,7 @@ const int COMMANDE_STATS_D7 = 2;
 const int COMMANDE_STATS_D7_H24 = 3;
 const int COMMANDE_MAX_TS = 4;
 const int COMMANDE_EXIT = 5;
+//const int NOMBRE_MAX_CAPTEURS = 1500;
 
 using namespace std;
 

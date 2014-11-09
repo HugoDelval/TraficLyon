@@ -11,6 +11,8 @@
 #include <stddef.h>  // permet de connaitre 'NULL'
 #include "Date.h"
 
+const int AUCUNE_DONNEE =0;
+
 struct ElementListeDates
 {
 	int idCapteur;

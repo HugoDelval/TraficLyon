@@ -13,6 +13,14 @@
 
 using namespace std;
 
+const int NOMBRE_ETATS_CAPTEUR_UTILES = 4;
+const int NOMBRE_ETATS_CAPTEUR_TOT = 5;
+const int VERT = 1;
+const int JAUNE = 2;
+const int ROUGE = 3;
+const int NOIR = 4;
+
+
 class EvenementsCapteur
 {
 

@@ -23,7 +23,7 @@ void EvenementsCapteur::ajouter(int trafic, Date date)
 		}
 		else // 2 cases a modifier
 		{
-			int tempsAAjouterDateDernierEvenement = max5minutes( (59-dateDernierEvenement.minute)*60 + 60-dateDernierEvenement.seconde ) ;
+			int tempsAAjouterDateDernierEvenement = max5minutes( (NOMBRE_MINUSTES_HEURE-1-dateDernierEvenement.minute)*NOMBRE_MINUSTES_HEURE + NOMBRE_SECONDES_MINUTE -dateDernierEvenement.seconde ) ;
 			int autreTemps = secondesPasseesMajore - tempsAAjouterDateDernierEvenement;
 			/*cout<<tempsAAjouterDateDernierEvenement<<endl;
 			cout<<autreTemps<<endl;
@@ -53,25 +53,25 @@ void EvenementsCapteur::statistiquesParCapteur()
 	double secondesPasseesJ2=0.0;
 	double secondesPasseesR3=0.0;
 	double secondesPasseesN4=0.0;
-	for(int i=0 ; i<24 ; i++)
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		for(int j=0 ; j<7 ; j++)
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
 		{
-			for(int k=0 ; k<5 ; k++)
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++)
 			{
 				secondesPasseesActif += secondesPassees[i][j][k];
 				switch(k)
 				{
-					case 1:
+					case VERT:
 						secondesPasseesV1 += secondesPassees[i][j][k];
 						break;
-					case 2:
+					case JAUNE:
 						secondesPasseesJ2 += secondesPassees[i][j][k];
 						break;
-					case 3:
+					case ROUGE:
 						secondesPasseesR3 += secondesPassees[i][j][k];
 						break;
-					case 4:
+					case NOIR:
 						secondesPasseesN4 += secondesPassees[i][j][k];
 				}
 			}
@@ -85,14 +85,14 @@ void EvenementsCapteur::statistiquesParCapteur()
 
 double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
 {
-	double *secondesPasseesJournee = new double[4];
-	for(int j=0 ; j<4 ; j++)
+	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
 	{
 		secondesPasseesJournee[j] = 0.0;
 	}
-	for(int i=0 ; i<24 ; i++)
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		for(int j=1 ; j<5 ; j++)
+		for(int j(1) ; j<NOMBRE_ETATS_CAPTEUR_TOT ; j++)
 		{
 			secondesPasseesJournee[j-1] += secondesPassees[i][jour][j];
 		}
@@ -111,11 +111,13 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDern
 		{
 			if(dateDernierEvenement.jourDeLaSemaine == jour)
 			{
-				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes( (59-dateDernierEvenement.minute)*60 + 60-dateDernierEvenement.seconde );
+				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes(
+						(NOMBRE_MINUSTES_HEURE-1-dateDernierEvenement.minute)*NOMBRE_SECONDES_MINUTE
+						+ NOMBRE_SECONDES_MINUTE-dateDernierEvenement.seconde );
 			}
 			else if(datePlus5min.jourDeLaSemaine == jour)
 			{
-				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes( (datePlus5min.minute)*60 + datePlus5min.seconde );
+				secondesPasseesJournee[traficDernierEvenement-1] += max5minutes( (datePlus5min.minute)*NOMBRE_SECONDES_MINUTE + datePlus5min.seconde );
 			}
 		}
 	}
@@ -125,12 +127,12 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDern
 
 double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic)
 {
-	double *secondesPasseesHeure = new double[4];
-	for(int j=0 ; j<4 ; j++)
+	double *secondesPasseesHeure = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
 	{
 		secondesPasseesHeure[j] = 0.0;
 	}
-	for(int i=1 ; i<5 ; i++)
+	for(int i(1) ; i<(NOMBRE_ETATS_CAPTEUR_UTILES+1) ; i++)
 	{
 		secondesPasseesHeure[i-1] += secondesPassees[heure][jour][i];
 	}
@@ -148,7 +150,7 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Da
 		{
 			if(dateDernierEvenement.heure == heure)
 			{
-				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes(60-dateDernierEvenement.seconde );
+				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes(NOMBRE_SECONDES_MINUTE-dateDernierEvenement.seconde );
 			}
 			else if(datePlus5min.heure == heure)
 			{
@@ -162,11 +164,11 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Da
 
 void EvenementsCapteur::afficher()
 {
-	for(int i=0 ; i<24 ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
 	{
-		for(int j=0 ; j<7 ; j++) // jour semaine
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
 		{
-			for(int k=0 ; k<5 ; k++) // trafic
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++) // trafic
 			{
 				if(secondesPassees[i][j][k]!=0)
 				{
@@ -184,25 +186,25 @@ void EvenementsCapteur::afficher()
 
 int EvenementsCapteur::max5minutes(int nombreSecondes)
 {
-	if(nombreSecondes <= 5*60)
+	if(nombreSecondes <= 5*NOMBRE_SECONDES_MINUTE)
 	{
 		return nombreSecondes;
 	}
-	return 5*60;
+	return 5*NOMBRE_SECONDES_MINUTE;
 }
 
 EvenementsCapteur::EvenementsCapteur(int trafic, Date date)
 {
 	traficDernierEvenement = trafic;
 	dateDernierEvenement = date;
-	secondesPassees = new int**[24];
-	for(int i=0 ; i<24 ; i++)  // heures
+	secondesPassees = new int**[NOMBRE_HEURES_JOURNEE];
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
 	{
-		secondesPassees[i] = new int*[7];
-		for(int j=0 ; j<7 ; j++) // jour semaine
+		secondesPassees[i] = new int*[NOMBRE_JOURS_SEMAINE];
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
 		{
 			secondesPassees[i][j] = new int[5];
-			for(int k=0 ; k<5 ; k++) // trafic
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++) // trafic
 			{
 				secondesPassees[i][j][k] = 0;
 			}
@@ -215,14 +217,14 @@ EvenementsCapteur::EvenementsCapteur()
 {
 	traficDernierEvenement = 0;
 //	dateDernierEvenement();
-	secondesPassees = new int**[24];
-	for(int i=0 ; i<24 ; i++)  // heures
+	secondesPassees = new int**[NOMBRE_HEURES_JOURNEE];
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		secondesPassees[i] = new int*[7];
-		for(int j=0 ; j<7 ; j++) // jour semaine
+		secondesPassees[i] = new int*[NOMBRE_JOURS_SEMAINE];
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
 		{
-			secondesPassees[i][j] = new int[5];
-			for(int k=0 ; k<5 ; k++) // trafic
+			secondesPassees[i][j] = new int[NOMBRE_ETATS_CAPTEUR_TOT];
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++) // trafic
 			{
 				secondesPassees[i][j][k] = 0;
 			}
@@ -233,14 +235,14 @@ EvenementsCapteur::EvenementsCapteur()
 
 EvenementsCapteur::~EvenementsCapteur()
 {
-	for(int i=0 ; i<24 ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
 	{
-		for(int j=0 ; j<7 ; j++) // jour semaine
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
 		{
 			delete[] secondesPassees[i][j];
 		}
 	}
-	for(int i=0 ; i<24 ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
 	{
 		delete[] secondesPassees[i];
 	}

@@ -45,7 +45,7 @@ void Evenements::afficherTousLesEvenements()
 	cout<< "-------Evenements : -------" << endl;
 	cout<< "-----(par idTableau)-------" << endl;
 	cout<< "---------------------------" << endl;
-	for(int i(0); i<1500; i++)
+	for(int i(0); i<NOMBRE_MAX_CAPTEURS; i++)
 	{
 		cout << "id = " << i << endl;
 		capteurs[i]->afficher();
@@ -56,8 +56,8 @@ void Evenements::afficherTousLesEvenements()
 Evenements::Evenements()
 {
 	arbreId = new ArbreIdentifiants();
-	capteurs = new EvenementsCapteur*[1500];
-	for(int i=0 ; i<1500 ; i++)
+	capteurs = new EvenementsCapteur*[NOMBRE_MAX_CAPTEURS];
+	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
 	{
 		capteurs[i] = new EvenementsCapteur();
 	}
@@ -66,24 +66,24 @@ Evenements::Evenements()
 
 void Evenements::statistiquesCapteur(int idCapteurReel)
 {
-	int idCapteurTableau = arbreId->trouverIdTableauCorrespondant(idCapteurReel);
+	int idCapteurTableau( arbreId->trouverIdTableauCorrespondant(idCapteurReel));
 	capteurs[idCapteurTableau]->statistiquesParCapteur();
 }
 
 void Evenements::statistiquesJourSemaine(int nJour)
 {
 	double tempsTotal(0.0);
-	double *secondesPasseesJournee = new double[4];
-	for(int j=0 ; j<4 ; j++)
+	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 	{
 		secondesPasseesJournee[j] = 0.0;
 	}
 	//vert, jaune, rouge, et noir
-	double *secondesPasseesJourneeCapteurX = new double[4];
-	for(int i=0 ; i<1500 ; i++)
+	double *secondesPasseesJourneeCapteurX = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
 	{
 		secondesPasseesJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, dateDernierEvenementTrafic);
-		for(int j=0 ; j<4 ; j++)
+		for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 		{
 			tempsTotal += secondesPasseesJourneeCapteurX[j];
 			secondesPasseesJournee[j] += secondesPasseesJourneeCapteurX[j];
@@ -102,17 +102,17 @@ void Evenements::statistiquesJourSemaine(int nJour)
 void Evenements::statistiquesJourHeureSemaine(int nJour, int heure)
 {
 	double tempsTotal(0.0);
-	double *secondesPasseesHeureJournee = new double[4];
-	for(int j=0 ; j<4 ; j++)
+	double *secondesPasseesHeureJournee = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 	{
 		secondesPasseesHeureJournee[j] = 0.0;
 	}
 	//vert, jaune, rouge, et noir
-	double *secondesPasseesHeureJourneeCapteurX = new double[4];
-	for(int i=0 ; i<1500 ; i++)
+	double *secondesPasseesHeureJourneeCapteurX = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
 	{
 		secondesPasseesHeureJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, heure, dateDernierEvenementTrafic);
-		for(int j=0 ; j<4 ; j++)
+		for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 		{
 			tempsTotal += secondesPasseesHeureJourneeCapteurX[j];
 			secondesPasseesHeureJournee[j] += secondesPasseesHeureJourneeCapteurX[j];

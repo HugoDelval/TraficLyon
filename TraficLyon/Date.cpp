@@ -39,7 +39,7 @@ bool operator>=(Date const& date1, Date const& date2)
 	return !(date1<date2);
 }
 
-Date operator+(Date const &date, int secondes)   // 0 <= secondes <= 60
+Date operator+(Date const &date, int secondes)
 {
 	Date dateAddition(date);
 	return dateAddition.additionner(secondes);
@@ -50,7 +50,7 @@ int operator-(Date const& date1, Date const& dateAEnlever)
 	return date1.difference(dateAEnlever);
 }
 
-Date operator-(Date const &date, int secondes)   // 0 <= secondes <= 60
+Date operator-(Date const &date, int secondes)
 {
 	Date dateSoustraction(date);
 	return dateSoustraction.additionner(-secondes);
@@ -92,116 +92,119 @@ Date Date::additionner(int secondes)
 {
 	seconde += secondes;
 
-	if(seconde >= 60)
+	if(seconde >= NOMBRE_SECONDES_MINUTE)
 	{
-		minute+=seconde/60;
-		seconde %= 60;
+		minute+=seconde/NOMBRE_SECONDES_MINUTE;
+		seconde %= NOMBRE_SECONDES_MINUTE;
 	}
 	else if(seconde < 0)
 	{
 		seconde = -seconde;
-		minute-=(((seconde-1)/60)+1);
-		seconde %= 60;
-		seconde = (60 - seconde)%60;
+		minute-=(((seconde-1)/NOMBRE_SECONDES_MINUTE)+1);
+		seconde %= NOMBRE_SECONDES_MINUTE;
+		seconde = (NOMBRE_SECONDES_MINUTE - seconde)%NOMBRE_SECONDES_MINUTE;
 	}
 
-	if(minute >= 60)
+	if(minute >= NOMBRE_MINUSTES_HEURE)
 	{
-		heure+=minute/60;
-		minute%=60;
+		heure+=minute/NOMBRE_MINUSTES_HEURE;
+		minute%=NOMBRE_MINUSTES_HEURE;
 	}
 	else if (minute<0)
 	{
 		minute = -minute;
-		heure-=(((minute-1)/60)+1);
-		minute %= 60;
-		minute = (60 - minute)%60;
+		heure-=(((minute-1)/NOMBRE_MINUSTES_HEURE)+1);
+		minute %= NOMBRE_MINUSTES_HEURE;
+		minute = (NOMBRE_MINUSTES_HEURE - minute)%NOMBRE_MINUSTES_HEURE;
 	}
 
-	if(heure >= 24)
+	if(heure >= NOMBRE_HEURES_JOURNEE)
 	{
-		jourDuMois+=heure/24;
-		jourDeLaSemaine+=heure/24;
-		jourDeLaSemaine%=7;
-		heure %=24;
+		jourDuMois+=heure/NOMBRE_HEURES_JOURNEE;
+		jourDeLaSemaine+=heure/NOMBRE_HEURES_JOURNEE;
+		jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
+		heure %=NOMBRE_HEURES_JOURNEE;
 	}
 	else if (heure <0)
 	{
 		heure = -heure;
-		jourDuMois-=(((heure-1)/24)+1);
-		jourDeLaSemaine-=(((heure-1)/24)+1);
-		jourDeLaSemaine%=7;
-		jourDeLaSemaine = (7 - jourDeLaSemaine)%7;
-		heure %=24;
-		heure = (24 - heure)%24;
+		jourDuMois-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
+		jourDeLaSemaine-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
+		jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
+		jourDeLaSemaine = (NOMBRE_JOURS_SEMAINE - jourDeLaSemaine)%NOMBRE_JOURS_SEMAINE;
+		heure %=NOMBRE_HEURES_JOURNEE;
+		heure = (NOMBRE_HEURES_JOURNEE - heure)%NOMBRE_HEURES_JOURNEE;
 	}
 
-	if((jourDuMois > 27 && mois == 1))
+	if((jourDuMois > (NOMBRE_JOURS_MOIS_28-1) && mois == FEVRIER))
 	{
-		mois+=jourDuMois/28;
-		jourDuMois%=31;
+		mois+=jourDuMois/NOMBRE_JOURS_MOIS_28;
+		jourDuMois%=NOMBRE_JOURS_MOIS_31;
 	}
-	else if(jourDuMois<0 && mois==2)
+	else if(jourDuMois<0 && mois==2)  // si Mars
 	{
 		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/28)+1);
-		jourDuMois%=28;
-		jourDuMois = (28-jourDuMois)%28;
+		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_28)+1);
+		jourDuMois%=NOMBRE_JOURS_MOIS_28;
+		jourDuMois = (NOMBRE_JOURS_MOIS_28-jourDuMois)%NOMBRE_JOURS_MOIS_28;
 	}
 
 
-	if((jourDuMois > 29 && (mois == 3 || mois == 5 || mois == 8 || mois == 10)))
+	if((jourDuMois > (NOMBRE_JOURS_MOIS_30-1) && (mois == AVRIL || mois ==JUIN
+												|| mois == SEPTEMBRE || mois == 10)))
 	{
-		mois+=jourDuMois/30;
-		jourDuMois%=31;
+		mois+=jourDuMois/NOMBRE_JOURS_MOIS_30;
+		jourDuMois%=NOMBRE_JOURS_MOIS_31;
 	}
-	else if(jourDuMois<0 && (mois==4 || mois==6 || mois==9 || mois==11))
+	else if(jourDuMois<0 && (mois==MAI || mois==JUILLET || mois==OCTOBRE || mois==DECEMBRE))
 	{
 		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/30)+1);
-		jourDuMois%=30;
-		jourDuMois=(30-jourDuMois)%30;
+		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_30)+1);
+		jourDuMois%=NOMBRE_JOURS_MOIS_30;
+		jourDuMois=(NOMBRE_JOURS_MOIS_30-jourDuMois)%NOMBRE_JOURS_MOIS_30;
 	}
 
-	if(jourDuMois > 30 && (mois == 0 || mois == 2 || mois == 4 || mois == 6
-										|| mois == 7 || mois == 9|| mois==11))
+	if(jourDuMois > (NOMBRE_JOURS_MOIS_31-1) && (mois == JANVIER || mois ==MARS || mois == MAI
+									|| mois == JUILLET || mois == AOUT || mois == OCTOBRE
+											|| mois==DECEMBRE))
 	{
-		if(mois!=6 && mois != 11 && mois!=0)
+		if(mois!=JUILLET && mois != DECEMBRE && mois!=JANVIER)
 		{
-			mois+=jourDuMois/31;
-			jourDuMois%=30;
+			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+			jourDuMois%=NOMBRE_JOURS_MOIS_30;
 		}
-		else if(mois!=0)
+		else if(mois!=JANVIER)
 		{
-			mois+=jourDuMois/31;
-			jourDuMois%=31;
+			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+			jourDuMois%=NOMBRE_JOURS_MOIS_31;
 		}
 		else
 		{
-			mois+=jourDuMois/31;
-			jourDuMois%=28;
+			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+			jourDuMois%=NOMBRE_JOURS_MOIS_28;
 		}
 	}
-	else if(jourDuMois<0 && (mois==1 || mois==3 || mois==5 || mois==7 || mois==8 || mois==10 || mois==0))
+	else if(jourDuMois<0 && (mois==FEVRIER || mois==AVRIL || mois==JUIN || mois==AOUT
+									|| mois==SEPTEMBRE || mois==NOVEMBRE || mois==JANVIER))
 	{
 		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/31)+1);
-		jourDuMois%=31;
-		jourDuMois=(31-jourDuMois)%31;
+		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_31)+1);
+		jourDuMois%=NOMBRE_JOURS_MOIS_31;
+		jourDuMois=(NOMBRE_JOURS_MOIS_31-jourDuMois)%NOMBRE_JOURS_MOIS_31;
 	}
 
 	secondesDepuisDebutAnnee += secondes;
-	if(mois>11)
+	if(mois>DECEMBRE)
 	{
 		annee++;
-		mois%=12;
+		mois%=NOMBRE_MOIS_ANNEE;
 	}
 	else if(mois<0)
 	{
 		annee--;
 		mois=-mois;
-		mois%=12;
-		mois=(12-mois)%12;
+		mois%=NOMBRE_MOIS_ANNEE;
+		mois=(NOMBRE_MOIS_ANNEE-mois)%NOMBRE_MOIS_ANNEE;
 	}
 
 	return *this;
@@ -258,47 +261,50 @@ Date::Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, 
 	this->seconde = seconde;
 
 	int secondesMois(0);
-	int secondesMois30 (30*3600*24);
-	int secondesMois31 (31*3600*24);
-	int secondesMois28 (28*3600*24);
+	int secondesMois30 (NOMBRE_JOURS_MOIS_30*NOMBRE_SECONDES_MINUTE*NOMBRE_MINUSTES_HEURE*NOMBRE_HEURES_JOURNEE);
+	int secondesMois31 (NOMBRE_JOURS_MOIS_31*NOMBRE_SECONDES_MINUTE*NOMBRE_MINUSTES_HEURE*NOMBRE_HEURES_JOURNEE);
+	int secondesMois28 (NOMBRE_JOURS_MOIS_28*NOMBRE_SECONDES_MINUTE*NOMBRE_MINUSTES_HEURE*NOMBRE_HEURES_JOURNEE);
 	switch (mois)
 	{
-		case 1: // fevrier
+		case FEVRIER:
 			secondesMois=secondesMois31;
 			break;
-		case 2: //mars
+		case MARS:
 			secondesMois=secondesMois31 + secondesMois28;
 			break;
-		case 3: //avril
+		case AVRIL:
 			secondesMois=secondesMois31 *2 + secondesMois28;
 			break;
-		case 4: //mai
+		case MAI:
 			secondesMois=secondesMois31 *2 + secondesMois28 + secondesMois30;
 			break;
-		case 5: //juin
+		case JUIN:
 			secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30;
 			break;
-		case 6: //juillet
+		case JUILLET:
 			secondesMois=secondesMois31 *3 + secondesMois28 + secondesMois30*2;
 			break;
-		case 7: //aout
+		case AOUT:
 			secondesMois=secondesMois31 *4 + secondesMois28 + secondesMois30 *2;
 			break;
-		case 8: //septembre
+		case SEPTEMBRE:
 			secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *2;
 			break;
-		case 9: //octobre
+		case OCTOBRE:
 			secondesMois=secondesMois31 *5 + secondesMois28 + secondesMois30 *3;
 			break;
-		case 10: //novembre
+		case NOVEMBRE:
 			secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *3;
 			break;
-		case 11: //decembre
+		case DECEMBRE:
 			secondesMois=secondesMois31 *6 + secondesMois28 + secondesMois30 *4;
 			break;
 	}
 
-	secondesDepuisDebutAnnee = seconde + minute*60 + heure*3600 + jourDuMois*3600*24 + secondesMois;
+	secondesDepuisDebutAnnee = seconde + minute*NOMBRE_SECONDES_MINUTE
+								+ heure*NOMBRE_SECONDES_MINUTE*NOMBRE_MINUSTES_HEURE
+								+ jourDuMois*NOMBRE_SECONDES_MINUTE*NOMBRE_MINUSTES_HEURE*NOMBRE_HEURES_JOURNEE
+								+ secondesMois;
 }
 
 Date::Date(Date const &dateACopier)

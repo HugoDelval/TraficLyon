@@ -13,8 +13,10 @@
 #include "EvenementsCapteur.h"
 #include "ListeDatesMaxBouchons.h"
 
-
 using namespace std;
+
+const int NOMBRE_MAX_CAPTEURS = 1500;
+const int NOMBRE_ETATS_CAPTEUR = 4;
 
 class Evenements {
 public:

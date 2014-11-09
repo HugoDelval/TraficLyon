@@ -10,7 +10,7 @@
 
 float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle)
 {
-	if(trafic != 0) // si le capteur est actif
+	if(trafic != AUCUNE_DONNEE) // si le capteur est actif
 	{
 		ElementListeDates *newE = new ElementListeDates();
 		newE->idCapteur=idCapteur;
@@ -90,7 +90,7 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 				delete evenementCourant;
 			}
 		}
-		else if( evenementCourant->dateEvenement + (5*60) < dateActuelle )
+		else if( evenementCourant->dateEvenement + (5*NOMBRE_SECONDES_MINUTE) < dateActuelle )
 		{
 			//action : suppresion de toute la liste a partir d'ici + sortie boucle
 			if(evenementCourant->precedent != NULL)

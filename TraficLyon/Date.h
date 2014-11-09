@@ -12,6 +12,28 @@
 
 using namespace std;
 
+const int NOMBRE_JOURS_ANNEE = 365;
+const int NOMBRE_JOURS_MOIS_28 = 28;
+const int NOMBRE_JOURS_MOIS_30= 30;
+const int NOMBRE_JOURS_MOIS_31 = 31;
+const int NOMBRE_JOURS_SEMAINE = 7;
+const int NOMBRE_HEURES_JOURNEE = 24;
+const int NOMBRE_MINUSTES_HEURE = 60;
+const int NOMBRE_SECONDES_MINUTE = 60;
+const int NOMBRE_MOIS_ANNEE = 12;
+const int JANVIER = 0;
+const int FEVRIER =1;
+const int MARS = 2;
+const int AVRIL =3;
+const int MAI = 4;
+const int JUIN =5;
+const int JUILLET = 6;
+const int AOUT =7;
+const int SEPTEMBRE = 8;
+const int OCTOBRE =9;
+const int NOVEMBRE = 10;
+const int DECEMBRE =11;
+
 class Date
 {
 public:
