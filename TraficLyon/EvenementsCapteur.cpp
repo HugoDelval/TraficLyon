@@ -1,14 +1,26 @@
-/*
- * EvenementsCapteur.cpp
- *
- *  Created on: 7 nov. 2014
- *      Author: Hugo
- */
+/*************************************************************************
+       EvenementsCapteur  -  implementation des EvenementsCapteurs decrite dans EvenementsCapteur.h
+                             -------------------
+    début                : 07/11/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
 
+//---------- Réalisation de la classe <> (fichier EvenementsCapteur.cpp) --
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+
+//------------------------------------------------------ Include personnel
 #include "EvenementsCapteur.h"
 
+//------------------------------------------------------------- Constantes
 
-void EvenementsCapteur::ajouter(int trafic, Date date)
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+void EvenementsCapteur::Ajouter(int trafic, Date date)
 {
 	if(!isEmpty)
 	{
@@ -46,7 +58,7 @@ void EvenementsCapteur::ajouter(int trafic, Date date)
 
 }
 
-void EvenementsCapteur::statistiquesParCapteur()
+void EvenementsCapteur::StatistiquesParCapteur()
 {
 	double secondesPasseesActif=0.0;
 	double secondesPasseesV1=0.0;
@@ -83,7 +95,7 @@ void EvenementsCapteur::statistiquesParCapteur()
 	cout<<"N "<<(secondesPasseesN4/secondesPasseesActif)*100.0<<"%"<<endl;
 }
 
-double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
+double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
 {
 	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
 	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
@@ -125,7 +137,7 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, Date dateDern
 	return secondesPasseesJournee;
 }
 
-double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic)
+double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic)
 {
 	double *secondesPasseesHeure = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
 	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
@@ -162,7 +174,7 @@ double* EvenementsCapteur::secondesPasseesDansChaqueEtat(int jour, int heure, Da
 	return secondesPasseesHeure;
 }
 
-void EvenementsCapteur::afficher()
+void EvenementsCapteur::Afficher()
 {
 	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
 	{
@@ -184,14 +196,7 @@ void EvenementsCapteur::afficher()
 	}
 }
 
-int EvenementsCapteur::max5minutes(int nombreSecondes)
-{
-	if(nombreSecondes <= 5*NOMBRE_SECONDES_MINUTE)
-	{
-		return nombreSecondes;
-	}
-	return 5*NOMBRE_SECONDES_MINUTE;
-}
+//-------------------------------------------- Constructeurs - destructeur
 
 EvenementsCapteur::EvenementsCapteur(int trafic, Date date)
 {
@@ -249,3 +254,15 @@ EvenementsCapteur::~EvenementsCapteur()
 	delete[] secondesPassees;
 }
 
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées
+
+int EvenementsCapteur::max5minutes(int nombreSecondes)
+{
+	if(nombreSecondes <= 5*NOMBRE_SECONDES_MINUTE)
+	{
+		return nombreSecondes;
+	}
+	return 5*NOMBRE_SECONDES_MINUTE;
+}

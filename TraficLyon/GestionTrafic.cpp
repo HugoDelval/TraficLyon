@@ -1,89 +1,36 @@
-/*
- * GestionTrafic.cpp
- *
- *  Created on: 24 oct. 2014
- *      Author: Hugo
- */
+/*************************************************************************
+    GestionTrafic  -  implementation de GestionTrafic decrit dans GestionTrafic.h
+                             -------------------
+    début                : 24/10/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
 
+//---------- Réalisation de la classe <GestionTrafic> (fichier GestionTrafic.cpp) --
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+
+//------------------------------------------------------ Include personnel
 #include "GestionTrafic.h"
 
-GestionTrafic::GestionTrafic()
+//------------------------------------------------------------- Constantes
+
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+int main()
 {
-	toutLeTrafic = new Evenements();
+	GestionTrafic g;
+	g.Start();
+
+	return 0;
 }
 
-GestionTrafic::~GestionTrafic()
-{
 
-}
-
-
-void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois,
-				string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
-{
-	int idCapteurR = atoi(idCapteurReel.c_str());
-	int idCapteurTableau = toutLeTrafic->ajouterIdAArbre(idCapteurR);
-	if(idCapteurTableau != -1)
-	{
-		int anneeFinale = atoi(annee.c_str());
-		int moisFinal = atoi(mois.c_str());
-		int jourDuMoisFinal = atoi(jourDuMois.c_str());
-		int heureFinale = atoi(heure.c_str());
-		int minuteFinale = atoi(minute.c_str());
-		int secondeFinale = atoi(seconde.c_str());
-		int jourDeLaSemaineFinale = atoi(jourDeLaSemaine.c_str());
-		int traficFinal = 0; // <=> capteur inactif
-		if(trafic.compare("V")==0)
-		{
-			traficFinal=1;
-		}
-		else if(trafic.compare("J")==0)
-		{
-			traficFinal=2;
-		}
-		else if(trafic.compare("R")==0)
-		{
-			traficFinal=3;
-		}
-		else if(trafic.compare("N")==0)
-		{
-			traficFinal=4;
-		}
-		toutLeTrafic->ajouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
-									   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
-		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
-	}
-	else //il y a une erreur dans l'insertion
-	{
-		cout<<"erreur arbreIdentifiants"<<endl;
-	}
-}
-
-void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
-{
-	int idCapteurR = atoi(idCapteurReel.c_str());
-	toutLeTrafic->statistiquesCapteur(idCapteurR);
-}
-
-void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
-{
-	int jourDeLaSemaineFinale = atoi(nJour.c_str());
-	toutLeTrafic->statistiquesJourSemaine(jourDeLaSemaineFinale-1);
-}
-
-void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)
-{
-	int jourDeLaSemaineFinale = atoi(nJour.c_str());
-	int heureFinale = atoi(heure.c_str());
-	toutLeTrafic->statistiquesJourHeureSemaine(jourDeLaSemaineFinale-1, heureFinale);
-}
-
-void GestionTrafic::appelerMaxBouchonsSimultanes()
-{
-	toutLeTrafic->maxBouchonsSimultanes();
-}
-
-void GestionTrafic::start()
+void GestionTrafic::Start()
 {
 	string commande="";
 	int typeCommande=-1;
@@ -160,6 +107,98 @@ void GestionTrafic::start()
 	}
 }
 
+
+//-------------------------------------------- Constructeurs - destructeur
+
+GestionTrafic::GestionTrafic()
+{
+	toutLeTrafic = new Evenements();
+}
+
+GestionTrafic::~GestionTrafic()
+{
+
+}
+
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées
+
+void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string mois, string jourDuMois,
+				string heure, string minute, string seconde, string jourDeLaSemaine, string trafic)
+{
+	int idCapteurR = atoi(idCapteurReel.c_str());
+	int idCapteurTableau = toutLeTrafic->AjouterIdAArbre(idCapteurR);
+	if(idCapteurTableau != -1)
+	{
+		int anneeFinale = atoi(annee.c_str());
+		int moisFinal = atoi(mois.c_str());
+		int jourDuMoisFinal = atoi(jourDuMois.c_str());
+		int heureFinale = atoi(heure.c_str());
+		int minuteFinale = atoi(minute.c_str());
+		int secondeFinale = atoi(seconde.c_str());
+		int jourDeLaSemaineFinale = atoi(jourDeLaSemaine.c_str());
+		int traficFinal = 0; // <=> capteur inactif
+		if(trafic.compare("V")==0)
+		{
+			traficFinal=1;
+		}
+		else
+		{
+			if(trafic.compare("J")==0)
+			{
+				traficFinal=2;
+			}
+			else
+			{
+				if(trafic.compare("R")==0)
+				{
+					traficFinal=3;
+				}
+				else
+				{
+					if(trafic.compare("N")==0)
+					{
+						traficFinal=4;
+					}
+					toutLeTrafic->AjouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
+									   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
+					//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
+				}
+			}
+		}
+	}
+	else //il y a une erreur dans l'insertion
+	{
+		cout<<"erreur arbreIdentifiants"<<endl;
+	}
+}
+
+void GestionTrafic::appelerStatistiquesCapteur(string idCapteurReel)
+{
+	int idCapteurR = atoi(idCapteurReel.c_str());
+	toutLeTrafic->StatistiquesCapteur(idCapteurR);
+}
+
+void GestionTrafic::appelerStatistiquesJourSemaine(string nJour)
+{
+	int jourDeLaSemaineFinale = atoi(nJour.c_str());
+	toutLeTrafic->StatistiquesJourSemaine(jourDeLaSemaineFinale-1);
+}
+
+void GestionTrafic::appelerStatistiquesJourHeureSemaine(string nJour, string heure)
+{
+	int jourDeLaSemaineFinale = atoi(nJour.c_str());
+	int heureFinale = atoi(heure.c_str());
+	toutLeTrafic->StatistiquesJourHeureSemaine(jourDeLaSemaineFinale-1, heureFinale);
+}
+
+void GestionTrafic::appelerMaxBouchonsSimultanes()
+{
+	toutLeTrafic->MaxBouchonsSimultanes();
+}
+
+
 int GestionTrafic::determineTypeCommande(const string &commande)
 {
 	int res =-1;
@@ -167,33 +206,40 @@ int GestionTrafic::determineTypeCommande(const string &commande)
 	{
 		res=COMMANDE_ADD;
 	}
-	else if(commande.find("STATS_C")==0)
+	else
 	{
+		if(commande.find("STATS_C")==0)
+		{
 		res=COMMANDE_STATS_C;
-	}
-	else if(commande.find("STATS_D7_H24")==0)
-	{
-		res=COMMANDE_STATS_D7_H24;
-	}
-	else if(commande.find("STATS_D7")==0)
-	{
-		res=COMMANDE_STATS_D7;
-	}
-	else if(commande.find("MAX_TS")==0)
-	{
-		res=COMMANDE_MAX_TS;
-	}
-	else if(commande.find("EXIT")==0)
-	{
-		res=COMMANDE_EXIT;
+		}
+		else
+		{
+			if(commande.find("STATS_D7_H24")==0)
+			{
+				res=COMMANDE_STATS_D7_H24;
+			}
+			else
+			{
+				if(commande.find("STATS_D7")==0)
+				{
+					res=COMMANDE_STATS_D7;
+				}
+				else
+				{
+					if(commande.find("MAX_TS")==0)
+					{
+						res=COMMANDE_MAX_TS;
+					}
+					else
+					{
+						if(commande.find("EXIT")==0)
+						{
+							res=COMMANDE_EXIT;
+						}
+					}
+				}
+			}
+		}
 	}
 	return res;
-}
-
-int main()
-{
-	GestionTrafic g;
-	g.start();
-
-	return 0;
 }

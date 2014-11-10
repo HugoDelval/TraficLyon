@@ -1,13 +1,26 @@
-/*
- * Evenements.cpp
- *
- *  Created on: 24 oct. 2014
- *      Author: Hugo
- */
+/*************************************************************************
+       Evenements  -  implementation des Evenements decrits dans Evenements.h
+                             -------------------
+    début                : 24/10/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
 
+//---------- Réalisation de la classe <Evenements> (fichier Evenements.cpp) --
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+
+//------------------------------------------------------ Include personnel
 #include "Evenements.h"
 
-void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+void Evenements::AjouterEvenement(int idCapteur, int heure, int jourSemaine,
 									int trafic, int anneeEvent , int moisEvent,
 									int nJourMoisEvent, int minutesEvent, int secondesEvent)
 {
@@ -17,9 +30,9 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 #endif
 */
 	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
-	capteurs[idCapteur]->ajouter(trafic,dateEvenement);
+	capteurs[idCapteur]->Ajouter(trafic,dateEvenement);
 	dateDernierEvenementTrafic = dateEvenement;
-	float traficAcuel=gestionnaireMax.ajouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
+	float traficAcuel=gestionnaireMax.AjouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
 	if(traficAcuel > bouchonMax)
 	{
 		bouchonMax = traficAcuel;
@@ -27,19 +40,19 @@ void Evenements::ajouterEvenement(int idCapteur, int heure, int jourSemaine,
 	}
 }
 
-void Evenements::maxBouchonsSimultanes()
+void Evenements::MaxBouchonsSimultanes()
 {
-	dateBouchonMax.afficheDateRelle();
+	dateBouchonMax.AfficheDateRelle();
 	cout << bouchonMax << "%"
 		 << endl;
 }
 
-int Evenements::ajouterIdAArbre(int idCapeurReel)
+int Evenements::AjouterIdAArbre(int idCapeurReel)
 {
-	return arbreId->insert(idCapeurReel);
+	return arbreId->Insert(idCapeurReel);
 }
 
-void Evenements::afficherTousLesEvenements()
+void Evenements::AfficherTousLesEvenements()
 {
 	cout<< endl;
 	cout<< "-------Evenements : -------" << endl;
@@ -48,29 +61,19 @@ void Evenements::afficherTousLesEvenements()
 	for(int i(0); i<NOMBRE_MAX_CAPTEURS; i++)
 	{
 		cout << "id = " << i << endl;
-		capteurs[i]->afficher();
+		capteurs[i]->Afficher();
 	}
 
 }
 
-Evenements::Evenements()
+
+void Evenements::StatistiquesCapteur(int idCapteurReel)
 {
-	arbreId = new ArbreIdentifiants();
-	capteurs = new EvenementsCapteur*[NOMBRE_MAX_CAPTEURS];
-	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
-	{
-		capteurs[i] = new EvenementsCapteur();
-	}
-	bouchonMax=0.0;
+	int idCapteurTableau( arbreId->TrouverIdTableauCorrespondant(idCapteurReel));
+	capteurs[idCapteurTableau]->StatistiquesParCapteur();
 }
 
-void Evenements::statistiquesCapteur(int idCapteurReel)
-{
-	int idCapteurTableau( arbreId->trouverIdTableauCorrespondant(idCapteurReel));
-	capteurs[idCapteurTableau]->statistiquesParCapteur();
-}
-
-void Evenements::statistiquesJourSemaine(int nJour)
+void Evenements::StatistiquesJourSemaine(int nJour)
 {
 	double tempsTotal(0.0);
 	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR];
@@ -82,7 +85,7 @@ void Evenements::statistiquesJourSemaine(int nJour)
 	double *secondesPasseesJourneeCapteurX = new double[NOMBRE_ETATS_CAPTEUR];
 	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
 	{
-		secondesPasseesJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, dateDernierEvenementTrafic);
+		secondesPasseesJourneeCapteurX = capteurs[i]->SecondesPasseesDansChaqueEtat(nJour, dateDernierEvenementTrafic);
 		for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 		{
 			tempsTotal += secondesPasseesJourneeCapteurX[j];
@@ -99,7 +102,7 @@ void Evenements::statistiquesJourSemaine(int nJour)
 }
 
 
-void Evenements::statistiquesJourHeureSemaine(int nJour, int heure)
+void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 {
 	double tempsTotal(0.0);
 	double *secondesPasseesHeureJournee = new double[NOMBRE_ETATS_CAPTEUR];
@@ -111,7 +114,7 @@ void Evenements::statistiquesJourHeureSemaine(int nJour, int heure)
 	double *secondesPasseesHeureJourneeCapteurX = new double[NOMBRE_ETATS_CAPTEUR];
 	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
 	{
-		secondesPasseesHeureJourneeCapteurX = capteurs[i]->secondesPasseesDansChaqueEtat(nJour, heure, dateDernierEvenementTrafic);
+		secondesPasseesHeureJourneeCapteurX = capteurs[i]->SecondesPasseesDansChaqueEtat(nJour, heure, dateDernierEvenementTrafic);
 		for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 		{
 			tempsTotal += secondesPasseesHeureJourneeCapteurX[j];
@@ -127,6 +130,18 @@ void Evenements::statistiquesJourHeureSemaine(int nJour, int heure)
 	cout<<"N "<<(secondesPasseesHeureJournee[3]/tempsTotal)*100.0<<"%"<<endl;
 }
 
+//-------------------------------------------- Constructeurs - destructeur
+
+Evenements::Evenements()
+{
+	arbreId = new ArbreIdentifiants();
+	capteurs = new EvenementsCapteur*[NOMBRE_MAX_CAPTEURS];
+	for(int i(0) ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		capteurs[i] = new EvenementsCapteur();
+	}
+	bouchonMax=0.0;
+}
 
 Evenements::~Evenements()
 {
@@ -136,4 +151,8 @@ Evenements::~Evenements()
 	delete [] capteurs;
 // a modifier : boucles comme dans le constructeur
 }
+
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées
 

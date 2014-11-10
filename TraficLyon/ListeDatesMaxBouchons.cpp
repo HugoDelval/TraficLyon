@@ -1,14 +1,27 @@
-/*
- * ListeDatesMaxBouchons.cpp
- *
- *  Created on: 5 nov. 2014
- *      Author: Hugo
- */
+/*************************************************************************
+       ListeDatesMaxBouchons  -  implementation de la ListeDatesMaxBouchons decrite dans ListeDatesMaxBouchons.h
+                             -------------------
+    début                : 0/11/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
 
+//---------- Réalisation de la classe <ListeDatesMaxBouchons> (fichier ListeDatesMaxBouchons.cpp) --
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+
+//------------------------------------------------------ Include personnel
 #include "ListeDatesMaxBouchons.h"
 
+//------------------------------------------------------------- Constantes
 
-float ListeDatesMaxBouchons::ajouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle)
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+float ListeDatesMaxBouchons::AjouteCapteurEtRetourneTraficActuel(int idCapteur, int trafic, Date dateActuelle)
 {
 	if(trafic != AUCUNE_DONNEE) // si le capteur est actif
 	{
@@ -43,16 +56,40 @@ void ListeDatesMaxBouchons::ajouteDansLaListe(ElementListeDates *newE)
 	}
 }
 
-void ListeDatesMaxBouchons::debugAffiche()
+void ListeDatesMaxBouchons::DebugAffiche()
 {
 	ElementListeDates *evenementCourant = root;
 	while (evenementCourant != NULL)
 	{
 		cout<<"id:"<<evenementCourant->idCapteur<<" trafic:"<<evenementCourant->trafic<<" ";
-		evenementCourant->dateEvenement.debugAffichage();
+		evenementCourant->dateEvenement.DebugAffichage();
 		evenementCourant=evenementCourant->suivant;
 	}
 }
+
+//-------------------------------------------- Constructeurs - destructeur
+
+ListeDatesMaxBouchons::ListeDatesMaxBouchons()
+{
+	root = NULL;
+}
+
+ListeDatesMaxBouchons::~ListeDatesMaxBouchons()
+{
+	ElementListeDates *e=root;
+	ElementListeDates *evenementALiberer;
+	while (e != NULL)
+	{
+		evenementALiberer=e;
+		e=e->suivant;
+		delete evenementALiberer;
+	}
+}
+
+
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées
 
 void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int newIdCapteur)
 {
@@ -90,26 +127,29 @@ void ListeDatesMaxBouchons::supprimeCapteursObsoletes(Date dateActuelle, int new
 				delete evenementCourant;
 			}
 		}
-		else if( evenementCourant->dateEvenement + (5*NOMBRE_SECONDES_MINUTE) < dateActuelle )
+		else
 		{
-			//action : suppresion de toute la liste a partir d'ici + sortie boucle
-			if(evenementCourant->precedent != NULL)
+			if( evenementCourant->dateEvenement + (5*NOMBRE_SECONDES_MINUTE) < dateActuelle )
 			{
-				evenementCourant->precedent->suivant=NULL;
+				//action : suppresion de toute la liste a partir d'ici + sortie boucle
+				if(evenementCourant->precedent != NULL)
+				{
+					evenementCourant->precedent->suivant=NULL;
+				}
+				if(evenementCourant==root) //on doit supprimer toute la liste
+				{
+					root=NULL;
+				}
+				ElementListeDates *evenementALiberer;
+				while (evenementCourant != NULL)
+				{
+					evenementALiberer=evenementCourant;
+					evenementCourant=evenementCourant->suivant;
+					delete evenementALiberer;
+				}
+				//sortie boucle
+				break;
 			}
-			if(evenementCourant==root) //on doit supprimer toute la liste
-			{
-				root=NULL;
-			}
-			ElementListeDates *evenementALiberer;
-			while (evenementCourant != NULL)
-			{
-				evenementALiberer=evenementCourant;
-				evenementCourant=evenementCourant->suivant;
-				delete evenementALiberer;
-			}
-			//sortie boucle
-			break;
 		}
 		evenementCourant=evenementCourant->suivant;
 	}
@@ -131,21 +171,4 @@ float ListeDatesMaxBouchons::calculeTraficActu()
 	}
 
 	return (res/nombreCapteursActifs)*100.0;
-}
-
-ListeDatesMaxBouchons::ListeDatesMaxBouchons()
-{
-	root = NULL;
-}
-
-ListeDatesMaxBouchons::~ListeDatesMaxBouchons()
-{
-	ElementListeDates *e=root;
-	ElementListeDates *evenementALiberer;
-	while (e != NULL)
-	{
-		evenementALiberer=e;
-		e=e->suivant;
-		delete evenementALiberer;
-	}
 }

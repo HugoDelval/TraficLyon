@@ -1,24 +1,37 @@
+/*************************************************************************
+       ArbreIdentifiants  -  implementation de l'ArbreIdentifiants decrit dans ArbreIdentifiants.h
+                             -------------------
+    début                : 24/10/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
+
+//---------- Réalisation de la classe <ArbreIdentifiants> (fichier ArbreIdentifiants.cpp) --
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 #include <stdlib.h>
+
+//------------------------------------------------------ Include personnel
 #include "ArbreIdentifiants.h"
 
-using namespace std;
+//------------------------------------------------------------- Constantes
 
 
-ArbreIdentifiants::ArbreIdentifiants()
-{
-	root = NULL;
-	dernierIdTableau = -1;
-}
+//----------------------------------------------------------------- PUBLIC
 
-int ArbreIdentifiants::insert(int idR)
+//----------------------------------------------------- Méthodes publiques
+
+int ArbreIdentifiants::Insert(int idR)
 {
 	/*
 #ifdef MAP
 	cout<<"insert in ArbreIdentifiants with : "<<idR<<endl;
 #endif
 */
-	int res=-1;
+	int res(-1);
 	if(root==NULL)
 	{
 		dernierIdTableau++;
@@ -41,10 +54,23 @@ int ArbreIdentifiants::insert(int idR)
 	return res;
 }
 
-int ArbreIdentifiants::trouverIdTableauCorrespondant(int idR)
+int ArbreIdentifiants::TrouverIdTableauCorrespondant(int idR)
 {
 	return trouverIdTableauCorrespondantRec(idR,root);
 }
+
+//-------------------------------------------- Constructeurs - destructeur
+
+ArbreIdentifiants::ArbreIdentifiants()
+{
+	root = NULL;
+	dernierIdTableau = -1;
+}
+
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées
+
 
 // Finding an element
 int ArbreIdentifiants::trouverIdTableauCorrespondantRec(int idR,ptrOnAVLTreeNode &p)
@@ -444,3 +470,4 @@ int main()
 	return 0;
 }
 */
+

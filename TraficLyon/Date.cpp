@@ -1,17 +1,266 @@
+/*************************************************************************
+       Date  -  implementation de la Date decrite dans Date.h
+                             -------------------
+    début                : 07/11/2014
+    copyright            : (C) 2014 par PAPIN/DELVAL
+*************************************************************************/
 
-/*
- * Date.cpp
- *
- *  Created on: 7 nov. 2014
- *      Author: Hugo
- */
+//---------- Réalisation de la classe <Date> (fichier Date.cpp) --
 
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+
+//------------------------------------------------------ Include personnel
 #include "Date.h"
 
+//------------------------------------------------------------- Constantes
+
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+bool Date::EstEgal(Date const &dateAComparer) const
+{
+	if (dateAComparer.annee == annee  && dateAComparer.jourDeLaSemaine==jourDeLaSemaine
+				&& dateAComparer.jourDuMois==jourDuMois && dateAComparer.mois==mois
+				&& dateAComparer.heure==heure && dateAComparer.minute==minute
+				&& dateAComparer.seconde==seconde)
+	{
+		return true;
+	}
+	else
+	{
+		 return false;
+	}
+}
+
+bool Date::EstInf(Date const& dateAComparer) const
+{
+	if(dateAComparer.annee <annee )
+	{
+		return true;
+	}
+	else
+	{
+		if(dateAComparer.mois <mois)
+		{
+			return true;
+		}
+		else
+		{
+			if(dateAComparer.jourDuMois < jourDuMois)
+			{
+				return true;
+			}
+			else
+			{
+				if(dateAComparer.heure < heure)
+				{
+					return true;
+				}
+				else
+				{
+					if(dateAComparer.minute <minute)
+					{
+						return true;
+					}
+					else
+					{
+						if(dateAComparer.seconde <seconde)
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+Date Date::Additionner(int secondes)
+{
+	seconde += secondes;
+
+	if(seconde >= NOMBRE_SECONDES_MINUTE)
+	{
+		minute+=seconde/NOMBRE_SECONDES_MINUTE;
+		seconde %= NOMBRE_SECONDES_MINUTE;
+	}
+	else
+	{
+		if(seconde < 0)
+		{
+			seconde = -seconde;
+			minute-=(((seconde-1)/NOMBRE_SECONDES_MINUTE)+1);
+			seconde %= NOMBRE_SECONDES_MINUTE;
+			seconde = (NOMBRE_SECONDES_MINUTE - seconde)%NOMBRE_SECONDES_MINUTE;
+		}
+	}
+
+	if(minute >= NOMBRE_MINUSTES_HEURE)
+	{
+		heure+=minute/NOMBRE_MINUSTES_HEURE;
+		minute%=NOMBRE_MINUSTES_HEURE;
+	}
+	else
+	{
+		if (minute<0)
+		{
+			minute = -minute;
+			heure-=(((minute-1)/NOMBRE_MINUSTES_HEURE)+1);
+			minute %= NOMBRE_MINUSTES_HEURE;
+			minute = (NOMBRE_MINUSTES_HEURE - minute)%NOMBRE_MINUSTES_HEURE;
+		}
+	}
+
+	if(heure >= NOMBRE_HEURES_JOURNEE)
+	{
+		jourDuMois+=heure/NOMBRE_HEURES_JOURNEE;
+		jourDeLaSemaine+=heure/NOMBRE_HEURES_JOURNEE;
+		jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
+		heure %=NOMBRE_HEURES_JOURNEE;
+	}
+	else
+	{
+		if (heure <0)
+		{
+			heure = -heure;
+			jourDuMois-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
+			jourDeLaSemaine-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
+			jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
+			jourDeLaSemaine = (NOMBRE_JOURS_SEMAINE - jourDeLaSemaine)%NOMBRE_JOURS_SEMAINE;
+			heure %=NOMBRE_HEURES_JOURNEE;
+			heure = (NOMBRE_HEURES_JOURNEE - heure)%NOMBRE_HEURES_JOURNEE;
+		}
+	}
+
+	if((jourDuMois > (NOMBRE_JOURS_MOIS_28-1) && mois == FEVRIER))
+	{
+		mois+=jourDuMois/NOMBRE_JOURS_MOIS_28;
+		jourDuMois%=NOMBRE_JOURS_MOIS_31;
+	}
+	else
+	{
+		if(jourDuMois<JANVIER && mois==MARS)
+		{
+			jourDuMois=-jourDuMois;
+			mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_28)+1);
+			jourDuMois%=NOMBRE_JOURS_MOIS_28;
+			jourDuMois = (NOMBRE_JOURS_MOIS_28-jourDuMois)%NOMBRE_JOURS_MOIS_28;
+		}
+	}
+
+
+	if((jourDuMois > (NOMBRE_JOURS_MOIS_30-1) && (mois == AVRIL || mois ==JUIN
+												|| mois == SEPTEMBRE || mois == 10)))
+	{
+		mois+=jourDuMois/NOMBRE_JOURS_MOIS_30;
+		jourDuMois%=NOMBRE_JOURS_MOIS_31;
+	}
+	else
+	{
+		if(jourDuMois<0 && (mois==MAI || mois==JUILLET || mois==OCTOBRE || mois==DECEMBRE))
+		{
+			jourDuMois=-jourDuMois;
+			mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_30)+1);
+			jourDuMois%=NOMBRE_JOURS_MOIS_30;
+			jourDuMois=(NOMBRE_JOURS_MOIS_30-jourDuMois)%NOMBRE_JOURS_MOIS_30;
+		}
+	}
+
+	if(jourDuMois > (NOMBRE_JOURS_MOIS_31-1) && (mois == JANVIER || mois ==MARS || mois == MAI
+									|| mois == JUILLET || mois == AOUT || mois == OCTOBRE
+											|| mois==DECEMBRE))
+	{
+		if(mois!=JUILLET && mois != DECEMBRE && mois!=JANVIER)
+		{
+			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+			jourDuMois%=NOMBRE_JOURS_MOIS_30;
+		}
+		else
+		{
+			if(mois!=JANVIER)
+			{
+				mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+				jourDuMois%=NOMBRE_JOURS_MOIS_31;
+			}
+			else
+			{
+				mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
+				jourDuMois%=NOMBRE_JOURS_MOIS_28;
+			}
+		}
+	}
+	else
+	{
+		if(jourDuMois<0 && (mois==FEVRIER || mois==AVRIL || mois==JUIN || mois==AOUT
+									|| mois==SEPTEMBRE || mois==NOVEMBRE || mois==JANVIER))
+		{
+			jourDuMois=-jourDuMois;
+			mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_31)+1);
+			jourDuMois%=NOMBRE_JOURS_MOIS_31;
+			jourDuMois=(NOMBRE_JOURS_MOIS_31-jourDuMois)%NOMBRE_JOURS_MOIS_31;
+		}
+	}
+
+	secondesDepuisDebutAnnee += secondes;
+	if(mois>DECEMBRE)
+	{
+		annee++;
+		mois%=NOMBRE_MOIS_ANNEE;
+	}
+	else
+	{
+		if(mois<0)
+		{
+			annee--;
+			mois=-mois;
+			mois%=NOMBRE_MOIS_ANNEE;
+			mois=(NOMBRE_MOIS_ANNEE-mois)%NOMBRE_MOIS_ANNEE;
+		}
+	}
+
+	return *this;
+}
+
+int Date::Difference(Date const &dateAEnlever) const
+{
+	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)*365*24*3600;
+}
+
+void Date::AfficheDateRelle()
+{
+	cout << annee <<" "
+		 << mois+1 << " "
+		 << jourDuMois+1 << " "
+		 << heure << " "
+		 << minute << " "
+		 << seconde << " ";
+}
+
+void Date::DebugAffichage()
+{
+	cout << "année: "<< annee
+		 <<" mois: "<<mois
+		 << " jour: " << jourDuMois
+		 << " heure: " << heure
+		 << " minute: " << minute
+		 << " seconde: " << seconde
+		 << " jourSemaine: " << jourDeLaSemaine
+		 <<endl;
+}
+
+//-------------------------------------------- Redéfinition d'opérateurs
 
 bool operator==(Date const &date1, Date const &date2)
 {
-	return date1.estEgal(date2);
+	return date1.EstEgal(date2);
 }
 
 bool operator!=(Date const& date1, Date const& date2)
@@ -21,7 +270,7 @@ bool operator!=(Date const& date1, Date const& date2)
 
 bool operator<(Date const& date2, Date const &date1)
 {
-	return date1.estInf(date2);
+	return date1.EstInf(date2);
 }
 
 bool operator<=(Date const& date1, Date const& date2)
@@ -42,200 +291,22 @@ bool operator>=(Date const& date1, Date const& date2)
 Date operator+(Date const &date, int secondes)
 {
 	Date dateAddition(date);
-	return dateAddition.additionner(secondes);
+	return dateAddition.Additionner(secondes);
 }
 
 int operator-(Date const& date1, Date const& dateAEnlever)
 {
-	return date1.difference(dateAEnlever);
+	return date1.Difference(dateAEnlever);
 }
 
 Date operator-(Date const &date, int secondes)
 {
 	Date dateSoustraction(date);
-	return dateSoustraction.additionner(-secondes);
+	return dateSoustraction.Additionner(-secondes);
 }
 
-bool Date::estEgal(Date const &dateAComparer) const
-{
-	if (dateAComparer.annee == annee  && dateAComparer.jourDeLaSemaine==jourDeLaSemaine
-				&& dateAComparer.jourDuMois==jourDuMois && dateAComparer.mois==mois
-				&& dateAComparer.heure==heure && dateAComparer.minute==minute
-				&& dateAComparer.seconde==seconde)
-	{
-		return true;
-	} else {
-		 return false;
-	}
-}
 
-// todo verifier
-bool Date::estInf(Date const& dateAComparer) const
-{
-	if(dateAComparer.annee <annee )
-			return true;
-		else if(dateAComparer.mois <mois)
-			return true;
-		else if(dateAComparer.jourDuMois < jourDuMois)
-			return true;
-		else if(dateAComparer.heure < heure)
-			return true;
-		else if(dateAComparer.minute <minute)
-			return true;
-		else if(dateAComparer.seconde <seconde)
-			return true;
-		else
-			return false;
-}
-
-Date Date::additionner(int secondes)
-{
-	seconde += secondes;
-
-	if(seconde >= NOMBRE_SECONDES_MINUTE)
-	{
-		minute+=seconde/NOMBRE_SECONDES_MINUTE;
-		seconde %= NOMBRE_SECONDES_MINUTE;
-	}
-	else if(seconde < 0)
-	{
-		seconde = -seconde;
-		minute-=(((seconde-1)/NOMBRE_SECONDES_MINUTE)+1);
-		seconde %= NOMBRE_SECONDES_MINUTE;
-		seconde = (NOMBRE_SECONDES_MINUTE - seconde)%NOMBRE_SECONDES_MINUTE;
-	}
-
-	if(minute >= NOMBRE_MINUSTES_HEURE)
-	{
-		heure+=minute/NOMBRE_MINUSTES_HEURE;
-		minute%=NOMBRE_MINUSTES_HEURE;
-	}
-	else if (minute<0)
-	{
-		minute = -minute;
-		heure-=(((minute-1)/NOMBRE_MINUSTES_HEURE)+1);
-		minute %= NOMBRE_MINUSTES_HEURE;
-		minute = (NOMBRE_MINUSTES_HEURE - minute)%NOMBRE_MINUSTES_HEURE;
-	}
-
-	if(heure >= NOMBRE_HEURES_JOURNEE)
-	{
-		jourDuMois+=heure/NOMBRE_HEURES_JOURNEE;
-		jourDeLaSemaine+=heure/NOMBRE_HEURES_JOURNEE;
-		jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
-		heure %=NOMBRE_HEURES_JOURNEE;
-	}
-	else if (heure <0)
-	{
-		heure = -heure;
-		jourDuMois-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
-		jourDeLaSemaine-=(((heure-1)/NOMBRE_HEURES_JOURNEE)+1);
-		jourDeLaSemaine%=NOMBRE_JOURS_SEMAINE;
-		jourDeLaSemaine = (NOMBRE_JOURS_SEMAINE - jourDeLaSemaine)%NOMBRE_JOURS_SEMAINE;
-		heure %=NOMBRE_HEURES_JOURNEE;
-		heure = (NOMBRE_HEURES_JOURNEE - heure)%NOMBRE_HEURES_JOURNEE;
-	}
-
-	if((jourDuMois > (NOMBRE_JOURS_MOIS_28-1) && mois == FEVRIER))
-	{
-		mois+=jourDuMois/NOMBRE_JOURS_MOIS_28;
-		jourDuMois%=NOMBRE_JOURS_MOIS_31;
-	}
-	else if(jourDuMois<0 && mois==2)  // si Mars
-	{
-		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_28)+1);
-		jourDuMois%=NOMBRE_JOURS_MOIS_28;
-		jourDuMois = (NOMBRE_JOURS_MOIS_28-jourDuMois)%NOMBRE_JOURS_MOIS_28;
-	}
-
-
-	if((jourDuMois > (NOMBRE_JOURS_MOIS_30-1) && (mois == AVRIL || mois ==JUIN
-												|| mois == SEPTEMBRE || mois == 10)))
-	{
-		mois+=jourDuMois/NOMBRE_JOURS_MOIS_30;
-		jourDuMois%=NOMBRE_JOURS_MOIS_31;
-	}
-	else if(jourDuMois<0 && (mois==MAI || mois==JUILLET || mois==OCTOBRE || mois==DECEMBRE))
-	{
-		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_30)+1);
-		jourDuMois%=NOMBRE_JOURS_MOIS_30;
-		jourDuMois=(NOMBRE_JOURS_MOIS_30-jourDuMois)%NOMBRE_JOURS_MOIS_30;
-	}
-
-	if(jourDuMois > (NOMBRE_JOURS_MOIS_31-1) && (mois == JANVIER || mois ==MARS || mois == MAI
-									|| mois == JUILLET || mois == AOUT || mois == OCTOBRE
-											|| mois==DECEMBRE))
-	{
-		if(mois!=JUILLET && mois != DECEMBRE && mois!=JANVIER)
-		{
-			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
-			jourDuMois%=NOMBRE_JOURS_MOIS_30;
-		}
-		else if(mois!=JANVIER)
-		{
-			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
-			jourDuMois%=NOMBRE_JOURS_MOIS_31;
-		}
-		else
-		{
-			mois+=jourDuMois/NOMBRE_JOURS_MOIS_31;
-			jourDuMois%=NOMBRE_JOURS_MOIS_28;
-		}
-	}
-	else if(jourDuMois<0 && (mois==FEVRIER || mois==AVRIL || mois==JUIN || mois==AOUT
-									|| mois==SEPTEMBRE || mois==NOVEMBRE || mois==JANVIER))
-	{
-		jourDuMois=-jourDuMois;
-		mois-=(((jourDuMois-1)/NOMBRE_JOURS_MOIS_31)+1);
-		jourDuMois%=NOMBRE_JOURS_MOIS_31;
-		jourDuMois=(NOMBRE_JOURS_MOIS_31-jourDuMois)%NOMBRE_JOURS_MOIS_31;
-	}
-
-	secondesDepuisDebutAnnee += secondes;
-	if(mois>DECEMBRE)
-	{
-		annee++;
-		mois%=NOMBRE_MOIS_ANNEE;
-	}
-	else if(mois<0)
-	{
-		annee--;
-		mois=-mois;
-		mois%=NOMBRE_MOIS_ANNEE;
-		mois=(NOMBRE_MOIS_ANNEE-mois)%NOMBRE_MOIS_ANNEE;
-	}
-
-	return *this;
-}
-
-int Date::difference(Date const &dateAEnlever) const
-{
-	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)*365*24*3600;
-}
-
-void Date::afficheDateRelle()
-{
-	cout << annee <<" "
-		 << mois+1 << " "
-		 << jourDuMois+1 << " "
-		 << heure << " "
-		 << minute << " "
-		 << seconde << " ";
-}
-
-void Date::debugAffichage()
-{
-	cout << "année: "<< annee
-		 <<" mois: "<<mois
-		 << " jour: " << jourDuMois
-		 << " heure: " << heure
-		 << " minute: " << minute
-		 << " seconde: " << seconde
-		 << " jourSemaine: " << jourDeLaSemaine
-		 <<endl;
-}
+//-------------------------------------------- Constructeurs - destructeur
 
 Date::Date()
 {
@@ -323,3 +394,8 @@ Date::Date(Date const &dateACopier)
 Date::~Date() {
 	// TODO Auto-generated destructor stub
 }
+
+
+//------------------------------------------------------------------ PRIVE
+
+//------------------------------------------------------- Méthodes privées

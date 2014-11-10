@@ -30,7 +30,7 @@ static void testAjouteDansLaListe()
 
 	//maListe1.ajouteDansLaListe(element1);
 	//maListe1.ajouteDansLaListe(element2);
-	maListe1.debugAffiche();
+	maListe1.DebugAffiche();
 
 }
 
