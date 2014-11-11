@@ -231,7 +231,8 @@ Date Date::Additionner(int secondes)
 
 int Date::Difference(Date const &dateAEnlever) const
 {
-	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)*365*24*3600;
+	return (secondesDepuisDebutAnnee - dateAEnlever.secondesDepuisDebutAnnee)+(annee - dateAEnlever.annee)
+								*NOMBRE_JOURS_ANNEE*NOMBRE_HEURES_JOURNEE*NOMBRE_MINUSTES_HEURE*NOMBRE_SECONDES_MINUTE;
 }
 
 void Date::AfficheDateRelle()

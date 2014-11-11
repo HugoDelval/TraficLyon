@@ -11,19 +11,14 @@
 #ifndef EVENEMENTS_H
 #define EVENEMENTS_H
 
+//--------------------------------------------------- Interfaces utilisées
 #include <iostream>
 #include "ArbreIdentifiants.h"
 #include "EvenementsCapteur.h"
 #include "ListeDatesMaxBouchons.h"
+#include "Constantes.h"
 
 using namespace std;
-
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-
-const int NOMBRE_MAX_CAPTEURS = 1500;
-const int NOMBRE_ETATS_CAPTEUR = 4;
 
 //------------------------------------------------------------------ Types
 

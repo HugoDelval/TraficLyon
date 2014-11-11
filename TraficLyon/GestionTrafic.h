@@ -11,19 +11,11 @@
 #ifndef GESTIONTRAFIC_H
 #define GESTIONTRAFIC_H
 
-using namespace std;
-#include "Evenements.h"
-#include <stdlib.h>
-
 //--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-const int COMMANDE_ADD = 0;
-const int COMMANDE_STATS_C = 1;
-const int COMMANDE_STATS_D7 = 2;
-const int COMMANDE_STATS_D7_H24 = 3;
-const int COMMANDE_MAX_TS = 4;
-const int COMMANDE_EXIT = 5;
+#include "Evenements.h"
+#include "Constantes.h"
+#include <stdlib.h>
+using namespace std;
 
 //------------------------------------------------------------------ Types
 
@@ -77,7 +69,8 @@ private:
 	// Contrat :
 	//
 
-	void appelerStatistiquesJourHeureSemaine(string nJour, string heure);	// Mode d'emploi :
+	void appelerStatistiquesJourHeureSemaine(string nJour, string heure);
+	// Mode d'emploi :
 	//
 	// Contrat :
 	//

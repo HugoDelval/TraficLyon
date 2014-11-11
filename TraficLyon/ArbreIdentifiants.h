@@ -12,6 +12,9 @@
 #define ARBREIDENTIFIANTS_H
 
 //--------------------------------------------------- Interfaces utilisées
+using namespace std;
+#include <iostream>
+#include "Constantes.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -75,17 +78,6 @@ private:
 	// Contrat :
 	//
 
-	//void supprimer(int idR,ptrOnAVLTreeNode &aSupprimer);
-	//int deleteMin(ptrOnAVLTreeNode &p);
-	//ptrOnAVLTreeNode findMin(ptrOnAVLTreeNode p);
-	//ptrOnAVLTreeNode findMax(ptrOnAVLTreeNode p);
-	//void vider(ptrOnAVLTreeNode &dest);
-	//void copy(ptrOnAVLTreeNode &src,ptrOnAVLTreeNode &dest);
-	//ptrOnAVLTreeNode nodeCopy(ptrOnAVLTreeNode &aCopier);
-	//void preOrder(ptrOnAVLTreeNode p); //inutile ?
-	//void inOrder(ptrOnAVLTreeNode p); //inutile ?
-	//void postOrder(ptrOnAVLTreeNode p); //inutile ?
-
 	//------------------------------------------------------- Attributs privés
 	int hauteurSousArbre(ptrOnAVLTreeNode);
 	ptrOnAVLTreeNode rotationSimpleGauche(ptrOnAVLTreeNode &p1);
@@ -93,7 +85,6 @@ private:
 	ptrOnAVLTreeNode rotationSimpleDroite(ptrOnAVLTreeNode &p1);
 	ptrOnAVLTreeNode rotationDoubleDroite(ptrOnAVLTreeNode &p1);
 	int max(int value1, int value2);
-	//int nombreNodes(ptrOnAVLTreeNode p); //inutile ?
 	ptrOnAVLTreeNode root;
 	int dernierIdTableau;
 

@@ -21,14 +21,6 @@
 
 //----------------------------------------------------- Méthodes publiques
 
-int main()
-{
-	GestionTrafic g;
-	g.Start();
-
-	return 0;
-}
-
 
 void GestionTrafic::Start()
 {
@@ -166,11 +158,6 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 		}
 		toutLeTrafic->AjouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
 											   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
-		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
-	}
-	else //il y a une erreur dans l'insertion
-	{
-		cout<<"erreur arbreIdentifiants"<<endl;
 	}
 }
 

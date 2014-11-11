@@ -163,7 +163,7 @@ float ListeDatesMaxBouchons::calculeTraficActu()
 	while (evenementCourant != NULL)
 	{
 		nombreCapteursActifs++;
-		if(evenementCourant->trafic==3 || evenementCourant->trafic==4) //si rouge ou noir
+		if(evenementCourant->trafic==ROUGE || evenementCourant->trafic==NOIR) //si rouge ou noir
 		{
 			res++;
 		}

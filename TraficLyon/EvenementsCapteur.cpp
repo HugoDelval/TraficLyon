@@ -37,9 +37,6 @@ void EvenementsCapteur::Ajouter(int trafic, Date date)
 		{
 			int tempsAAjouterDateDernierEvenement = max5minutes( (NOMBRE_MINUSTES_HEURE-1-dateDernierEvenement.minute)*NOMBRE_MINUSTES_HEURE + NOMBRE_SECONDES_MINUTE -dateDernierEvenement.seconde ) ;
 			int autreTemps = secondesPasseesMajore - tempsAAjouterDateDernierEvenement;
-			/*cout<<tempsAAjouterDateDernierEvenement<<endl;
-			cout<<autreTemps<<endl;
-			cout<<secondesPasseesMajore<<endl;*/
 			secondesPassees[datePlus5min.heure][datePlus5min.jourDeLaSemaine][traficDernierEvenement]
 			               += autreTemps;
 			secondesPassees[dateDernierEvenement.heure][dateDernierEvenement.jourDeLaSemaine][traficDernierEvenement]
@@ -54,8 +51,6 @@ void EvenementsCapteur::Ajouter(int trafic, Date date)
 		dateDernierEvenement = date;
 		isEmpty=false;
 	}
-	//cout<<"fin ajouter dans EvenementsCapteur"<<endl;
-
 }
 
 void EvenementsCapteur::StatistiquesParCapteur()
@@ -97,8 +92,8 @@ void EvenementsCapteur::StatistiquesParCapteur()
 
 double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
 {
-	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
-	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
+	double *secondesPasseesJournee = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 	{
 		secondesPasseesJournee[j] = 0.0;
 	}
@@ -139,12 +134,12 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDern
 
 double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic)
 {
-	double *secondesPasseesHeure = new double[NOMBRE_ETATS_CAPTEUR_UTILES];
-	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR_UTILES ; j++)
+	double *secondesPasseesHeure = new double[NOMBRE_ETATS_CAPTEUR];
+	for(int j(0) ; j<NOMBRE_ETATS_CAPTEUR ; j++)
 	{
 		secondesPasseesHeure[j] = 0.0;
 	}
-	for(int i(1) ; i<(NOMBRE_ETATS_CAPTEUR_UTILES+1) ; i++)
+	for(int i(1) ; i<(NOMBRE_ETATS_CAPTEUR+1) ; i++)
 	{
 		secondesPasseesHeure[i-1] += secondesPassees[heure][jour][i];
 	}
@@ -176,11 +171,11 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, int heure, Da
 
 void EvenementsCapteur::Afficher()
 {
-	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
 		{
-			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++) // trafic
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++)
 			{
 				if(secondesPassees[i][j][k]!=0)
 				{
@@ -203,13 +198,13 @@ EvenementsCapteur::EvenementsCapteur(int trafic, Date date)
 	traficDernierEvenement = trafic;
 	dateDernierEvenement = date;
 	secondesPassees = new int**[NOMBRE_HEURES_JOURNEE];
-	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
 		secondesPassees[i] = new int*[NOMBRE_JOURS_SEMAINE];
-		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
 		{
 			secondesPassees[i][j] = new int[5];
-			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++) // trafic
+			for(int k(0) ; k<NOMBRE_ETATS_CAPTEUR_TOT ; k++)
 			{
 				secondesPassees[i][j][k] = 0;
 			}
@@ -221,7 +216,6 @@ EvenementsCapteur::EvenementsCapteur(int trafic, Date date)
 EvenementsCapteur::EvenementsCapteur()
 {
 	traficDernierEvenement = 0;
-//	dateDernierEvenement();
 	secondesPassees = new int**[NOMBRE_HEURES_JOURNEE];
 	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
@@ -240,14 +234,14 @@ EvenementsCapteur::EvenementsCapteur()
 
 EvenementsCapteur::~EvenementsCapteur()
 {
-	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++) // jour semaine
+		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
 		{
 			delete[] secondesPassees[i][j];
 		}
 	}
-	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)  // heures
+	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
 		delete[] secondesPassees[i];
 	}

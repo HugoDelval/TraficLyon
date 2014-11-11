@@ -24,11 +24,6 @@ void Evenements::AjouterEvenement(int idCapteur, int heure, int jourSemaine,
 									int trafic, int anneeEvent , int moisEvent,
 									int nJourMoisEvent, int minutesEvent, int secondesEvent)
 {
-	/*
-#ifdef MAP
-	cout<<"insert in Evenements with : "<<idCapteur<<" "<<heure<<" "<<jourSemaine<<" "<<trafic<<endl;
-#endif
-*/
 	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
 	capteurs[idCapteur]->Ajouter(trafic,dateEvenement);
 	dateDernierEvenementTrafic = dateEvenement;
@@ -92,8 +87,6 @@ void Evenements::StatistiquesJourSemaine(int nJour)
 			secondesPasseesJournee[j] += secondesPasseesJourneeCapteurX[j];
 		}
 	}
-	cout<<tempsTotal<<endl;
-	cout<<secondesPasseesJournee[0]<<endl;
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
 	cout<<"V "<<(secondesPasseesJournee[0]/tempsTotal)*100.0<<"%"<<endl;
 	cout<<"J "<<(secondesPasseesJournee[1]/tempsTotal)*100.0<<"%"<<endl;
@@ -121,8 +114,6 @@ void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 			secondesPasseesHeureJournee[j] += secondesPasseesHeureJourneeCapteurX[j];
 		}
 	}
-	cout<<tempsTotal<<endl;
-	cout<<secondesPasseesHeureJournee[0]<<endl;
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
 	cout<<"V "<<(secondesPasseesHeureJournee[0]/tempsTotal)*100.0<<"%"<<endl;
 	cout<<"J "<<(secondesPasseesHeureJournee[1]/tempsTotal)*100.0<<"%"<<endl;
@@ -145,9 +136,6 @@ Evenements::Evenements()
 
 Evenements::~Evenements()
 {
-#ifdef MAP
-	cout<< "Evenements::~Evenements()" <<endl;
-#endif
 	delete [] capteurs;
 // a modifier : boucles comme dans le constructeur
 }

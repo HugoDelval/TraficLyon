@@ -10,21 +10,14 @@
 #ifndef EVENEMENTSCAPTEUR_H_
 #define EVENEMENTSCAPTEUR_H_
 
+//--------------------------------------------------- Interfaces utilisées
 #include "Date.h"
 #include <iostream>
+#include "Constantes.h"
 
 using namespace std;
 
-//--------------------------------------------------- Interfaces utilisées
-
 //------------------------------------------------------------- Constantes
-
-const int NOMBRE_ETATS_CAPTEUR_UTILES = 4;
-const int NOMBRE_ETATS_CAPTEUR_TOT = 5;
-const int VERT = 1;
-const int JAUNE = 2;
-const int ROUGE = 3;
-const int NOIR = 4;
 
 //------------------------------------------------------------------ Types
 

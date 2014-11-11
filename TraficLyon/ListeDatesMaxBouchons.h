@@ -11,13 +11,9 @@
 #ifndef LISTEDATESMAXBOUCHONS_H_
 #define LISTEDATESMAXBOUCHONS_H_
 
-#include <stddef.h>  // permet de connaitre 'NULL'
-#include "Date.h"
-
 //--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-const int AUCUNE_DONNEE =0;
+#include "Date.h"
+#include "Constantes.h"
 
 //------------------------------------------------------------- Structures
 
