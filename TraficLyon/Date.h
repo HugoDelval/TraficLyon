@@ -19,7 +19,16 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Date>
-//
+//Gere une date sous forme d'une année, un mois, un jour du mois, un jour de la semaine,
+// 		une heure, une minute, une seconde et un nombre de secondes depuis le début de l'année.
+// On peut effectuer plusieurs actions sur la Date :
+//			- l'afficher
+//			- la comparer avec une autre date (comparaison de superiorités et inferiorités strictes)
+//			- la comparer avec une autre date (comparaison d'égalité)
+//			- l'additioner avec une autre date
+//			- la soustraire avec une autre date
+// Les possibilités de comparaisons et les opérations serviront à la surcharge d'opérateurs
+//					(située à l'exterieur de la classe) : <, >, >=, <=, !=, +, -
 //------------------------------------------------------------------------
 
 class Date
@@ -30,19 +39,27 @@ public:
 	//----------------------------------------------------- Méthodes publiques
 	bool EstEgal(Date const& dateAComparer) const;
 	// Mode d'emploi :
-	//
+	//			'dateAComparer' est une autre Date
+	//			Permet de vérifier l'égalité de la Date avec une autre Date en parametre
+	//			Retourne 'true' si la Date est égal à 'dateAComparer'
+	//			Retourne 'false' si la Date est different à 'dateAComparer'
 	// Contrat :
 	//
 
 	bool EstInf(Date const& dateAComparer) const;
 	// Mode d'emploi :
-	//
+	//			'dateAComparer' est une autre Date
+	//			Permet de vérifier l'inferiorité de la Date avec une autre Date en parametre
+	//			Retourne 'true' si la Date est inferieure à 'dateAComparer'
+	//			Retourne 'false' si la Date est superieure à 'dateAComparer'
+
 	// Contrat :
 	//
 
 	Date Additionner(int secondes);
 	// Mode d'emploi :
-	//
+	//			Permet d'ajouter des secondes à la Date
+	//			Retourne la Date modifiée
 	// Contrat :
 	//
 
