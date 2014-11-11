@@ -38,7 +38,7 @@ void Evenements::AjouterEvenement(int idCapteur, int heure, int jourSemaine,
 void Evenements::MaxBouchonsSimultanes()
 {
 	dateBouchonMax.AfficheDateRelle();
-	cout << bouchonMax << "%"
+	cout << (int)(bouchonMax) << "%"
 		 << endl;
 }
 
@@ -88,10 +88,10 @@ void Evenements::StatistiquesJourSemaine(int nJour)
 		}
 	}
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
-	cout<<"V "<<(secondesPasseesJournee[0]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"J "<<(secondesPasseesJournee[1]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"R "<<(secondesPasseesJournee[2]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"N "<<(secondesPasseesJournee[3]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"V "<<(int)((secondesPasseesJournee[0]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"J "<<(int)((secondesPasseesJournee[1]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"R "<<(int)((secondesPasseesJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"N "<<(int)((secondesPasseesJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
 }
 
 
@@ -115,10 +115,10 @@ void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 		}
 	}
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
-	cout<<"V "<<(secondesPasseesHeureJournee[0]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"J "<<(secondesPasseesHeureJournee[1]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"R "<<(secondesPasseesHeureJournee[2]/tempsTotal)*100.0<<"%"<<endl;
-	cout<<"N "<<(secondesPasseesHeureJournee[3]/tempsTotal)*100.0<<"%"<<endl;
+	cout<<"V "<<(int)((secondesPasseesHeureJournee[0]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"J "<<(int)((secondesPasseesHeureJournee[1]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"R "<<(int)((secondesPasseesHeureJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"N "<<(int)((secondesPasseesHeureJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
