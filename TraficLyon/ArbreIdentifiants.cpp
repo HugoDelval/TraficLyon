@@ -57,6 +57,11 @@ ArbreIdentifiants::ArbreIdentifiants()
 	dernierIdTableau = -1;
 }
 
+virtual ArbreIdentifiants::~ArbreIdentifiants()
+{
+	supprimeRecursivement(root);
+}
+
 //------------------------------------------------------------------ PRIVE
 
 //------------------------------------------------------- Méthodes privées
@@ -194,3 +199,14 @@ ptrOnAVLTreeNode ArbreIdentifiants::rotationDoubleDroite(ptrOnAVLTreeNode &p1)
 	p1->right = rotationSimpleGauche(p1->right);
 	return rotationSimpleDroite(p1);
 }
+
+void ArbreIdentifiants::supprimeRecursivement(ptrOnAVLTreeNode nodeCourante)
+{
+	if(nodeCourante != NULL)
+	{
+		supprimeRecursivement(nodeCourante->left);
+		supprimeRecursivement(nodeCourante->right);
+		delete nodeCourante;
+	}
+}
+

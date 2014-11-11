@@ -134,8 +134,12 @@ Evenements::Evenements()
 
 Evenements::~Evenements()
 {
+	delete arbreId;
+	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		delete capteurs[i];
+	}
 	delete [] capteurs;
-// a modifier : boucles comme dans le constructeur
 }
 
 //------------------------------------------------------------------ PRIVE

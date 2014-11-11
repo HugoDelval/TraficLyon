@@ -390,8 +390,8 @@ Date::Date(Date const &dateACopier)
 	//
 }
 
-Date::~Date() {
-	// TODO Auto-generated destructor stub
+Date::~Date()
+{
 }
 
 

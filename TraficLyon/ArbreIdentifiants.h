@@ -61,6 +61,11 @@ public:
 	// Contrat :
 	//
 
+	virtual ~ArbreIdentifiants();
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
 
 	//----------------------------------------------------------------- PRIVE
 private:
@@ -78,13 +83,50 @@ private:
 	// Contrat :
 	//
 
-	//------------------------------------------------------- Attributs privés
-	int hauteurSousArbre(ptrOnAVLTreeNode);
+
 	ptrOnAVLTreeNode rotationSimpleGauche(ptrOnAVLTreeNode &p1);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	ptrOnAVLTreeNode rotationDoubleGauche(ptrOnAVLTreeNode &p1);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	ptrOnAVLTreeNode rotationSimpleDroite(ptrOnAVLTreeNode &p1);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	ptrOnAVLTreeNode rotationDoubleDroite(ptrOnAVLTreeNode &p1);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	int hauteurSousArbre(ptrOnAVLTreeNode);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	int max(int value1, int value2);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	void supprimeRecursivement(ptrOnAVLTreeNode nodeCourante);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	//------------------------------------------------------- Attributs privés
 	ptrOnAVLTreeNode root;
 	int dernierIdTableau;
 

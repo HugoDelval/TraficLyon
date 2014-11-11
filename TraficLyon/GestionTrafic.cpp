@@ -109,7 +109,7 @@ GestionTrafic::GestionTrafic()
 
 GestionTrafic::~GestionTrafic()
 {
-
+	delete toutLeTrafic;
 }
 
 //------------------------------------------------------------------ PRIVE
