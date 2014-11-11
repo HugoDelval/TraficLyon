@@ -84,10 +84,10 @@ void EvenementsCapteur::StatistiquesParCapteur()
 			}
 		}
 	}
-	cout<<"V "<<(secondesPasseesV1/secondesPasseesActif)*100.0<<"%"<<endl;
-	cout<<"J "<<(secondesPasseesJ2/secondesPasseesActif)*100.0<<"%"<<endl;
-	cout<<"R "<<(secondesPasseesR3/secondesPasseesActif)*100.0<<"%"<<endl;
-	cout<<"N "<<(secondesPasseesN4/secondesPasseesActif)*100.0<<"%"<<endl;
+	cout<<"V "<<(int)((secondesPasseesV1/secondesPasseesActif)*100.0)<<"%"<<endl;
+	cout<<"J "<<(int)((secondesPasseesJ2/secondesPasseesActif)*100.0)<<"%"<<endl;
+	cout<<"R "<<(int)((secondesPasseesR3/secondesPasseesActif)*100.0)<<"%"<<endl;
+	cout<<"N "<<(int)((secondesPasseesN4/secondesPasseesActif)*100.0)<<"%"<<endl;
 }
 
 double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic)
