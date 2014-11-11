@@ -16,7 +16,6 @@
 
 //------------------------------------------------------------- Constantes
 
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -306,7 +305,6 @@ Date operator-(Date const &date, int secondes)
 	return dateSoustraction.Additionner(-secondes);
 }
 
-
 //-------------------------------------------- Constructeurs - destructeur
 
 Date::Date()
@@ -392,8 +390,8 @@ Date::Date(Date const &dateACopier)
 	//
 }
 
-Date::~Date() {
-	// TODO Auto-generated destructor stub
+Date::~Date()
+{
 }
 
 

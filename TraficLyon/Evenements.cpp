@@ -61,7 +61,6 @@ void Evenements::AfficherTousLesEvenements()
 
 }
 
-
 void Evenements::StatistiquesCapteur(int idCapteurReel)
 {
 	int idCapteurTableau( arbreId->TrouverIdTableauCorrespondant(idCapteurReel));
@@ -93,7 +92,6 @@ void Evenements::StatistiquesJourSemaine(int nJour)
 	cout<<"R "<<(int)((secondesPasseesJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
 	cout<<"N "<<(int)((secondesPasseesJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
 }
-
 
 void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 {
@@ -136,8 +134,12 @@ Evenements::Evenements()
 
 Evenements::~Evenements()
 {
+	delete arbreId;
+	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		delete capteurs[i];
+	}
 	delete [] capteurs;
-// a modifier : boucles comme dans le constructeur
 }
 
 //------------------------------------------------------------------ PRIVE

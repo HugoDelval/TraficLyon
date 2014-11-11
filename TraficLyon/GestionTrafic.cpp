@@ -109,7 +109,7 @@ GestionTrafic::GestionTrafic()
 
 GestionTrafic::~GestionTrafic()
 {
-
+	delete toutLeTrafic;
 }
 
 //------------------------------------------------------------------ PRIVE
@@ -184,7 +184,6 @@ void GestionTrafic::appelerMaxBouchonsSimultanes()
 {
 	toutLeTrafic->MaxBouchonsSimultanes();
 }
-
 
 int GestionTrafic::determineTypeCommande(const string &commande)
 {
