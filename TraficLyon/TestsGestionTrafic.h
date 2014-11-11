@@ -23,8 +23,7 @@
 
 class TestsGestionTrafic {
 public:
-	TestsGestionTrafic();
-	virtual ~TestsGestionTrafic();
+
 };
 
 #endif /* TESTSGESTIONTRAFIC_H_ */
