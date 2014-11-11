@@ -5,10 +5,24 @@
  *      Author: Papin
  */
 #include "GestionTrafic.h"
+#include "TestsGestionTrafic.h"
 
-int main()
+static void LancementApplication()
 {
 	GestionTrafic g;
 	g.Start();
+}
+
+static void LancementTests()
+{
+	TestsGestionTrafic testeur;
+	testeur.LancementTests();
+}
+
+int main()
+{
+	 //LancementApplication();
+	// ou alors les tests :
+	LancementTests();
 	return 0;
 }

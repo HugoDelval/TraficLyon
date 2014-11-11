@@ -57,7 +57,7 @@ ArbreIdentifiants::ArbreIdentifiants()
 	dernierIdTableau = -1;
 }
 
-virtual ArbreIdentifiants::~ArbreIdentifiants()
+ArbreIdentifiants::~ArbreIdentifiants()
 {
 	supprimeRecursivement(root);
 }

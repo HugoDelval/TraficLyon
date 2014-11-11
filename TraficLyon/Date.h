@@ -46,6 +46,12 @@ public:
 	// Contrat :
 	//
 
+	int  Difference(Date const &dateAEnlever) const;
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	void AfficheDateRelle();
 	// Mode d'emploi :
 	//
@@ -53,12 +59,6 @@ public:
 	//
 
 	void DebugAffichage();
-	// Mode d'emploi :
-	//
-	// Contrat :
-	//
-
-	int  Difference(Date const &dateAEnlever) const;
 	// Mode d'emploi :
 	//
 	// Contrat :

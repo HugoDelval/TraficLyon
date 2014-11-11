@@ -13,6 +13,10 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "GestionTrafic.h"
+#include <iostream>
+#include <string.h>
+
+using namespace std;
 
 //------------------------------------------------------------------ Types
 

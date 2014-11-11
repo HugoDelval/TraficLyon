@@ -99,6 +99,71 @@ void GestionTrafic::Start()
 	}
 }
 
+void GestionTrafic::Start(string commande)
+{
+	int typeCommande=-1;
+	typeCommande = determineTypeCommande(commande);
+	switch(typeCommande)
+	{
+		case COMMANDE_ADD:
+		{
+			size_t mot0 = commande.find(' ')+1;
+			size_t mot1 = commande.find(' ', mot0+1)+1;
+			size_t mot2 = commande.find(' ',mot1+1)+1;
+			size_t mot3 = commande.find(' ',mot2+1)+1;
+			size_t mot4 = commande.find(' ',mot3+1)+1;
+			size_t mot5 = commande.find(' ',mot4+1)+1;
+			size_t mot6 = commande.find(' ',mot5+1)+1;
+			size_t mot7 = commande.find(' ',mot6+1)+1;
+			size_t mot8 = commande.find(' ',mot7+1)+1;
+			appelerAjouter(
+					commande.substr(mot0,mot1-mot0-1),
+					commande.substr(mot1,mot2-mot1-1),
+					commande.substr(mot2,mot3-mot2-1),
+					commande.substr(mot3,mot4-mot3-1),
+					commande.substr(mot4,mot5-mot4-1),
+					commande.substr(mot5,mot6-mot5-1),
+					commande.substr(mot6,mot7-mot6-1),
+					commande.substr(mot7,mot8-mot7-1),
+					commande.substr(mot8,1)/*juste un caractere (V,R,N...)*/
+					);
+			break;
+		}
+		case COMMANDE_STATS_C:
+		{
+			size_t mot0 = commande.find(' ')+1;
+			appelerStatistiquesCapteur(commande.substr(mot0,commande.length()-mot0-1));
+			break;
+		}
+		case COMMANDE_STATS_D7:
+		{
+			size_t mot0 = commande.find(' ')+1;
+			appelerStatistiquesJourSemaine(commande.substr(mot0,commande.length()-mot0-1));
+			break;
+		}
+		case COMMANDE_STATS_D7_H24:
+		{
+			size_t mot0 = commande.find(' ')+1;
+			size_t mot1 = commande.find(' ',mot0+1)+1;
+			appelerStatistiquesJourHeureSemaine(
+					commande.substr(mot0,mot1-mot0-1),
+					commande.substr(mot1,commande.length()-mot1-1)
+			);
+			break;
+		}
+		case COMMANDE_MAX_TS:
+		{
+			appelerMaxBouchonsSimultanes();
+			break;
+		}
+		default:
+		{
+			//erreur de commande
+			break;
+		}
+	}
+}
+
 
 //-------------------------------------------- Constructeurs - destructeur
 

@@ -48,6 +48,12 @@ public:
 	// Contrat :
 	//
 
+	void Start(string commande);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
 	//----------------------------------------------------------------- PRIVE
 private:
 	//------------------------------------------------------- Méthodes privées
@@ -93,6 +99,7 @@ private:
 
 	//------------------------------------------------------- Classes amies
 friend class TestsGestionTrafic;
+
 };
 
 #endif /* GESTIONTRAFIC_H */

@@ -109,7 +109,6 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDern
 	if(secondesPasseesMajore>0) // on doit peut etre ajouter qqchose au resultat final
 	{
 		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
-		//il faut ajouter qqchose si :
 		if( datePlus5min.jourDeLaSemaine==jour && dateDernierEvenement.jourDeLaSemaine==jour )
 		{
 			secondesPasseesJournee[traficDernierEvenement-1] += secondesPasseesMajore;
@@ -148,7 +147,6 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, int heure, Da
 	if(secondesPasseesMajore>0) // on doit peut etre ajouter qqchose au resultat final
 	{
 		Date datePlus5min = dateDernierEvenement+secondesPasseesMajore;
-		//il faut ajouter qqchose si :
 		if( datePlus5min.heure==heure && dateDernierEvenement.heure==heure )
 		{
 			secondesPasseesHeure[traficDernierEvenement-1] += secondesPasseesMajore;
@@ -157,11 +155,13 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, int heure, Da
 		{
 			if(dateDernierEvenement.heure == heure)
 			{
-				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes(NOMBRE_SECONDES_MINUTE-dateDernierEvenement.seconde );
+				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes(
+						(NOMBRE_MINUSTES_HEURE-1-dateDernierEvenement.minute)*NOMBRE_SECONDES_MINUTE
+						+ NOMBRE_SECONDES_MINUTE-dateDernierEvenement.seconde );
 			}
 			else if(datePlus5min.heure == heure)
 			{
-				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes( datePlus5min.seconde );
+				secondesPasseesHeure[traficDernierEvenement-1] += max5minutes( (datePlus5min.minute)*NOMBRE_SECONDES_MINUTE + datePlus5min.seconde );
 			}
 		}
 	}
