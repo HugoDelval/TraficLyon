@@ -161,12 +161,12 @@ void GestionTrafic::appelerAjouter(string idCapteurReel,string annee, string moi
 					{
 						traficFinal=4;
 					}
-					toutLeTrafic->AjouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
-									   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
-					//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 				}
 			}
 		}
+		toutLeTrafic->AjouterEvenement(idCapteurTableau,heureFinale,jourDeLaSemaineFinale-1,traficFinal,
+											   anneeFinale,moisFinal-1,jourDuMoisFinal-1,minuteFinale,secondeFinale);
+		//toutLeTrafic->afficherTousLesEvenements();  // Pour les tests
 	}
 	else //il y a une erreur dans l'insertion
 	{
