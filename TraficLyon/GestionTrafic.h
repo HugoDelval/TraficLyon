@@ -90,6 +90,9 @@ private:
 
 	//------------------------------------------------------- Attributs privés
 	Evenements *toutLeTrafic;
+
+	//------------------------------------------------------- Classes amies
+friend class TestsGestionTrafic;
 };
 
 #endif /* GESTIONTRAFIC_H */

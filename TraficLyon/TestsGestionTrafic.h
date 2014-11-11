@@ -22,8 +22,22 @@
 //------------------------------------------------------------------------
 
 class TestsGestionTrafic {
-public:
 
+	//----------------------------------------------------------------- PUBLIC
+public:
+	//----------------------------------------------------- Méthodes publiques
+	void LancementTests();
+
+
+	//----------------------------------------------------------------- PRIVE
+
+	//------------------------------------------------------- Méthodes privées
+private:
+	void testAdd();
+	void testStatsCapteur();
+	void testStatJourSemaine();
+	void testStatsJourSemaineHeure();
+	void testStatsMaxBouchons();
 };
 
 #endif /* TESTSGESTIONTRAFIC_H_ */
