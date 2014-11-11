@@ -185,7 +185,6 @@ void GestionTrafic::appelerMaxBouchonsSimultanes()
 	toutLeTrafic->MaxBouchonsSimultanes();
 }
 
-
 int GestionTrafic::determineTypeCommande(const string &commande)
 {
 	int res =-1;

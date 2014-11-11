@@ -61,7 +61,6 @@ void Evenements::AfficherTousLesEvenements()
 
 }
 
-
 void Evenements::StatistiquesCapteur(int idCapteurReel)
 {
 	int idCapteurTableau( arbreId->TrouverIdTableauCorrespondant(idCapteurReel));
@@ -93,7 +92,6 @@ void Evenements::StatistiquesJourSemaine(int nJour)
 	cout<<"R "<<(int)((secondesPasseesJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
 	cout<<"N "<<(int)((secondesPasseesJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
 }
-
 
 void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 {

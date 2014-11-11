@@ -142,11 +142,11 @@ void ArbreIdentifiants::insert(int idR, int idT,ptrOnAVLTreeNode &p)
 	p->height = d + 1;
 }
 
-
 int ArbreIdentifiants::max(int value1, int value2)
 {
 	return ((value1 > value2) ? value1 : value2);
 }
+
 int ArbreIdentifiants::hauteurSousArbre(ptrOnAVLTreeNode p)
 {
 	int t;
@@ -171,6 +171,7 @@ ptrOnAVLTreeNode ArbreIdentifiants::rotationSimpleGauche(ptrOnAVLTreeNode &p1)
 	p2->height = max(hauteurSousArbre(p2->left),p1->height) + 1;
 	return p2;
 }
+
 ptrOnAVLTreeNode ArbreIdentifiants:: rotationSimpleDroite(ptrOnAVLTreeNode &p1)
 {
 	ptrOnAVLTreeNode p2;
@@ -181,11 +182,13 @@ ptrOnAVLTreeNode ArbreIdentifiants:: rotationSimpleDroite(ptrOnAVLTreeNode &p1)
 	p2->height = max(p1->height,hauteurSousArbre(p2->right)) + 1;
 	return p2;
 }
+
 ptrOnAVLTreeNode ArbreIdentifiants:: rotationDoubleGauche(ptrOnAVLTreeNode &p1)
 {
 	p1->left=rotationSimpleDroite(p1->left);
 	return rotationSimpleGauche(p1);
 }
+
 ptrOnAVLTreeNode ArbreIdentifiants::rotationDoubleDroite(ptrOnAVLTreeNode &p1)
 {
 	p1->right = rotationSimpleGauche(p1->right);

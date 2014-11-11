@@ -16,7 +16,6 @@
 
 //------------------------------------------------------------- Constantes
 
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -305,7 +304,6 @@ Date operator-(Date const &date, int secondes)
 	Date dateSoustraction(date);
 	return dateSoustraction.Additionner(-secondes);
 }
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
