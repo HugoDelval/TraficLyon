@@ -27,10 +27,10 @@ void Evenements::AjouterEvenement(int idCapteur, int heure, int jourSemaine,
 	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
 	capteurs[idCapteur]->Ajouter(trafic,dateEvenement);
 	dateDernierEvenementTrafic = dateEvenement;
-	float traficAcuel=gestionnaireMax.AjouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
-	if(traficAcuel > bouchonMax)
+	float traficActuel=gestionnaireMax.AjouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
+	if(traficActuel > bouchonMax)
 	{
-		bouchonMax = traficAcuel;
+		bouchonMax = traficActuel;
 		dateBouchonMax = dateEvenement;
 	}
 }

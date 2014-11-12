@@ -1,15 +1,17 @@
 /*************************************************************************
-              	  	  Constantes.cpp  -  Enumeration de Constantes
+              	  	  Enumeration de Constantes
                              -------------------
     début                : 05/11/2014
     copyright            : (C) 2014 par PAPIN/DELVAL
 *************************************************************************/
 
-
 #ifndef CONSTANTES_H_
 #define CONSTANTES_H_
 
+//--------------------------------------------------- Interfaces utilisées
 #include <stddef.h>
+
+//--------------------------------------------------- Constantes
 
 const int NOMBRE_JOURS_ANNEE = 365;
 const int NOMBRE_JOURS_MOIS_28 = 28;

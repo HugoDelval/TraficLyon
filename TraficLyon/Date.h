@@ -58,20 +58,22 @@ public:
 
 	Date Additionner(int secondes);
 	// Mode d'emploi :
-	//			Permet d'ajouter des secondes à la Date
+	//			Permet d'ajouter un nombre entier de secondes à la Date
 	//			Retourne la Date modifiée
 	// Contrat :
 	//
 
 	int  Difference(Date const &dateAEnlever) const;
 	// Mode d'emploi :
-	//
+	//			Permet de soustraire une date en paramètre à la Date
+	//			Retourne la Date modifiée
 	// Contrat :
 	//
 
 	void AfficheDateRelle();
 	// Mode d'emploi :
-	//
+	//			Permet d'afficher l'année, le moi, le jour du mois, l'heure de la journée, la minute de l'heure
+	//					et la seconde dans la minute de la date
 	// Contrat :
 	//
 
@@ -84,25 +86,26 @@ public:
 	//----------------------------------------------------- Constructeurs - destructeur
 	Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
 	// Mode d'emploi :
-	//
+	//			Initialise une Date en attribuant à ses attributs les valeurs en paramète
 	// Contrat :
 	//
 
 	Date(Date const &dateACopier);
 	// Mode d'emploi :
-	//
+	//			Initialise une Date identique à la Date entrée en paramètre
 	// Contrat :
 	//
 
 	Date();
 	// Mode d'emploi :
-	//
+	//			Initialise une Date.
+	//			Tous les attributs de la Date son initialisés à 0.
 	// Contrat :
 	//
 
 	virtual ~Date();
 	// Mode d'emploi :
-	//
+	//			Supprime et libere l'espace memoire correspondant a la Date.
 	// Contrat :
 	//
 

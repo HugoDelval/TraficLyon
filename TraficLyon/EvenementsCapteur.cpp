@@ -1,11 +1,11 @@
 /*************************************************************************
-       EvenementsCapteur  -  implementation des EvenementsCapteurs decrite dans EvenementsCapteur.h
+       EvenementsCapteur  -  implementation des EvenementsCapteur decrit dans EvenementsCapteur.h
                              -------------------
     début                : 07/11/2014
     copyright            : (C) 2014 par PAPIN/DELVAL
 *************************************************************************/
 
-//---------- Réalisation de la classe <> (fichier EvenementsCapteur.cpp) --
+//---------- Réalisation de la classe <EvenementsCapteur> (fichier EvenementsCapteur.cpp) --
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -55,11 +55,11 @@ void EvenementsCapteur::Ajouter(int trafic, Date date)
 
 void EvenementsCapteur::StatistiquesParCapteur()
 {
-	double secondesPasseesActif=0.0;
-	double secondesPasseesV1=0.0;
-	double secondesPasseesJ2=0.0;
-	double secondesPasseesR3=0.0;
-	double secondesPasseesN4=0.0;
+	double secondesPasseesActif(0.0);
+	double secondesPasseesV1(0.0);
+	double secondesPasseesJ2(0.0);
+	double secondesPasseesR3(0.0);
+	double secondesPasseesN4(0.0);
 	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
 		for(int j(0) ; j<NOMBRE_JOURS_SEMAINE ; j++)
@@ -99,7 +99,7 @@ double* EvenementsCapteur::SecondesPasseesDansChaqueEtat(int jour, Date dateDern
 	}
 	for(int i(0) ; i<NOMBRE_HEURES_JOURNEE ; i++)
 	{
-		for(int j(1) ; j<NOMBRE_ETATS_CAPTEUR_TOT ; j++)
+		for(int j(1) ; j<NOMBRE_ETATS_CAPTEUR+1 ; j++)
 		{
 			secondesPasseesJournee[j-1] += secondesPassees[i][jour][j];
 		}

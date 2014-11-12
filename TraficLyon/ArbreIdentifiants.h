@@ -50,20 +50,24 @@ public:
 
 	int TrouverIdTableauCorrespondant(int idR);
 	// Mode d'emploi :
-	//
+	//				retourne la résultat de 'trouverIdTableauCorrespondantRec' avec 'idR' et 'root'
+	//						en parametre.
 	// Contrat :
 	//
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	ArbreIdentifiants();
 	// Mode d'emploi :
-	//
+	//			Initialise un ArbreIdentifiants.
+	//				- 'root' est initialisé à NULL
+	//				- 'dernierIdTableau' est initialisé à 0
 	// Contrat :
 	//
 
 	virtual ~ArbreIdentifiants();
 	// Mode d'emploi :
-	//
+	//			Supprime et libere l'espace memoire correspondant a l' 'ArbreIdentifiants'
+	//					(un 'ptrOnAVLTreeNode')
 	// Contrat :
 	//
 
