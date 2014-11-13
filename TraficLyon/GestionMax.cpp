@@ -126,54 +126,63 @@ void GestionMax::AfficherMax()
 	ElementDate *e=root;
 	ElementDate *dateAPartirDeLaquelleOnPeutSupprimer = root;
 	ElementEvenement *eAConsiderer;
-	dateMax = root->dateAretenir;
-	float secondesTot=0.0;
-	float secondesBouchon=0.0;
-	while (e != NULL)
+	if(root != NULL)
 	{
-		for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+		dateMax = root->dateAretenir;
+		float secondesTot=0.0;
+		float secondesBouchon=0.0;
+		while (e != NULL)
 		{
-			eAConsiderer = trouverEInteressant(e->dateAretenir,i);
-			if(eAConsiderer!=NULL && eAConsiderer->suivant!=NULL)
+			for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
 			{
-				int secondesAAjouter = max5minutes(eAConsiderer->dateEvenement->dateAretenir-e->dateAretenir);
-				secondesTot+=secondesAAjouter;
-				if(eAConsiderer->suivant->trafic == NOIR || eAConsiderer->suivant->trafic == ROUGE)
+				eAConsiderer = trouverEInteressant(e->dateAretenir,i);
+				if(eAConsiderer!=NULL && eAConsiderer->suivant!=NULL)
 				{
-					secondesBouchon+=secondesAAjouter;
+					int secondesAAjouter = max5minutes(eAConsiderer->dateEvenement->dateAretenir-e->dateAretenir);
+					secondesTot+=secondesAAjouter;
+					if(eAConsiderer->suivant->trafic == NOIR || eAConsiderer->suivant->trafic == ROUGE)
+					{
+						secondesBouchon+=secondesAAjouter;
+					}
 				}
 			}
-		}
-		if(secondesBouchon/secondesTot>=maxBouchon)
-		{
-			maxBouchon = secondesBouchon/secondesTot;
-			dateMax = e->dateAretenir;
-		}
-		secondesTot=0.0;
-		secondesBouchon=0.0;
+			if(secondesBouchon/secondesTot>=maxBouchon)
+			{
+				maxBouchon = secondesBouchon/secondesTot;
+				dateMax = e->dateAretenir;
+			}
+			secondesTot=0.0;
+			secondesBouchon=0.0;
 
-		e=e->suivant;
-		while(dateAPartirDeLaquelleOnPeutSupprimer != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant->dateAretenir + (5*NOMBRE_SECONDES_MINUTE+1) >= dateMax)
+			e=e->suivant;
+			while(dateAPartirDeLaquelleOnPeutSupprimer != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant->dateAretenir + (5*NOMBRE_SECONDES_MINUTE+1) >= dateMax)
+			{
+				dateAPartirDeLaquelleOnPeutSupprimer = dateAPartirDeLaquelleOnPeutSupprimer->suivant;
+			}
+		}
+		supprimerToutApres(dateMax-(5*NOMBRE_SECONDES_MINUTE +1));
+
+
+		dateMax.AfficheDateRelle();
+		cout << (int)(maxBouchon*100) << "%"
+			 << "\r\n";
+		for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
 		{
-			dateAPartirDeLaquelleOnPeutSupprimer = dateAPartirDeLaquelleOnPeutSupprimer->suivant;
+			if(tabListeDate[i] != NULL && tabListeDate[i]->trafic==0)
+			{
+				ElementEvenement *elementASupprimer = tabListeDate[i];
+				tabListeDate[i]=tabListeDate[i]->suivant;
+				delete elementASupprimer;
+			}
 		}
 	}
-//suppression
-
-
-
-	dateMax.AfficheDateRelle();
-	cout << (int)(maxBouchon*100) << "%"
-		 << "\r\n";
-	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	else
 	{
-		if(tabListeDate[i] != NULL && tabListeDate[i]->trafic==0)
-		{
-			ElementEvenement *elementASupprimer = tabListeDate[i];
-			tabListeDate[i]=tabListeDate[i]->suivant;
-			delete elementASupprimer;
-		}
+		cout << 0 << "%"
+			 << "\r\n";
 	}
+
+
 }
 
 void GestionMax::AfficheListes()
@@ -216,20 +225,10 @@ GestionMax::GestionMax()
 	maxBouchon=0.0;
 }
 
-GestionMax::~GestionMax() {
-	ElementEvenement *e;
-	ElementEvenement *evenementALiberer;
-	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
-	{
-		e=tabListeDate[i];
-		evenementALiberer=NULL;
-		while (e != NULL)
-		{
-			evenementALiberer=e;
-			e=e->suivant;
-			delete evenementALiberer;
-		}
-	}
+GestionMax::~GestionMax()
+{
+	supprimerToutApres(root->dateAretenir);
+	delete[] tabListeDate;
 
 }
 
@@ -254,5 +253,57 @@ int GestionMax::max5minutes(int nombreSecondes)
 		return nombreSecondes;
 	}
 	return 5*NOMBRE_SECONDES_MINUTE;
+}
+
+void GestionMax::supprimerToutApres(Date dateDebutSuppression)
+{
+	ElementDate *e1= root;
+	bool estRoot=true;
+	while (e1 != NULL && e1->dateAretenir>dateDebutSuppression)
+	{
+		estRoot=false;
+		e1=e1->suivant;
+	}
+	if(e1 != NULL && e1->precedent != NULL)
+	{
+		e1->precedent->suivant=NULL;
+	}
+	if(estRoot)
+	{
+		root=NULL;
+	}
+	ElementDate *aSup1;
+	while (e1 != NULL)
+	{
+		aSup1 = e1;
+		e1=e1->suivant;
+		delete aSup1;
+	}
+	ElementEvenement *e;
+	ElementEvenement *aSup;
+	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		e= tabListeDate[i];
+		estRoot=true;
+		while (e != NULL && e->dateEvenement->dateAretenir>dateDebutSuppression)
+		{
+			estRoot=false;
+			e=e->suivant;
+		}
+		if(e != NULL && e->precedent != NULL)
+		{
+			e->precedent->suivant=NULL;
+		}
+		if(estRoot)
+		{
+			tabListeDate[i]=NULL;
+		}
+		while (e != NULL)
+		{
+			aSup = e;
+			e=e->suivant;
+			delete aSup;
+		}
+	}
 }
 

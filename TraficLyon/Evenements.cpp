@@ -80,10 +80,10 @@ void Evenements::StatistiquesJourSemaine(int nJour)
 		}
 	}
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
-	cout<<"V "<<(int)((secondesPasseesJournee[0]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"J "<<(int)((secondesPasseesJournee[1]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"R "<<(int)((secondesPasseesJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"N "<<(int)((secondesPasseesJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"V "<<(int)((secondesPasseesJournee[0]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"J "<<(int)((secondesPasseesJournee[1]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"R "<<(int)((secondesPasseesJournee[2]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"N "<<(int)((secondesPasseesJournee[3]/tempsTotal)*100.0)<<"%"<<"\r\n";
 }
 
 void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
@@ -106,10 +106,10 @@ void Evenements::StatistiquesJourHeureSemaine(int nJour, int heure)
 		}
 	}
 	tempsTotal= tempsTotal==0 ? 1 : tempsTotal ; //on evite la division par 0
-	cout<<"V "<<(int)((secondesPasseesHeureJournee[0]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"J "<<(int)((secondesPasseesHeureJournee[1]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"R "<<(int)((secondesPasseesHeureJournee[2]/tempsTotal)*100.0)<<"%"<<endl;
-	cout<<"N "<<(int)((secondesPasseesHeureJournee[3]/tempsTotal)*100.0)<<"%"<<endl;
+	cout<<"V "<<(int)((secondesPasseesHeureJournee[0]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"J "<<(int)((secondesPasseesHeureJournee[1]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"R "<<(int)((secondesPasseesHeureJournee[2]/tempsTotal)*100.0)<<"%"<<"\r\n";
+	cout<<"N "<<(int)((secondesPasseesHeureJournee[3]/tempsTotal)*100.0)<<"%"<<"\r\n";
 }
 
 //-------------------------------------------- Constructeurs - destructeur

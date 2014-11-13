@@ -27,7 +27,6 @@ struct ElementEvenement
 	ElementDate *dateEvenement;
 	ElementEvenement *suivant;
 	ElementEvenement *precedent;
-	bool aEteModifie;
 };
 
 //------------------------------------------------------------------------
@@ -53,6 +52,7 @@ private:
 	//------------------------------------------------------- Méthodes privées
 	ElementEvenement* trouverEInteressant(Date dateACalculer, int idTableau);
 	int max5minutes(int nombreSecondes);
+	void supprimerToutApres(Date dateDebutSuppression);
 	//------------------------------------------------------- Attributs privés
 	ElementEvenement ** tabListeDate; // *1500(id)
 	ElementDate *root;
