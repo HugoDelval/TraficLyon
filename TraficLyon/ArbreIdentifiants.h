@@ -44,7 +44,8 @@ public:
 	//----------------------------------------------------- Méthodes publiques
 	int Insert(int idR);
 	// Mode d'emploi :
-	//
+	//			Insert un nouvel élement dans l'arbre en fonction de 'idR' en paramètre.
+	//			Retourne la position dans le tableau correspondante à 'idR'.
 	// Contrat :
 	//
 
@@ -77,56 +78,66 @@ private:
 	//------------------------------------------------------- Méthodes privées
 	int trouverIdTableauCorrespondantRec(int idR,ptrOnAVLTreeNode &p);
 	// Mode d'emploi :
-	//
+	//			Recherche récursive de la position dans le tableau correspondant à la position dans l'arbre en
+	//					Paramètre 'p'. Lorsque cette valeur de position est trouvée, elle est retournée sous forme
+	//					d'entier.
+	//			La recherche de 'idR' dans l'arbre se fait à partir du noeud 'p'.
+	//			Retourne -1 si 'p' est NULL.
 	// Contrat :
 	//
 
 	void insert(int idR, int idT, ptrOnAVLTreeNode &p);
 	// Mode d'emploi :
-	//
+	//			Insert un noeud dans l'ArbreIdentifiants, dont les caractéristiques sont
+	//				l''idR' et l' 'idt' en paramètre. La position du noeud dans l'arbre
+	//				est déterminée grâce à idR.
+	//			Lors de cette insertion, il y a si besoin équilibrage de l'arbre.
 	// Contrat :
 	//
 
 
 	ptrOnAVLTreeNode rotationSimpleGauche(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
-	//
+	//			Passe à gauche le noeud droit du noeud en paramètre.
+	//			Sert éventuellement à équilibrer l' ArbreIdentifiant.
 	// Contrat :
 	//
 
 	ptrOnAVLTreeNode rotationDoubleGauche(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
-	//
+	//			Retourne le noeud coorespondant à une double 'rotationDoubleGauche' avec le noeud en paramètre.
 	// Contrat :
 	//
 
 	ptrOnAVLTreeNode rotationSimpleDroite(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
-	//
+	//			Passe à droite le noeud gauche du noeud en paramètre.
+	//			Sert éventuellement à équilibrer l' ArbreIdentifiant
 	// Contrat :
 	//
 
 	ptrOnAVLTreeNode rotationDoubleDroite(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
-	//
+	//			Retourne le noeud coorespondant à une double 'rotationDoubleDroite' avec le noeud en paramètre.
 	// Contrat :
 	//
 
 	int hauteurSousArbre(ptrOnAVLTreeNode);
 	// Mode d'emploi :
-	//
+	//			Retourne la hauteur sous arbre, c'est a dire le nombre de noeuds maximal
+	//				pour arriver à une feuille.
 	// Contrat :
 	//
 
 	int max(int value1, int value2);
 	// Mode d'emploi :
-	//
+	//			Retourne la valeur la plus grande des 2 parametres
 	// Contrat :
 	//
 
 	void supprimeRecursivement(ptrOnAVLTreeNode nodeCourante);
 	// Mode d'emploi :
-	//
+	//			Supprime tous les elements de l'arbre de façon récursive à partir du noeud en parametre.
 	// Contrat :
 	//
 

@@ -21,7 +21,8 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <GestionTrafic>
-//
+// Interprète les commandes données par l'utilisateur en lignes de commndes et appelle les méthodes
+//		nécessaires dans les autres classes. Cette classe gère donc l'ensemble du trafic de Lyon.
 //------------------------------------------------------------------------
 
 class GestionTrafic {
