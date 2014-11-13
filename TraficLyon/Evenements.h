@@ -24,7 +24,18 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Evenements>
-//
+// Gère l'ensemble des 'EvenementsCapteur' en stockant les 1500 pointeurs vers les 1500
+// 'EvenementsCapteur' potentiels dans un tableau. Si l'utilisateur ajoute une nouvelle
+// donnée, alors cette classe la redirigera vers l''EvenementsCapteur' associé.
+// On peut :
+//		-ajouter un nouvel état de capteur pour un capteur donné et une date donnée
+//		-afficher les statistiques pour un capteur donné
+//		-afficher les statistiques du trafic pour un jour de la semaine
+//			pour l'ensemble des capteurs
+//		-afficher les statistiques du trafic pour un jour de la semaine et
+//			une heure de la journée pour l'ensemble des capteurs
+//		-afficher le moment avec le plus de bouchons simultanés
+//		-afficher les secondes passées dans chaque état pour chaque capteur
 //------------------------------------------------------------------------
 
 
@@ -58,13 +69,15 @@ public:
 
 	void StatistiquesJourSemaine(int nJour);
 	// Mode d'emploi :
-	//			Affiche les pourcentages des temps passés dans chaque état pour un jour 'nJour'.
+	//			Affiche les pourcentages des temps passés dans chaque état pour un jour de la semaine
+	//				'nJour' pour l'ensemble des capteurs.
 	// Contrat :
 	//
 
 	void StatistiquesJourHeureSemaine(int nJour, int heure);
 	// Mode d'emploi :
-	//			Affiche les pourcentages des temps passés dans chaque état pour un jour 'nJour' et une heure 'heure'.
+	//			Affiche les pourcentages des temps passés dans chaque état pour un jour de la semaine
+	//				'nJour' et une heure donnée 'heure' pour l'ensemble des capteurs.
 	// Contrat :
 	//
 

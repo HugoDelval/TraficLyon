@@ -23,7 +23,17 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <EvenementsCapteur>
-//
+// Gère les evenements d'un capteur en stockant le nombre de secondes passées
+// pour un jour, une heure et un état particulier. Stocke également la date
+// du dernier évenement pour ce capteur et le dernier état du trafic pour ce
+// capteur.
+// On peut :
+//		-ajouter un nouvel état du capteur a une date donnée
+//		-afficher le nombre de secondes passées dans chaque état
+//		-afficher les statistiques du capteur
+//		-afficher les statistiques du capteur à un jour donné
+//		-afficher les statistiques du capteur à un jour de la semaine donné
+//			et une heure de la journée donnée
 //------------------------------------------------------------------------
 
 

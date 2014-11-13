@@ -34,7 +34,14 @@ typedef struct AVLTreeNode* ptrOnAVLTreeNode;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <ArbreIdentifiants>
-//
+// Cette classe ordonne les identifiants réels de capteurs sous la forme d'un arbre. La position
+// dans l'arbre de l'identifiant va devenir un nouvel identifiant pour chaque capteur. Ces
+// nouveau identifiants seront tous les entiers compris entre 0 et 1499. Cela permettra de
+// déterminer la position d'un capteur dans un éventuel tableau.
+// On peut :
+//		-ajouter un nouvel identifiant de capteur dans l'arbre
+//		-déterminer le nouvel identifiant du capteur grâce à sa potion dans l'arbre
+//		-effectuer des opérations sur l'arbres (rotations...)
 //------------------------------------------------------------------------
 
 class ArbreIdentifiants
