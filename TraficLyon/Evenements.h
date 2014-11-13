@@ -129,7 +129,7 @@ private:
 	EvenementsCapteur **capteurs;  // tableau de pointeurs vers EvenementsCapteur : id*1500
 	Date dateDernierEvenementTrafic;
 	GestionMax gestionnaireMax;
-
+friend class TestsGestionTrafic;
 };
 
 #endif /* EVENEMENTS_H */

@@ -19,10 +19,10 @@
 //----------------------------------------------------- Méthodes publiques
 void TestsGestionTrafic::LancementTests()
 {
-	testAdd();
+	/*testAdd();
 	testStatsCapteur();
 	testStatJourSemaine();
-	testStatsJourSemaineHeure();
+	testStatsJourSemaineHeure();*/
 	testStatsMaxBouchons();
 }
 
@@ -248,6 +248,10 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 3 0 1 R";
 	g.Start(s);
+	s = "ADD 1425 2014 5 21 14 3 0 1 N"; //ajout d'un 3è !
+	g.Start(s);
+	s = "ADD 1425 2014 5 21 14 4 0 1 V";
+	g.Start(s);
 	s = "ADD 1422 2014 5 21 14 4 0 1 V";
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 4 0 1 V";
@@ -272,8 +276,9 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 9 0 1 V";
 	g.Start(s);
+	//g.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g.toutLeTrafic->MaxBouchonsSimultanes();
-	cout<<"attendu : 2014 5 21 14 2 0 50%"<<endl<<endl;
+	cout<<"attendu : 2014 5 21 14 3 0 66%"<<endl<<endl;
 	// donc : il y a bien aucun capteur du meme id + le calcul parait juste
 
 	//changement de max bouchon :

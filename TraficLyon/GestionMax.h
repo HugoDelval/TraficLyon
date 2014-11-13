@@ -27,6 +27,7 @@ struct ElementEvenement
 	ElementDate *dateEvenement;
 	ElementEvenement *suivant;
 	ElementEvenement *precedent;
+	bool aEteModifie;
 };
 
 //------------------------------------------------------------------------
@@ -41,6 +42,7 @@ public:
 	//----------------------------------------------------- Méthodes publiques
 	void Ajouter(int idTableau, int trafic, Date dateEvenement);
 	void AfficherMax();
+	void AfficheListes();
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	GestionMax();
@@ -49,7 +51,8 @@ public:
 	//----------------------------------------------------------------- PRIVE
 private:
 	//------------------------------------------------------- Méthodes privées
-
+	ElementEvenement* trouverEInteressant(Date dateACalculer, int idTableau);
+	int max5minutes(int nombreSecondes);
 	//------------------------------------------------------- Attributs privés
 	ElementEvenement ** tabListeDate; // *1500(id)
 	ElementDate *root;

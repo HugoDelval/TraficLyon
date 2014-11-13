@@ -20,107 +20,137 @@
 //----------------------------------------------------- Méthodes publiques
 void GestionMax::Ajouter(int idTableau, int traficEvenement, Date dateEvenement)
 {
-	/* insertion dans la liste de date en faisant attention aux capteurs n'ayant pas agit les 5min precedentes */
+	/* insertion dans les listes de date et evenements en faisant attention aux capteurs n'ayant pas agit les 5min precedentes */
 	if(root == NULL)
 	{
+		root=new ElementDate();
 		root->dateAretenir=dateEvenement;
 		root->suivant=NULL;
 		root->precedent=NULL;
 	}
 	else
 	{
-		if(tabListeDate[idTableau]->suivant != NULL)
+		if(tabListeDate[idTableau]!=NULL && (dateEvenement - tabListeDate[idTableau]->dateEvenement->dateAretenir) > NOMBRE_SECONDES_MINUTE*5)
 		{
-			if((dateEvenement - tabListeDate[idTableau]->suivant->dateEvenement->dateAretenir) > NOMBRE_SECONDES_MINUTE*5)
+			Date dateIntermediaire = tabListeDate[idTableau]->dateEvenement->dateAretenir + NOMBRE_SECONDES_MINUTE*5 +1;
+			ElementDate *e= tabListeDate[idTableau]->dateEvenement;
+			while (e->suivant != NULL && e->suivant->dateAretenir > dateIntermediaire)
 			{
-				Date dateIntermediaire = tabListeDate[idTableau]->suivant->dateEvenement->dateAretenir + NOMBRE_SECONDES_MINUTE*5 +1;
-				ElementDate *e;
-				e=tabListeDate[idTableau]->dateEvenement;
-				while (e->suivant != NULL && e->suivant->dateAretenir > dateIntermediaire)
+				e=e->suivant;
+			}
+			if(e->suivant!=NULL)
+			{
+				if(e->suivant->dateAretenir != dateIntermediaire)
 				{
-					e=e->suivant;
-				}
-				if(e->suivant!=NULL)
-				{
-					if(e->suivant->dateAretenir != dateIntermediaire)
-					{
-						ElementDate *suivant = e->suivant;
-						ElementDate *precedent = e->suivant;
-						ElementDate *elementAInserer=new ElementDate();
-						elementAInserer->dateAretenir=dateIntermediaire;
-						elementAInserer->suivant = suivant;
-						elementAInserer->precedent=precedent;
-						elementAInserer->suivant->precedent = elementAInserer;
-						if(elementAInserer->precedent != NULL)
-						{
-							elementAInserer->suivant->precedent = elementAInserer;
-						}
-					}
-				}
-				else
-				{
-					ElementDate *precedent = e->suivant;
+					ElementDate *suivant = e->suivant;
+					ElementDate *precedent = e->precedent;
 					ElementDate *elementAInserer=new ElementDate();
 					elementAInserer->dateAretenir=dateIntermediaire;
-					elementAInserer->suivant = NULL;
+					elementAInserer->suivant = suivant;
 					elementAInserer->precedent=precedent;
+					elementAInserer->suivant->precedent = elementAInserer;
 					if(elementAInserer->precedent != NULL)
 					{
-						elementAInserer->suivant->precedent = elementAInserer;
+						elementAInserer->precedent->suivant = elementAInserer;
 					}
 				}
-
+			}
+			else
+			{
+				ElementDate *precedent = e->precedent;
+				ElementDate *elementAInserer=new ElementDate();
+				elementAInserer->dateAretenir=dateIntermediaire;
+				elementAInserer->suivant = NULL;
+				elementAInserer->precedent=precedent;
+				if(elementAInserer->precedent != NULL)
+				{
+					elementAInserer->precedent->suivant = elementAInserer;
+				}
 			}
 		}
 		if(root->dateAretenir != dateEvenement)
 		{
-			ElementDate *suivantRoot2 = root;
-			root->dateAretenir=dateEvenement;
-			root->suivant = suivantRoot2;
-			root->precedent=NULL;
-			if(root->suivant != NULL)
+			ElementDate *eleAInserer = new ElementDate();
+			eleAInserer->dateAretenir=dateEvenement;
+			eleAInserer->suivant = root;
+			eleAInserer->precedent=NULL;
+			if(root != NULL)
 			{
-				root->suivant->precedent = root;
+				root->precedent = eleAInserer;;
 			}
+			root = eleAInserer;
 		}
 	}
-
-	if(tabListeDate[traficEvenement] == NULL)
+	if(tabListeDate[idTableau] == NULL)
 	{
-		tabListeDate[traficEvenement]->dateEvenement=root;
-		tabListeDate[traficEvenement]->trafic=traficEvenement;
-		tabListeDate[traficEvenement]->suivant=NULL;
-		tabListeDate[traficEvenement]->precedent=NULL;
+		tabListeDate[idTableau] = new ElementEvenement();
+		tabListeDate[idTableau]->dateEvenement=root;
+		tabListeDate[idTableau]->trafic=traficEvenement;
+		tabListeDate[idTableau]->suivant=NULL;
+		tabListeDate[idTableau]->precedent=NULL;
 	}
 	else
 	{
-		ElementEvenement *suivantRoot = tabListeDate[traficEvenement];
-		tabListeDate[traficEvenement]->dateEvenement=root;
-		tabListeDate[traficEvenement]->trafic=traficEvenement;
-		tabListeDate[traficEvenement]->suivant = suivantRoot;
-		tabListeDate[traficEvenement]->precedent=NULL;
-		if(tabListeDate[traficEvenement]->suivant != NULL)
+		ElementEvenement *elementAInserer = new ElementEvenement();
+		elementAInserer->dateEvenement=root;
+		elementAInserer->trafic=traficEvenement;
+		elementAInserer->suivant = tabListeDate[idTableau];
+		elementAInserer->precedent=NULL;
+		if(tabListeDate[idTableau] != NULL)
 		{
-			tabListeDate[traficEvenement]->suivant->precedent = tabListeDate[traficEvenement];
+			tabListeDate[idTableau]->precedent = elementAInserer;
 		}
+		tabListeDate[idTableau] = elementAInserer;
 	}
 }
 
 
 void GestionMax::AfficherMax()
 {
+	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		if(tabListeDate[i] != NULL && tabListeDate[i]->dateEvenement->dateAretenir != root->dateAretenir)
+		{
+			ElementEvenement *elementAInserer = new ElementEvenement();
+			elementAInserer->dateEvenement=root;
+			elementAInserer->trafic=0;
+			elementAInserer->suivant = tabListeDate[i];
+			elementAInserer->precedent=NULL;
+			if(tabListeDate[i] != NULL)
+			{
+				tabListeDate[i]->precedent = elementAInserer;
+			}
+			tabListeDate[i] = elementAInserer;
+		}
+	}
 	ElementDate *e=root;
 	ElementDate *dateAPartirDeLaquelleOnPeutSupprimer = root;
-
+	ElementEvenement *eAConsiderer;
 	dateMax = root->dateAretenir;
+	float secondesTot=0.0;
+	float secondesBouchon=0.0;
 	while (e != NULL)
 	{
 		for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
 		{
-
+			eAConsiderer = trouverEInteressant(e->dateAretenir,i);
+			if(eAConsiderer!=NULL && eAConsiderer->suivant!=NULL)
+			{
+				int secondesAAjouter = max5minutes(eAConsiderer->dateEvenement->dateAretenir-e->dateAretenir);
+				secondesTot+=secondesAAjouter;
+				if(eAConsiderer->suivant->trafic == NOIR || eAConsiderer->suivant->trafic == ROUGE)
+				{
+					secondesBouchon+=secondesAAjouter;
+				}
+			}
 		}
-
-
+		if(secondesBouchon/secondesTot>=maxBouchon)
+		{
+			maxBouchon = secondesBouchon/secondesTot;
+			dateMax = e->dateAretenir;
+		}
+		secondesTot=0.0;
+		secondesBouchon=0.0;
 
 		e=e->suivant;
 		while(dateAPartirDeLaquelleOnPeutSupprimer != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant != NULL && dateAPartirDeLaquelleOnPeutSupprimer->suivant->dateAretenir + (5*NOMBRE_SECONDES_MINUTE+1) >= dateMax)
@@ -128,13 +158,49 @@ void GestionMax::AfficherMax()
 			dateAPartirDeLaquelleOnPeutSupprimer = dateAPartirDeLaquelleOnPeutSupprimer->suivant;
 		}
 	}
-
+//suppression
 
 
 
 	dateMax.AfficheDateRelle();
-	cout << (int)(maxBouchon) << "%"
-		 << '\r\n';
+	cout << (int)(maxBouchon*100) << "%"
+		 << "\r\n";
+	for(int i=0 ; i<NOMBRE_MAX_CAPTEURS ; i++)
+	{
+		if(tabListeDate[i] != NULL && tabListeDate[i]->trafic==0)
+		{
+			ElementEvenement *elementASupprimer = tabListeDate[i];
+			tabListeDate[i]=tabListeDate[i]->suivant;
+			delete elementASupprimer;
+		}
+	}
+}
+
+void GestionMax::AfficheListes()
+{
+	cout<<"Listes Tableau :"<<endl;
+	for(int i=0;i<1500;i++)
+	{
+		if(tabListeDate[i]!=NULL)
+		{
+			cout<<"id:"<<i<<endl;
+			ElementEvenement *e=tabListeDate[i];
+			while (e != NULL)
+			{
+				e->dateEvenement->dateAretenir.AfficheDateRelle();
+				cout<<" trafic:"<<e->trafic<<endl;
+				e=e->suivant;
+			}
+		}
+	}
+	cout<<"Liste Date :"<<endl;
+	ElementDate *e=root;
+	while (e != NULL)
+	{
+		e->dateAretenir.AfficheDateRelle();
+		cout<<endl;
+		e=e->suivant;
+	}
 }
 
 
@@ -170,4 +236,23 @@ GestionMax::~GestionMax() {
 //------------------------------------------------------------------ PRIVE
 
 //------------------------------------------------------- Méthodes privées
+
+ElementEvenement* GestionMax::trouverEInteressant(Date dateACalculer, int idTableau)
+{
+	ElementEvenement *res = tabListeDate[idTableau];
+	while(res != NULL && res->suivant != NULL && res->suivant->dateEvenement->dateAretenir > dateACalculer)
+	{
+		res=res->suivant;
+	}
+	return res;
+}
+
+int GestionMax::max5minutes(int nombreSecondes)
+{
+	if(nombreSecondes <= 5*NOMBRE_SECONDES_MINUTE)
+	{
+		return nombreSecondes;
+	}
+	return 5*NOMBRE_SECONDES_MINUTE;
+}
 
