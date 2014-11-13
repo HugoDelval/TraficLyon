@@ -15,7 +15,7 @@
 #include <iostream>
 #include "ArbreIdentifiants.h"
 #include "EvenementsCapteur.h"
-#include "ListeDatesMaxBouchons.h"
+#include "GestionMax.h"
 #include "Constantes.h"
 
 using namespace std;
@@ -115,9 +115,7 @@ private:
 	ArbreIdentifiants *arbreId;
 	EvenementsCapteur **capteurs;  // tableau de pointeurs vers EvenementsCapteur : id*1500
 	Date dateDernierEvenementTrafic;
-	Date dateBouchonMax;
-	float bouchonMax;
-	ListeDatesMaxBouchons gestionnaireMax;
+	GestionMax gestionnaireMax;
 
 };
 

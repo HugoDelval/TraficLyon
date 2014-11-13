@@ -27,19 +27,12 @@ void Evenements::AjouterEvenement(int idCapteur, int heure, int jourSemaine,
 	Date dateEvenement(jourSemaine, anneeEvent, moisEvent, nJourMoisEvent, heure, minutesEvent, secondesEvent);
 	capteurs[idCapteur]->Ajouter(trafic,dateEvenement);
 	dateDernierEvenementTrafic = dateEvenement;
-	float traficActuel=gestionnaireMax.AjouteCapteurEtRetourneTraficActuel(idCapteur,trafic,dateEvenement);
-	if(traficActuel > bouchonMax)
-	{
-		bouchonMax = traficActuel;
-		dateBouchonMax = dateEvenement;
-	}
+	gestionnaireMax.Ajouter(idCapteur,trafic,dateEvenement);
 }
 
 void Evenements::MaxBouchonsSimultanes()
 {
-	dateBouchonMax.AfficheDateRelle();
-	cout << (int)(bouchonMax) << "%"
-		 << endl;
+	gestionnaireMax.AfficherMax();
 }
 
 int Evenements::AjouterIdAArbre(int idCapeurReel)
@@ -129,7 +122,6 @@ Evenements::Evenements()
 	{
 		capteurs[i] = new EvenementsCapteur();
 	}
-	bouchonMax=0.0;
 }
 
 Evenements::~Evenements()
