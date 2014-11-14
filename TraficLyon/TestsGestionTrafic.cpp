@@ -119,8 +119,20 @@ void TestsGestionTrafic::testStatsCapteur()
 	g2.Start(s);
 	s = "ADD 1422 2014 6 1 0 0 40 1 N";
 	g2.Start(s);
-	g.toutLeTrafic->StatistiquesCapteur(1422);
+	g2.toutLeTrafic->StatistiquesCapteur(1422);
 	cout << "attendu : V:10% J:20% R:30% N:40%" << endl<<endl;
+
+	/* extinction d'un capteur */
+	GestionTrafic g3;
+	s = "ADD 1422 2014 05 31 23 59 0 7 V";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 0 0 1 J";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 7 0 1 N";
+	g3.Start(s);
+	g3.toutLeTrafic->StatistiquesCapteur(1422);
+	cout << "attendu : V:16% J:83% R:0% N:0%" << endl<<endl;
+
 	cout << "----------------------FIN STATS CAPTEUR----------------------"<<endl;
 }
 
@@ -161,6 +173,17 @@ void TestsGestionTrafic::testStatJourSemaine()
 	// jour 1: V:0s J:10s R:40s N:30s tot:80s
 	g2.toutLeTrafic->StatistiquesJourSemaine(0);
 	cout << "attendu : V:0% J:12% R:50% N:37%" << endl<<endl;
+
+	/* extinction d'un capteur */
+	GestionTrafic g3;
+	s = "ADD 1422 2014 6 1 0 0 0 1 J";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 7 0 1 N";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 8 0 1 N";
+	g3.Start(s);
+	g3.toutLeTrafic->StatistiquesJourSemaine(0);
+	cout << "attendu : V:0% J:83% R:0% N:16%" << endl<<endl;
 	cout << "----------------------FIN STATS JOUR SEMAINE----------------------"<<endl;
 }
 
@@ -201,6 +224,17 @@ void TestsGestionTrafic::testStatsJourSemaineHeure()
 	// jour 1: V:0s J:10s R:40s N:30s tot:80s
 	g2.toutLeTrafic->StatistiquesJourHeureSemaine(0,0);
 	cout << "attendu : V:0% J:12% R:50% N:37%" << endl<<endl;
+
+	/* extinction d'un capteur */
+	GestionTrafic g3;
+	s = "ADD 1422 2014 6 1 0 0 0 1 J";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 7 0 1 N";
+	g3.Start(s);
+	s = "ADD 1422 2014 6 1 0 8 0 1 N";
+	g3.Start(s);
+	g3.toutLeTrafic->StatistiquesJourHeureSemaine(0,0);
+	cout << "attendu : V:0% J:83% R:0% N:16%" << endl<<endl;
 	cout << "----------------------FIN STATS JOUR SEMAINE HEURE----------------------"<<endl;
 }
 
@@ -279,7 +313,6 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g.toutLeTrafic->MaxBouchonsSimultanes();
 	cout<<"attendu : 2014 5 21 14 3 0 66%"<<endl<<endl;
-	// donc : il y a bien aucun capteur du meme id + le calcul parait juste
 
 	//changement de max bouchon :
 	s = "ADD 1422 2014 5 21 14 10 0 1 R";
