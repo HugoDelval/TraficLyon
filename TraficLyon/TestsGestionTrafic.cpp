@@ -276,7 +276,7 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 9 0 1 V";
 	g.Start(s);
-	//g.toutLeTrafic->gestionnaireMax.AfficheListes();
+	g.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g.toutLeTrafic->MaxBouchonsSimultanes();
 	cout<<"attendu : 2014 5 21 14 3 0 66%"<<endl<<endl;
 	// donc : il y a bien aucun capteur du meme id + le calcul parait juste
@@ -290,6 +290,7 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 10 0 1 V";
 	g.Start(s);
+	g.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g.toutLeTrafic->MaxBouchonsSimultanes();
 	cout << "attendu : 2014 5 21 14 10 0 100%" << endl<<endl;
 	// le changement s'opere bien
@@ -308,6 +309,7 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	cout << "attendu : 2014 5 21 14 10 0 50%" << endl <<endl;
 	s = "ADD 2 2014 5 21 14 16 0 1 N";
 	g2.Start(s);
+	g2.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g2.toutLeTrafic->MaxBouchonsSimultanes();
 	cout << "attendu : 2014 5 21 14 11 0 100%" << endl<<endl;
 	// le changement s'opere bien
@@ -323,7 +325,7 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g3.Start(s);
 	s = "ADD 2 2014 5 21 14 16 0 1 N";
 	g3.Start(s);
-	//g3.toutLeTrafic->gestionnaireMax.AfficheListes();
+	g3.toutLeTrafic->gestionnaireMax.AfficheListes();
 	g3.toutLeTrafic->MaxBouchonsSimultanes();
 	cout << "attendu : 2014 5 21 14 15 0 100%" << endl<<endl;
 
