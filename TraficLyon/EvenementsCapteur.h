@@ -53,7 +53,7 @@ public:
 	//			Si la durée ajoutée est sur 2 jours ou sur 2 heures, alors l'incrémentation se fait
 	//					sur 2 cases différentes de 'secondesPassees'.
 	// Contrat :
-	//
+	//			trafic entre 1 et 4, date en ordre chronologique
 
 	void Afficher();
 	// Mode d'emploi :
@@ -61,13 +61,13 @@ public:
 	//						Elles correspondent au nombre de secondes passées pour chaque état,
 	//						chaque jour de la semaine et chaque heure.
 	// Contrat :
-	//
+	//             aucun
 
 	void StatistiquesParCapteur();
 	// Mode d'emploi :
 	//			Affiche le pourcentage de temps passé dans chaque état.
 	// Contrat :
-	//
+	//             aucun
 
 	double* SecondesPasseesDansChaqueEtat(int jour, Date dateDernierEvenementTrafic);
 	// Mode d'emploi :
@@ -81,7 +81,7 @@ public:
 	//						-case 3 : noir
 	//			Les temps pointés sont en secondes.
 	// Contrat :
-	//
+	//           jour entre 0 et 6
 
 	double* SecondesPasseesDansChaqueEtat(int jour, int heure, Date dateDernierEvenementTrafic);
 	// Mode d'emploi :
@@ -96,7 +96,7 @@ public:
 	//						-case 3 : noir
 	//			Les temps pointés sont en secondes.
 	// Contrat :
-	//
+	//           jour entre 0 et 6, heure entre 0 et 23
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	EvenementsCapteur(int trafic, Date date);
@@ -107,7 +107,7 @@ public:
 	//				-'secondesPassees' a tous ses pointeurs initialisés à 0
 	//				-'dateDernierEvenement' est initialisé à 'date'
 	// Contrat :
-	//
+	//             trafic entre 1 et 4
 
 	EvenementsCapteur();
 	// Mode d'emploi :
@@ -116,7 +116,7 @@ public:
 	//				-'traficDernierEvenement' est initialisé à 0
 	//				-'secondesPassees' a tous ses pointeurs initialisés à 0
 	// Contrat :
-	//
+	//           aucun
 
 	virtual ~EvenementsCapteur();
 	// Mode d'emploi :
@@ -136,7 +136,7 @@ private:
 	//			Retourne nombreSecondes si nombreSecondes est inférieur à 5 min.
 	//			Retourne nombreSecondes si nombreSecondes est supérieur à 5 min.
 	// Contrat :
-	//
+	//             aucun
 
 
 	//------------------------------------------------------- Attributs privés

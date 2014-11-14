@@ -57,7 +57,13 @@ public:
 	//				-recherche si la date d'ajout de l'evenement est le moment avec le plus de bouchons simultanés.
 	//						Et si besoin, 'dateBouchonMax' et 'bouchonMax' sont mis à jour.
 	// Contrat :
-	//
+	//           idCapteur entre 0 et 1499,
+	//           heure entre 0 et 23
+	//           jourSemaine entre 0 et 6
+	//           trafic entre 1 et 4
+	//           moisEvent entre 0 et 11
+	//           nJourMois entre 0 et 30, en conformite avec moisEvent
+	//           minutesEvent et secondesEvent entre 0 et 59
 
 	void StatistiquesCapteur(int idCapteurReel);
 	// Mode d'emploi :
@@ -65,27 +71,27 @@ public:
 	//					'capteurs' pour le capteur correspondant à idCapteurReel. On trouve la position
 	//					de ce capteur dans le tableau grace à sa position dans 'arbreId'.
 	// Contrat :
-	//
+	//          idCapteur entre 0 et 1499
 
 	void StatistiquesJourSemaine(int nJour);
 	// Mode d'emploi :
 	//			Affiche les pourcentages des temps passés dans chaque état pour un jour de la semaine
 	//				'nJour' pour l'ensemble des capteurs.
 	// Contrat :
-	//
+	//          nJour entre 0 et 6
 
 	void StatistiquesJourHeureSemaine(int nJour, int heure);
 	// Mode d'emploi :
 	//			Affiche les pourcentages des temps passés dans chaque état pour un jour de la semaine
 	//				'nJour' et une heure donnée 'heure' pour l'ensemble des capteurs.
 	// Contrat :
-	//
+	//          nJour entre 0 et 6, heure entre 0 et 23
 
 	void MaxBouchonsSimultanes();
 	// Mode d'emploi :
 	//			Affiche 'bouchonMax', le moment avec le plus de bouchons simultanés;
 	// Contrat :
-	//
+	//          aucun
 
 	int AjouterIdAArbre(int idCapeurReel);
 	// Mode d'emploi :
@@ -93,14 +99,14 @@ public:
 	//					dans l'arbre. Cette position permettra d'identifier un capteur
 	//					dans 'EvenementsCapteur' parmis les 1500 colones disponibles.
 	// Contrat :
-	//
+	//         aucun
 
 	void AfficherTousLesEvenements();
 	// Mode d'emploi :
 	//			Appel de la méhode 'Afficher' de EvenementsCapteurs pour chaque identifiant de capteur.
 	//					La méthode affiche donc les secondes passées dans chaque état pour chaque capteur.
 	// Contrat :
-	//
+	//           aucun
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	Evenements();
@@ -110,14 +116,14 @@ public:
 	//				-Toutes les cases de 'capteur'  sont initialisées à 0
 	//				-'BouchonsMax' est initialisé à 0
 	// Contrat :
-	//
+	//         aucun
 
 	virtual ~Evenements();
 	// Mode d'emploi :
 	//			 supprime et libere l'espace memoire correspondant a l'Evenements.
 	//					(un arbre, un tableau de pointeurs vers EvenementsCapteur, 2 Dates, une ListeDatesMaxBouchons)
 	// Contrat :
-	//
+	//           aucun
 
 	//----------------------------------------------------------------- PRIVE
 
