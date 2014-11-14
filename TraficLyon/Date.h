@@ -44,7 +44,7 @@ public:
 	//			Retourne 'true' si la Date est égal à 'dateAComparer'
 	//			Retourne 'false' si la Date est different à 'dateAComparer'
 	// Contrat :
-	//
+	//          aucun
 
 	bool EstInf(Date const& dateAComparer) const;
 	// Mode d'emploi :
@@ -54,60 +54,55 @@ public:
 	//			Retourne 'false' si la Date est superieure à 'dateAComparer'
 
 	// Contrat :
-	//
+	//			maximum une annee de difference entre les 2 Date a comparer
 
 	Date Additionner(int secondes);
 	// Mode d'emploi :
 	//			Permet d'ajouter un nombre entier de secondes à la Date
 	//			Retourne la Date modifiée
 	// Contrat :
-	//
+	//          nombre de secondes inferieur a 2annee
 
 	int  Difference(Date const &dateAEnlever) const;
 	// Mode d'emploi :
 	//			Permet de soustraire une date en paramètre à la Date
 	//			Retourne la Date modifiée
 	// Contrat :
-	//
+	//          nombre de secondes inferieur a 2annee
 
 	void AfficheDateRelle();
 	// Mode d'emploi :
 	//			Permet d'afficher l'année, le moi, le jour du mois, l'heure de la journée, la minute de l'heure
 	//					et la seconde dans la minute de la date
 	// Contrat :
-	//
+	//          aucun
 
-	void DebugAffichage();
-	// Mode d'emploi :
-	//
-	// Contrat :
-	//
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	Date(int jourDeLaSemaine, int annee, int mois, int jourDuMois, int heure, int minute, int seconde);
 	// Mode d'emploi :
 	//			Initialise une Date en attribuant à ses attributs les valeurs en paramète
 	// Contrat :
-	//
+	//            aucun
 
 	Date(Date const &dateACopier);
 	// Mode d'emploi :
 	//			Initialise une Date identique à la Date entrée en paramètre
 	// Contrat :
-	//
+	//           aucun
 
 	Date();
 	// Mode d'emploi :
 	//			Initialise une Date.
 	//			Tous les attributs de la Date son initialisés à 0.
 	// Contrat :
-	//
+	//           aucun
 
 	virtual ~Date();
 	// Mode d'emploi :
 	//			Supprime et libere l'espace memoire correspondant a la Date.
 	// Contrat :
-	//
+	//          aucun
 
 
 	//----------------------------------------------------------------- PRIVE
@@ -131,6 +126,7 @@ friend class EvenementsCapteur;
 
 //------------------------------------------------------- Redefinition d'operateurs
 
+//
 bool operator==(Date const& date1, Date const& date2);
 bool operator!=(Date const& date1, Date const& date2);
 bool operator<(Date const& date1, Date const& date2);
@@ -140,5 +136,6 @@ bool operator>=(Date const& date1, Date const& date2);
 Date operator+(Date const& date1, int minutes);
 Date operator-(Date const& date1, int minutes);
 int operator-(Date const& date1, Date const& date2);
+//  repose sur les methodes ci-dessus
 
 #endif /* DATE_H_ */

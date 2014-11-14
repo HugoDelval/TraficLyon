@@ -244,18 +244,6 @@ void Date::AfficheDateRelle()
 		 << seconde << " ";
 }
 
-void Date::DebugAffichage()
-{
-	cout << "année: "<< annee
-		 <<" mois: "<<mois
-		 << " jour: " << jourDuMois
-		 << " heure: " << heure
-		 << " minute: " << minute
-		 << " seconde: " << seconde
-		 << " jourSemaine: " << jourDeLaSemaine
-		 <<endl;
-}
-
 //-------------------------------------------- Redéfinition d'opérateurs
 
 bool operator==(Date const &date1, Date const &date2)
