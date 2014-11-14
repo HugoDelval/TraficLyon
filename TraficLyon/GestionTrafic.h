@@ -49,7 +49,7 @@ public:
 	//						-'appelerMaxBouchonsSimultanes' pour "COMMANDE_MAX_TS"
 	//			Si l'utilisateur entre la commande de sortie ("COMMANDE_EXIT"), il y a arret de l'application.
 	// Contrat :
-	//
+	//			Aucun
 
 	void Start(string commande);
 	// Mode d'emploi :
@@ -63,7 +63,7 @@ public:
 	//						-'appelerMaxBouchonsSimultanes' pour "COMMANDE_MAX_TS"
 	//			Si commande = "COMMANDE_EXIT"), il y a arret de l'application.
 	// Contrat :
-	//
+	//			Aucun
 
 	//----------------------------------------------------- Constructeurs - destructeur
 
@@ -72,14 +72,14 @@ public:
 	//			Initialise EvenementsCapteur :
 	//				-constructeur par défaut de Evenements pour initialiser 'toutLeTrafic'
 	// Contrat :
-	//
+	//			Aucun
 
 	virtual ~GestionTrafic();
 	// Mode d'emploi :
 	//			supprime et libere l'espace memoire correspondant a GestionTrafic.
 	//					(un 'Evenements')
 	// Contrat :
-	//
+	//			Aucun
 
 	//----------------------------------------------------------------- PRIVE
 private:
@@ -93,34 +93,41 @@ private:
 	//									   - 4 pour "N"
 	//			Appelle la methode 'Ajouter' pour toutLeTraffic avec en paramètre les entiers générés.
 	// Contrat :
-	//
+	//			-'mois' compris entre 1 et 12
+	//			-'jourDuMois' compris entre 1 et 31 dépendant du mois
+	//			-'heure' comrpis enre 0 et 23
+	//			-'minute' compris entre 0 et 59
+	// 			-'secondes' compris entre 0 et 59
+	//			-'jourDeLaSemaine' compris entre 1 et 7
+	//			-'trafic' = 'v' ou 'R' ou 'J' ou 'N'
 
 	void appelerStatistiquesCapteur(string idCapteurReel);
 	// Mode d'emploi :
 	//			Convertie la chaine de caractère en parametre en 'int'
 	//			Appelle la méthode 'StatitiquesCapteur' pour 'toutLeTrafic' avec l'entier généré en paramètre.
 	// Contrat :
-	//
+	//			Aucun
 
 	void appelerStatistiquesJourSemaine(string nJour);
 	// Mode d'emploi :
 	//			Convertie la chaine de caractère en parametre en 'int'
 	//			Appelle la méthode 'StatitiquesJourSemaine' pour 'toutLeTrafic' avec l'entier généré en paramètre.
 	// Contrat :
-	//
+	//			'njour' compris entre 1 et 7
 
 	void appelerStatistiquesJourHeureSemaine(string nJour, string heure);
 	// Mode d'emploi :
 	//			Convertie la chaine de caractère en parametre en 'int'
 	//			Appelle la méthode 'StatitiquesJourHeureSemaine' pour 'toutLeTrafic' avec l'entier généré en paramètre.
 	// Contrat :
-	//
+	//			-'njour' compris entre 1 et 7
+	//			-'heure' compris entre 0 et 23
 
 	void appelerMaxBouchonsSimultanes();
 	// Mode d'emploi :
 	//			Appelle la méthode 'MaxBouchonsSimultanes' pour 'toutLeTrafic'
 	// Contrat :
-	//
+	//			Aucun
 
 	int determineTypeCommande(const string &commande);
 	// Mode d'emploi :
@@ -133,7 +140,7 @@ private:
 	//						-'COMMANDE_MAX_TS' pour "MAX_TS"
 	//						-'COMMANDE_EXIT' pour "EXIT"
 	// Contrat :
-	//
+	//			Aucun
 
 
 	//------------------------------------------------------- Attributs privés

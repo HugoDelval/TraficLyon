@@ -54,14 +54,14 @@ public:
 	//			Insert un nouvel élement dans l'arbre en fonction de 'idR' en paramètre.
 	//			Retourne la position dans le tableau correspondante à 'idR'.
 	// Contrat :
-	//
+	//			Aucun
 
 	int TrouverIdTableauCorrespondant(int idR);
 	// Mode d'emploi :
 	//				retourne la résultat de 'trouverIdTableauCorrespondantRec' avec 'idR' et 'root'
 	//						en parametre.
 	// Contrat :
-	//
+	//			Aucun
 
 	//----------------------------------------------------- Constructeurs - destructeur
 	ArbreIdentifiants();
@@ -70,14 +70,14 @@ public:
 	//				- 'root' est initialisé à NULL
 	//				- 'dernierIdTableau' est initialisé à 0
 	// Contrat :
-	//
+	//			Aucun
 
 	virtual ~ArbreIdentifiants();
 	// Mode d'emploi :
 	//			Supprime et libere l'espace memoire correspondant a l' 'ArbreIdentifiants'
 	//					(un 'ptrOnAVLTreeNode')
 	// Contrat :
-	//
+	//			Aucun
 
 	//----------------------------------------------------------------- PRIVE
 private:
@@ -91,7 +91,7 @@ private:
 	//			La recherche de 'idR' dans l'arbre se fait à partir du noeud 'p'.
 	//			Retourne -1 si 'p' est NULL.
 	// Contrat :
-	//
+	//			'p' appartient à l'ArbreIdentifiants
 
 	void insert(int idR, int idT, ptrOnAVLTreeNode &p);
 	// Mode d'emploi :
@@ -100,7 +100,8 @@ private:
 	//				est déterminée grâce à idR.
 	//			Lors de cette insertion, il y a si besoin équilibrage de l'arbre.
 	// Contrat :
-	//
+	//			-'idt' compris entre 0 et 1499
+	//			-'p' appartient à l'ArbreIdentifiants
 
 
 	ptrOnAVLTreeNode rotationSimpleGauche(ptrOnAVLTreeNode &p1);
@@ -108,7 +109,7 @@ private:
 	//			Passe à gauche le noeud droit du noeud en paramètre.
 	//			Sert éventuellement à équilibrer l' ArbreIdentifiant.
 	// Contrat :
-	//
+	//			-'p1' appartient à l'ArbreIdentifiants
 
 	ptrOnAVLTreeNode rotationDoubleGauche(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
@@ -121,32 +122,32 @@ private:
 	//			Passe à droite le noeud gauche du noeud en paramètre.
 	//			Sert éventuellement à équilibrer l' ArbreIdentifiant
 	// Contrat :
-	//
+	//			-'p1' appartient à l'ArbreIdentifiants
 
 	ptrOnAVLTreeNode rotationDoubleDroite(ptrOnAVLTreeNode &p1);
 	// Mode d'emploi :
 	//			Retourne le noeud coorespondant à une double 'rotationDoubleDroite' avec le noeud en paramètre.
 	// Contrat :
-	//
+	//			-'p1' appartient à l'ArbreIdentifiants
 
-	int hauteurSousArbre(ptrOnAVLTreeNode);
+	int hauteurSousArbre(ptrOnAVLTreeNode p);
 	// Mode d'emploi :
 	//			Retourne la hauteur sous arbre, c'est a dire le nombre de noeuds maximal
 	//				pour arriver à une feuille.
 	// Contrat :
-	//
+	//			-'p' appartient à l'ArbreIdentifiants
 
 	int max(int value1, int value2);
 	// Mode d'emploi :
 	//			Retourne la valeur la plus grande des 2 parametres
 	// Contrat :
-	//
+	//			Aucun
 
 	void supprimeRecursivement(ptrOnAVLTreeNode nodeCourante);
 	// Mode d'emploi :
 	//			Supprime tous les elements de l'arbre de façon récursive à partir du noeud en parametre.
 	// Contrat :
-	//
+	//			-'nodeCourant' appartient à l'ArbreIdentifiants
 
 	//------------------------------------------------------- Attributs privés
 	ptrOnAVLTreeNode root;
