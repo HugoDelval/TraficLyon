@@ -286,24 +286,46 @@ void TestsGestionTrafic::testStatsMaxBouchons()
 	g.Start(s);
 	s = "ADD 2216 2014 5 21 14 10 0 1 R";
 	g.Start(s);
+	s = "ADD 1422 2014 5 21 14 10 0 1 V";
+	g.Start(s);
+	s = "ADD 2216 2014 5 21 14 10 0 1 V";
+	g.Start(s);
 	g.toutLeTrafic->MaxBouchonsSimultanes();
 	cout << "attendu : 2014 5 21 14 10 0 100%" << endl<<endl;
 	// le changement s'opere bien
 
-
+	GestionTrafic g2;
 	//changement de max bouchon apres 5min:
-	s = "ADD 2314 2014 5 21 14 10 0 1 N";//rajout d'un capteur
-	g.Start(s);
-	s = "ADD 1422 2014 5 21 14 16 0 1 R";
-	g.Start(s);
-	s = "ADD 2216 2014 5 21 14 16 0 1 R";
-	g.Start(s);
-	s = "ADD 2314 2014 5 21 14 16 0 1 N";
-	g.Start(s);
-	g.toutLeTrafic->MaxBouchonsSimultanes();
-	cout << "attendu : 2014 5 21 14 10 0 100%" << endl<<endl;
+	s = "ADD 1 2014 5 21 14 10 0 1 N";
+	g2.Start(s);
+	s = "ADD 2 2014 5 21 14 10 0 1 V";
+	g2.Start(s);
+	s = "ADD 1 2014 5 21 14 11 0 1 N";
+	g2.Start(s);
+	s = "ADD 2 2014 5 21 14 11 0 1 N";
+	g2.Start(s);
+	g2.toutLeTrafic->MaxBouchonsSimultanes();
+	cout << "attendu : 2014 5 21 14 10 0 50%" << endl <<endl;
+	s = "ADD 2 2014 5 21 14 16 0 1 N";
+	g2.Start(s);
+	g2.toutLeTrafic->MaxBouchonsSimultanes();
+	cout << "attendu : 2014 5 21 14 11 0 100%" << endl<<endl;
 	// le changement s'opere bien
 
+	//maxbouchon a une date != d'une date d'un 'add'
+	// erreur
+	GestionTrafic g3;
+	s = "ADD 1 2014 5 21 14 10 0 1 V";
+	g3.Start(s);
+	s = "ADD 2 2014 5 21 14 10 0 1 V";
+	g3.Start(s);
+	s = "ADD 3 2014 5 21 14 13 0 1 R";
+	g3.Start(s);
+	s = "ADD 2 2014 5 21 14 16 0 1 N";
+	g3.Start(s);
+	//g3.toutLeTrafic->gestionnaireMax.AfficheListes();
+	g3.toutLeTrafic->MaxBouchonsSimultanes();
+	cout << "attendu : 2014 5 21 14 15 0 100%" << endl<<endl;
 
 
 	cout << "----------------------FIN MAX BOUCHONS----------------------"<<endl;

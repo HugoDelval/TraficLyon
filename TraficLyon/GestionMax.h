@@ -98,7 +98,8 @@ private:
 
 	void supprimerToutApres(Date dateDebutSuppression);
 	// Mode d'emploi :
-	//			Supprime toutes les dates du tableau après 'dateDebutSuppression'
+	//			Supprime toutes les dates du tableau après 'dateDebutSuppression', permet une optimisation
+	//          methode non-utilisee car mauvaise gestion de la memoire. (nous n'avons pas eu le temps de bien tester)
 	// Contrat :
 	//
 

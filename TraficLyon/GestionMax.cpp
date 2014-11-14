@@ -43,7 +43,7 @@ void GestionMax::Ajouter(int idTableau, int traficEvenement, Date dateEvenement)
 				if(e->suivant->dateAretenir != dateIntermediaire)
 				{
 					ElementDate *suivant = e->suivant;
-					ElementDate *precedent = e->precedent;
+					ElementDate *precedent = e;
 					ElementDate *elementAInserer=new ElementDate();
 					elementAInserer->dateAretenir=dateIntermediaire;
 					elementAInserer->suivant = suivant;
@@ -138,11 +138,14 @@ void GestionMax::AfficherMax()
 				eAConsiderer = trouverEInteressant(e->dateAretenir,i);
 				if(eAConsiderer!=NULL && eAConsiderer->suivant!=NULL)
 				{
-					int secondesAAjouter = max5minutes(eAConsiderer->dateEvenement->dateAretenir-e->dateAretenir);
-					secondesTot+=secondesAAjouter;
-					if(eAConsiderer->suivant->trafic == NOIR || eAConsiderer->suivant->trafic == ROUGE)
+					if(eAConsiderer->suivant->trafic != AUCUNE_DONNEE)
 					{
-						secondesBouchon+=secondesAAjouter;
+						int secondesAAjouter = max5minutes(eAConsiderer->dateEvenement->dateAretenir-e->dateAretenir);
+						secondesTot+=secondesAAjouter;
+						if(eAConsiderer->suivant->trafic == NOIR || eAConsiderer->suivant->trafic == ROUGE)
+						{
+							secondesBouchon+=secondesAAjouter;
+						}
 					}
 				}
 			}
@@ -160,7 +163,7 @@ void GestionMax::AfficherMax()
 				dateAPartirDeLaquelleOnPeutSupprimer = dateAPartirDeLaquelleOnPeutSupprimer->suivant;
 			}
 		}
-		supprimerToutApres(dateMax-(5*NOMBRE_SECONDES_MINUTE +1));
+		//supprimerToutApres(dateMax-(5*NOMBRE_SECONDES_MINUTE +1));
 
 
 		dateMax.AfficheDateRelle();
