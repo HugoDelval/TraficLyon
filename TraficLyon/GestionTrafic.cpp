@@ -88,6 +88,7 @@ void GestionTrafic::Start()
 			case COMMANDE_EXIT:
 			{
 				sortir = true;
+				exit(EXIT_SUCCESS);
 				break;
 			}
 			default:
