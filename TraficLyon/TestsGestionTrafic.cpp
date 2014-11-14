@@ -19,10 +19,10 @@
 //----------------------------------------------------- Méthodes publiques
 void TestsGestionTrafic::LancementTests()
 {
-	/*testAdd();
+	testAdd();
 	testStatsCapteur();
 	testStatJourSemaine();
-	testStatsJourSemaineHeure();*/
+	testStatsJourSemaineHeure();
 	testStatsMaxBouchons();
 }
 
