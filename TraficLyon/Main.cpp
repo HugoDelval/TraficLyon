@@ -31,11 +31,11 @@ static void LancementTests()
 
 int main()
 {
-	//LancementApplication();
+	LancementApplication();
 
 	/* ou alors */
 
-	LancementTests();
+	//LancementTests();
 
 	return 0;
 }
