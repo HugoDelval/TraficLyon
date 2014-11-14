@@ -178,7 +178,8 @@ void GestionMax::AfficherMax()
 	}
 	else
 	{
-		cout << 0 << "%"
+		dateMax.AfficheDateRelle();
+		cout << (int)(maxBouchon*100) << "%"
 			 << "\r\n";
 	}
 
